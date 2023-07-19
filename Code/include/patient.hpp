@@ -15,7 +15,7 @@ class Patient
 {
 public:
 Patient() = default;
-Patient(std::string name, std::string surname,std::string adress, std::string phone_number); 
+Patient( std::string name, std::string surname,std::string adress, std::string phone_number); 
 
 
 //Modification menu for a patient
