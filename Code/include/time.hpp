@@ -1,11 +1,14 @@
-#ifndef __TIME__
-#define __TIME__
+#ifndef __TIMEs__
+#define __TIMEs__
 
-class Time
+#include <iostream>
+#include <iomanip>
+class Times
 {
 public:
-Time() = default;
-Time(int hours, int minutes);
+//constructor 
+Times();
+Times(int hours, int minutes);
 
 //getter and setter
 
@@ -13,49 +16,46 @@ Time(int hours, int minutes);
 
 int getHours() const;
 int getMinutes() const;
-Time getTime() const;
+Times getTimes() const;
 
 //setter for hours and minutes
 void setHours(int hours);
 void setMinutes(int minutes);
-void setTime(const Time& tm);
+void setTimes(const Times& tm);
 
 //Method
-void AddHours(int hours); //use to add hours to the time
+void AddHours(int hours); //use to add hours to the times
 void SubtractHours(int hours);
 
- //int TimeDiff(const Time& tm) const; //return the difference between two time in minutes
+ //int TimesDiff(const Times& tm) const; //return the difference between two times in minutes
 
 //operator overloading
 
-bool operator ==(const Time& tm) const;
-bool operator !=(const Time& tm) const;
-bool operator <(const Time& tm) const;
-bool operator >(const Time& tm) const;
-bool operator <=(const Time& tm) const;
-bool operator >=(const Time& tm) const;
+bool operator ==(const Times& tm) const;
+bool operator !=(const Times& tm) const;
+bool operator <(const Times& tm) const;
+bool operator >(const Times& tm) const;
+bool operator <=(const Times& tm) const;
+bool operator >=(const Times& tm) const;
 
-//With this operator we advance the time by minute
-Time operator +=(int min);
+//With this operator we advance the times by minute
+Times operator +=(int min);
 
-//with this operator we diminish the time
-Time operator -=(int min);
+//with this operator we diminish the times
+Times operator -=(int min);
+
+//Display the date in the format hh:mm (hours:minutes)
+friend std::ostream& operator <<(std::ostream& os, const Times& tm);
+//Read the date in the format hh:mm (hours:minutes)
+friend std::istream& operator >>(std::istream& is, Times& tm);
 
 
 private:
 int _hours;
 int _minutes;
+void SimplifyTimes(); // simplify the type of the times so it can fit the 24 hours format
 
-void SimplifyTime(); // simplify the type of the time so it can fit the 24 hours format
 };
-
-//Display the date in the format hh:mm (hours:minutes)
-friend std::ostream& operator <<(std::ostream& os, const Time& tm);
-//Read the date in the format hh:mm (hours:minutes)
-friend std::istream& operator >>(std::istream& is, Time& tm);
-
-
-
 
 
 #endif
