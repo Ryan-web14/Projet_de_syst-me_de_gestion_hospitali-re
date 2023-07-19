@@ -1,0 +1,31 @@
+Classe Médecin :
+
+ajouterMedecin(): Ajoute un nouveau médecin au système.
+supprimerMedecin(): Supprime un médecin du système.
+modifierMedecin(): Modifie les informations d'un médecin existant.
+afficherDetailsMedecin(): Affiche les informations détaillées d'un médecin.
+rechercherMedecinParID(): Recherche un médecin par son identifiant.
+rechercherMedecinParNom(): Recherche un médecin par son nom.
+afficherListePatients(): Affiche la liste des patients associés à un médecin.
+planifierRendezVous(): Planifie un nouveau rendez-vous pour un médecin.
+annulerRendezVous(): Annule un rendez-vous du médecin.
+afficherAgenda(): Affiche l'agenda des rendez-vous du médecin.
+creerPrescription(): Crée une nouvelle prescription médicale pour un patient.
+modifierPrescription(): Modifie une prescription médicale existante.
+Classe RendezVous :
+
+creerRendezVous(): Crée un nouveau rendez-vous entre un patient et un médecin.
+supprimerRendezVous(): Supprime un rendez-vous.
+modifierRendezVous(): Modifie les détails d'un rendez-vous existant.
+afficherDetailsRendezVous(): Affiche les détails d'un rendez-vous.
+rechercherRendezVousParID(): Recherche un rendez-vous par son identifiant.
+afficherHistoriqueRendezVous(): Affiche l'historique des rendez-vous d'un patient ou d'un médecin.
+Classe DossierMédical :
+
+creerDossierMedical(): Crée un nouveau dossier médical pour un patient.
+supprimerDossierMedical(): Supprime un dossier médical.
+modifierDossierMedical(): Modifie les informations d'un dossier médical existant.
+afficherDetailsDossierMedical(): Affiche les détails d'un dossier médical.
+ajouterEntry(): Ajoute une nouvelle entrée (consultation, traitement, etc.) au dossier médical.
+supprimerEntry(): Supprime une entrée du dossier médical.
+modifierEntry(): Modifie les détails d'une entrée existante dans le dossier médical.
