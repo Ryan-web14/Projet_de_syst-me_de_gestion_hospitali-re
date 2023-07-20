@@ -11,7 +11,6 @@ Times();
 Times(int hours, int minutes);
 
 //getter and setter
-
 //getter for the hours and minutes
 
 int getHours() const;
@@ -27,7 +26,7 @@ void setTimes(const Times& tm);
 void AddHours(int hours); //use to add hours to the times
 void SubtractHours(int hours);
 
- //int TimesDiff(const Times& tm) const; //return the difference between two times in minutes
+ int TimesDiff(const Times& nextTime) const; //return the difference between two times in minutes
 
 //operator overloading
 
