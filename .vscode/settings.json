@@ -101,7 +101,11 @@
     "stdexcept": "cpp",
     "streambuf": "cpp",
     "typeinfo": "cpp",
-    "iostream": "cpp"
+    "iostream": "cpp",
+    "bitset": "cpp",
+    "ctime": "cpp",
+    "regex": "cpp",
+    "iomanip": "cpp"
   },
   "C_Cpp.dimInactiveRegions": false
 }

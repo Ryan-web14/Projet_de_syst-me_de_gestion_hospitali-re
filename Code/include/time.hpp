@@ -53,7 +53,6 @@ private:
 int _hours;
 int _minutes;
 void SimplifyTimes(); // simplify the type of the times so it can fit the 24 hours format
-
 };
 
 
