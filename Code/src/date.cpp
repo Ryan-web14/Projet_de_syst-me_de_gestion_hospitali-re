@@ -34,5 +34,116 @@ bool Date::operator==(const Date& date) const
 bool Date::operator<(const Date& date ) const
 {
  int result = CompareDates(date);
+ if(result == -1)
+ {
+   return true;
+ }
+ else if(result == 1)
+ {
+   return false;
+ }
+ else if(theTime < date.getTime())
+ {
+   return true;
+ }
+ else 
+   return false;
 }
 
+bool Date::operator>(const Date& date) const
+{
+ int result = CompareDates(date);
+ if(result == 1)
+ {
+   return true;
+ }
+ else if(result == -1)
+ {
+   return false;
+ }
+ else if(theTime > date.getTime())
+ {
+   return true;
+ }
+ else 
+   return false;
+}
+
+bool Date::operator <=(const Date& date) const
+ {
+   if(*this < date || *this == date)
+   {
+      return true;
+   }
+   else 
+      return false;
+ }
+
+bool Date::operator >=(const Date& date) const
+{
+   if(*this > date || *this == date)
+   {
+      return true;
+   }
+   else 
+      return false;
+}
+
+bool Date::operator !=(const Date& date) const
+{
+   if(*this == date)
+   {
+      return false;
+   }
+   else 
+      return true;
+}
+
+int Date::CompareDates(const Date& otherDate) const
+{
+   if(_year < otherDate.getYear())
+   {
+      return -1;
+   }
+   else if(_year > otherDate.getYear())
+   {
+      return 1;
+   }
+   else if(_month < otherDate.getMonth())
+   {
+      return -1;
+   }
+   else if(_month > otherDate.getMonth())
+   {
+      return 1;
+   }
+   else if(_day < otherDate.getDay())
+   {
+      return -1;
+   }
+   else if(_day > otherDate.getDay())
+   {
+      return 1;
+   }
+ 
+   return 0;
+}
+
+Date& Date::operator+=(int days)
+{
+   days += _day;
+   if(days > DaysInMonth())
+   {
+    _day -= DaysInMonth();
+   }
+   if(_month < 12)
+   {
+      _month ++;
+   }
+   else
+   {
+      _month = 1;
+      _year++;
+   }
+   return *this;
+}

@@ -31,10 +31,10 @@ public:
     bool operator !=(const Date& date) const;
 
     //Compare two dates and return -1, 0 or 1
-    //return -1 when the instance is earlier than the second_date
-    //return 0 when the instance and second_date are equals that means it is the same date 
+    //return -1 when the instance is earlier than the otherDate
+    //return 0 when the instance and otherDate are equals that means it is the same date 
     //return 1 when the instance is later than the second date  
-    int CompareDates(const Date& second_date) const;
+    int CompareDates(const Date& otherDate) const;
 
     //Move the date by days ahead
     Date& operator +=(int days);
@@ -55,7 +55,7 @@ private:
     bool IsLeapYear() const;
 
     //return the number of days in a month
-    int DaysInMonth(int month, int year) const; 
+    int DaysInMonth() const; 
 
     friend std::ostream& operator <<(std::ostream& os, const Date& date);
     friend std::istream& operator >>(std::istream& is, Date& date);
