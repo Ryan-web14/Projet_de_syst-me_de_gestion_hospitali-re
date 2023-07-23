@@ -14,11 +14,13 @@ public:
     int getYear() const;
     int getMonth() const;
     int getDay() const;
+    Times getTime() const;
 
     //setter
     void setYear(int year);
     void setMonth(int month);
     void setDay(int day);
+    void setTime(const Times& time);
 
     //operator compare date and time
     bool operator ==(const Date& date) const;
@@ -29,6 +31,9 @@ public:
     bool operator !=(const Date& date) const;
 
     //Compare two dates and return -1, 0 or 1
+    //return -1 when the instance is earlier than the second_date
+    //return 0 when the instance and second_date are equals that means it is the same date 
+    //return 1 when the instance is later than the second date  
     int CompareDates(const Date& second_date) const;
 
     //Move the date by days ahead

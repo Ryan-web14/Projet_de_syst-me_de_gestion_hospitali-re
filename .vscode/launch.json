@@ -8,8 +8,8 @@
       "args": [],
       "stopAtEntry": false,
       "externalConsole": true,
-      "cwd": "c:/Users/user/OneDrive/JoJo_personal/OneDrive/Bureau/Projet_de_système_de_gestion_hospitalière/Code",
-      "program": "c:/Users/user/OneDrive/JoJo_personal/OneDrive/Bureau/Projet_de_système_de_gestion_hospitalière/Code/build/Debug/outDebug",
+      "cwd": "c:/Users/user/OneDrive/JoJo_personal/OneDrive/Bureau/Projet_de_système_de_gestion_hospitalière/Code/include",
+      "program": "c:/Users/user/OneDrive/JoJo_personal/OneDrive/Bureau/Projet_de_système_de_gestion_hospitalière/Code/include/build/Debug/outDebug",
       "MIMode": "gdb",
       "miDebuggerPath": "gdb",
       "setupCommands": [
