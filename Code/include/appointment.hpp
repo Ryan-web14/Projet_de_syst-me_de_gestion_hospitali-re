@@ -8,6 +8,7 @@
 
 class Appointment
 {
+Appointment();
 
 private:
 std::string appointment_id;
