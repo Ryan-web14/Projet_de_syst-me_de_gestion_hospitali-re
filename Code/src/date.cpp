@@ -258,6 +258,18 @@ std::ostream& operator<<(std::ostream& os, const Date& date)
    return os;
 }
 
+std::istream& opeator >>(std::istream is, const Date& date)
+{
+   int month;
+   int year;
+   int day;
+   char slash;
+   is>>day>>slash>>month>>slash>>year;
+   day.setDay(day);
+   month.setMonth(month);
+   year.setYear(year);
+}
+
 void Date::DisplayDate() const 
 {
    std::cout << this->ToLongDate() << " " << this->getTime() << std::endl;
