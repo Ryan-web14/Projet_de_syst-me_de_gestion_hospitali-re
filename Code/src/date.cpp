@@ -147,3 +147,118 @@ Date& Date::operator+=(int days)
    }
    return *this;
 }
+
+ std::string Date::ConvertIntToString(int integer) const
+{
+   std::string s;
+   std::stringstream conv;
+   conv << integer;
+   s = conv.str();
+   return s;
+}
+
+
+std::string Date::ToLongDate() const 
+{
+   std::string day;
+   std::string year;
+   std::string longDate;
+
+   day = ConvertIntToString(_day);
+   year = ConvertIntToString(_year);
+
+   longDate = day + " ";
+
+   switch(_month)
+   {
+      case 1 : longDate += "January";
+               break;
+      case 2 : longDate += "February";
+               break;
+      case 3 : longDate += "March";
+               break;
+      case 4 : longDate += "April";
+               break;
+      case 5 : longDate += "May";
+               break;
+      case 6 : longDate += "June";
+               break;
+      case 7 : longDate += "July";
+               break;
+      case 8 : longDate += "August";
+               break;
+      case 9 : longDate += "September";
+               break;
+      case 10 : longDate += "October";
+               break;
+      case 11 : longDate += "November";
+               break;
+      case 12 : longDate += "December";
+               break;
+   }
+
+   longDate = longDate + " " + year;
+
+   return longDate;
+}
+
+bool Date::IsLeapYear() const
+{
+   if(_year % 4 == 0 && _year % 100 != 0)
+   {
+      return true;
+   }
+   else if(_year % 4 == 0 && _year % 100 == 0 && _year % 400 == 0)
+   {
+      return true;
+   }
+   else 
+      return false;
+}
+
+int Date::DaysInMonth() const
+{
+   switch(_month)
+   {
+      case 1 : return 31;
+               break;
+      case 2 : if(IsLeapYear())
+               {
+                  return 29;
+               }
+               else 
+                  return 28;
+               break;
+      case 3 : return 31;
+               break;
+      case 4 : return 30;
+               break;
+      case 5 : return 31;
+               break;
+      case 6 : return 30;
+               break;
+      case 7 : return 31;
+               break;
+      case 8 : return 31;
+               break;
+      case 9 : return 30;
+               break;
+      case 10 : return 31;
+               break;
+      case 11 : return 30;
+               break;
+      case 12 : return 31;
+               break;
+   }
+}
+
+std::ostream& operator<<(std::ostream& os, const Date& date)
+{
+   os << date.getDay() <<"/" << date.getMonth() << "/" << date.getYear() << " " << date.getTime();
+   return os;
+}
+
+void Date::DisplayDate() const 
+{
+   std::cout << this->ToLongDate() << " " << this->getTime() << std::endl;
+}

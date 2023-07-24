@@ -40,7 +40,13 @@ public:
     Date& operator +=(int days);
 
     //Write the corresponding month of the date by creating a string 
-    std::string ToLongDate(); // Corrected here
+   std::string ToLongDate() const; // Corrected here
+    
+    //Convert integer to string 
+   std::string ConvertIntToString(int integer) const;
+
+    //Display the date in a string format 
+    void DisplayDate() const;
 
 private:
     int _year;
@@ -59,6 +65,7 @@ private:
 
     friend std::ostream& operator <<(std::ostream& os, const Date& date);
     friend std::istream& operator >>(std::istream& is, Date& date);
+    
 };
 
 #endif
