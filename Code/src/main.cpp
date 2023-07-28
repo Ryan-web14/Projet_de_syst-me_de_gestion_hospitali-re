@@ -1,5 +1,6 @@
 #include "patient.hpp"
-#include "time.hpp"
+
+#include "doctor.hpp"
 
 
 
@@ -9,8 +10,8 @@ int main()
 Patient patient1("Jean", "Dupont", "12 rue de la paix", "066950431");
 patient1.DisplayPatient();
 
-Times time(3,5);
+Doctor doctor("Jean", "Dupont", "12 rue de la paix", "066950431");
+doctor.DisplayDoctor();
 
-time += 60;
 return 0;
 }

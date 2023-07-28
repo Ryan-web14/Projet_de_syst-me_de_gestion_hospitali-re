@@ -7,9 +7,9 @@ Patient::Patient( std::string name, std::string surname, std::string adress, std
     _name = name;
     _surname = surname;
     //_birthday = birthday;
-    _adress = adress;
+    _address = adress;
     _temporary_number = NumberGenerator();
-    _permanent_number = name.substr(0,2) + NumberGenerator();
+    _permanent_number = _surname.substr(0,2) + NumberGenerator();
     if(IsValidPhoneNumber(phone_number)) //verify if the phone number is valid
     {
         _phone_number = phone_number;
@@ -58,7 +58,7 @@ void Patient::setBirthday(Birth birthday)
 
 void Patient::setAdress(const std::string& adress)
 {
-    _adress = adress;
+    _address = adress;
 }
 
 void Patient::DisplayPatient() const 
@@ -66,7 +66,7 @@ void Patient::DisplayPatient() const
     std::cout << "Name : " << _name << std::endl;
     std::cout << "Surname : " << _surname << std::endl;
     //std::cout << "Birthday : " << _birthday.day << std::endl;
-    std::cout << "Adress : " << _adress << std::endl;
+    std::cout << "Adress : " << _address << std::endl;
     std::cout << "Phone number : " << _phone_number << std::endl;
     std::cout << "Temporary number : " << _temporary_number << std::endl;
     std::cout << "Permanent number : " << _permanent_number << std::endl;
@@ -101,7 +101,7 @@ Birth Patient::getBirthday() const
 
 std::string Patient::getAdress() const
 {
-    return _adress;
+    return _address;
 }
 
 std::string Patient::getPhoneNumber() const

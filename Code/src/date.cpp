@@ -249,6 +249,8 @@ int Date::DaysInMonth() const
                break;
       case 12 : return 31;
                break;
+      default:
+             return 30;
    }
 }
 
@@ -258,16 +260,17 @@ std::ostream& operator<<(std::ostream& os, const Date& date)
    return os;
 }
 
-std::istream& opeator >>(std::istream is, const Date& date)
+std::istream& operator >>(std::istream& is,Date& date)
 {
    int month;
    int year;
    int day;
    char slash;
    is>>day>>slash>>month>>slash>>year;
-   day.setDay(day);
-   month.setMonth(month);
-   year.setYear(year);
+   date.setDay(day);
+   date.setMonth(month);
+   date.setYear(year);
+   return is;
 }
 
 void Date::DisplayDate() const 

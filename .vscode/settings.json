@@ -105,7 +105,8 @@
     "bitset": "cpp",
     "ctime": "cpp",
     "regex": "cpp",
-    "iomanip": "cpp"
+    "iomanip": "cpp",
+    "fstream": "cpp"
   },
   "C_Cpp.dimInactiveRegions": false
 }

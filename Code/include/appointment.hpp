@@ -6,15 +6,18 @@
 #include <vector>
 #include "patient.hpp"
 #include "date.hpp"
-
+#include <vector>
+#include <fstream>
+#include <iostream>
+#include <algorithm>
 class Appointment
 {
-Appointment();
+Appointment(Date& date, Patient& patient,Doctor& doctor, std::string reason);
+Appointment(Date& date, Patient& patient, std::string reason);
 
 private:
 std::string appointment_id;
-Date appointment_date; // we are going to simplify the concept of time 
-//std::string appointment_hour;
+std::vector <Date> appointmentDate;
 //Doctor doctor_info;
 std::string appointment_reason;
 Patient patient_info;

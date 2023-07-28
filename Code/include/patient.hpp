@@ -49,7 +49,7 @@ std::string _temporary_number;
 std::string _name;
 std::string _surname;
 Birth _birthday;
-std::string _adress;
+std::string _address;
 std::string _phone_number;
 static std::set<std::string> existing_numbers; //set of existing numbers
 static std::string NumberGenerator(); //generate a new number
