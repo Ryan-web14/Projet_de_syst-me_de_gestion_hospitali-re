@@ -15,34 +15,39 @@
 class Doctor
 {
 public:
-    Doctor();
-    Doctor(std::string name, std::string surname, std::string adress, std::string phone_number);
+//constructor and destructor
+//constructor by default
+Doctor();
 
-    //Methods
-    //verify if the phone number is valid
-    bool IsValidPhoneNumber(const std::string& phone_number);
-    bool isAvalaible(const Date& date) const;
+//constructor with parameters which are the name, the surname, the adress and the phone number
+Doctor(std::string name, std::string surname, std::string adress, std::string phone_number);
 
-    //Display the information of a doctor
-    void DisplayDoctor() const;
+//Methods
+//verify if the phone number is valid
+bool IsValidPhoneNumber(const std::string& phone_number);
+bool isAvalaible(const Date& date) const;
 
-    //getter
-    std::string getName() const;
-    std::string getSurname() const;
-    Birth getBirthday() const;
-    std::string getAddress() const;
-    std::string getPhoneNumber() const;
-    void getPatients() const;
-    std::string getLicenseNumber() const;
-    std::string getDoctorNumber() const;
-    void getAppointment() const;
+//Display the information of a doctor
+void DisplayDoctor() const;
 
-    //setter
-    void setName(const std::string& name);
-    void setSurname(const std::string& surname);
-    void setBirthday(Birth birthday);
-    void setAddress(const std::string& address);
-    void setPhoneNumber(const std::string& phone_number);
+//getter
+std::string getName() const;
+std::string getSurname() const;
+Birth getBirthday() const;
+std::string getAddress() const;
+std::string getPhoneNumber() const;
+void getPatients() const;
+std::string getLicenseNumber() const;
+std::string getDoctorNumber() const;
+//show the list of appointment for the doctor
+void getAppointment() const;
+
+//setter
+void setName(const std::string& name);
+void setSurname(const std::string& surname);
+void setBirthday(Birth birthday);
+void setAddress(const std::string& address);
+void setPhoneNumber(const std::string& phone_number);
 
 private:
 std::string _name;

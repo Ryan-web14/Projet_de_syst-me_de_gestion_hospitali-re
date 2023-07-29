@@ -1,6 +1,13 @@
 #include "appointment.hpp"
 
-Appointment::Appointment()
+
+
+void Appointment::getPatientInfo() const
 {
-    
+    patient_info.DisplayPatient();
+}
+
+void Appointment::getDoctorInfo() const
+{
+    doctor_info.DisplayDoctor();
 }
