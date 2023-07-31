@@ -32,7 +32,7 @@ void Appointment::DisplayAppointment() const
 
     std::cout << "\033[1;33mAppointment ID:\033[0m " << std::left << std::setw(0) << _appointmentId << "\n\n";
 
-   std::cout << "\033[1;33mAppointment Date:\033[0m " << std::left << std::setw(0) << appointmentDate.ToLongDate() <<" at " <<appointmentDate.getTime() << std::setw(0) << "\n\n";
+   std::cout << "\033[1;33mAppointment Date:\033[0m " << std::left << std::setw(0) << appointmentDate.ToLongDate() <<" a " <<appointmentDate.getTime() << std::setw(0) << "\n\n";
 
     std::cout << "\033[1;33mAppointment Reason:\033[0m \n" << std::left << std::setw(0) << _appointmentReason << "\n\n";
 

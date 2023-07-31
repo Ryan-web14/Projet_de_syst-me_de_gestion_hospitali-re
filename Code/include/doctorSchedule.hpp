@@ -16,7 +16,7 @@ public:
 //default constructor
 DoctorSchedule() = default;
 //constructor with parameters
-DoctorSchedule(std::shared_ptr<DoctorAppointment> doctor);
+DoctorSchedule(std::shared_ptr<Doctor> doctor);
 //methods
 //add an appointment to the schedule
 void AddAppointment(std::shared_ptr<Appointment> appointment);

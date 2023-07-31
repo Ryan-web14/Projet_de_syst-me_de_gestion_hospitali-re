@@ -1,6 +1,10 @@
 #include "doctorSchedule.hpp"
 
 
+DoctorSchedule::DoctorSchedule(std::shared_ptr<Doctor> doctor) : _doctor(doctor) 
+{
+  
+}
 
 void DoctorSchedule::AddAppointment(std::shared_ptr<Appointment> appointment)
 {
@@ -26,12 +30,25 @@ void DoctorSchedule::AddAppointment(std::shared_ptr<Appointment> appointment)
 //    }
 //    return true;
 // }
-
 void DoctorSchedule::DisplaySchedule() const
 {
-    for(const auto appointment: _appointmentList)
+    std::cout << "\n\033[1;35m========================================\033[0m\n";
+    std::cout << "\033[1;36m          DOCTOR'S SCHEDULE\033[0m\n";
+    std::cout << "\033[1;35m========================================\033[0m\n";
+
+    if (_appointmentList.empty())
     {
-        appointment->DisplayDoctorAppointment();
+        std::cout << "\033[1;31mThe schedule is currently empty.\033[0m\n";
     }
-    return;
+    else
+    {
+        for(const auto& appointment: _appointmentList)
+        {
+            appointment->DisplayDoctorAppointment();
+        }
+    }
+
+    std::cout << "\033[1;35m========================================\033[0m\n";
 }
+
+
