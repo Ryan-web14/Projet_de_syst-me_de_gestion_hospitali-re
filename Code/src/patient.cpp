@@ -1,15 +1,19 @@
 #include "patient.hpp"
 
-
+NumberGenerator Patient::_numberGenerator(100000, 999999);
 
 Patient::Patient( std::string name, std::string surname, std::string adress, std::string phone_number)
 {
     _name = name;
+      for (auto& sur: surname)
+    {
+        sur = std::toupper(sur);
+    }
     _surname = surname;
     //_birthday = birthday;
     _address = adress;
-    _temporary_number = NumberGenerator();
-    _permanent_number = _surname.substr(0,2) + NumberGenerator();
+    _temporary_number = _numberGenerator.generateNumber();
+    _permanent_number = _surname.substr(0,2) +_numberGenerator.generateNumber();;
     if(IsValidPhoneNumber(phone_number)) //verify if the phone number is valid
     {
         _phone_number = phone_number;
@@ -20,24 +24,6 @@ Patient::Patient( std::string name, std::string surname, std::string adress, std
     }
 }
 
-std::string Patient::NumberGenerator()
-{
-    std::string new_number;
-    do
-    {
-        std::stringstream ss;
-        std::random_device rd;
-        std::mt19937 gen(rd());
-        std::uniform_int_distribution<> distrib(100000, 999999);
-        ss << distrib(gen);
-        new_number = ss.str();
-
-    } while (std::find(std::begin(existing_numbers),std::end(existing_numbers), new_number) != existing_numbers.end());
-
-    existing_numbers.insert(new_number);
-    return new_number;
-}
-
 void Patient::setName(const std::string& name)
 {
     _name = name;
@@ -46,6 +32,10 @@ void Patient::setName(const std::string& name)
 
 void Patient::setSurname(const std::string& surname)
 {
+    for (auto sur: surname)
+    {
+        sur = std::toupper(sur);
+    }
     _surname = surname;
    
 }
@@ -63,16 +53,20 @@ void Patient::setAdress(const std::string& adress)
 
 void Patient::DisplayPatient() const 
 {
-    std::cout << "Name : " << _name << std::endl;
-    std::cout << "Surname : " << _surname << std::endl;
-    //std::cout << "Birthday : " << _birthday.day << std::endl;
-    std::cout << "Adress : " << _address << std::endl;
-    std::cout << "Phone number : " << _phone_number << std::endl;
-    std::cout << "Temporary number : " << _temporary_number << std::endl;
-    std::cout << "Permanent number : " << _permanent_number << std::endl;
+    std::cout << "\n\033[1;35m=====================================================\033[0m\n";
+    std::cout << "\033[1;36m\t\t\tPATIENT DETAILS\033[0m\n";
+    std::cout << "\033[1;35m=====================================================\033[0m\n";
+
+    std::cout << "\033[1;33mName:\033[0m " << std::left << std::setw(0) << _name << "\n\n";
+    std::cout << "\033[1;33mSurname:\033[0m " << std::left << std::setw(0) << _surname << "\n\n";
+    std::cout << "\033[1;33mAddress:\033[0m " << std::left << std::setw(0) << _address << "\n\n";
+    std::cout << "\033[1;33mPhone number:\033[0m " << std::left << std::setw(0) << _phone_number << "\n\n";
+    std::cout << "\033[1;33mTemporary number:\033[0m " << std::left << std::setw(0) << _temporary_number << "\n\n";
+    std::cout << "\033[1;33mPermanent number:\033[0m " << std::left << std::setw(0) << _permanent_number << "\n\n";
+
+    std::cout << "\033[1;35m=====================================================\033[0m\n\n";
 }
 
-std::set<std::string> Patient::existing_numbers;
 
 std::string Patient::getTemporaryNumber() const
 {

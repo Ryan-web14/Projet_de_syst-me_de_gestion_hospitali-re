@@ -3,7 +3,7 @@
 
 Doctor::Doctor()
 {
-    _doctorNumber = NumberGenerator(1000000, 9999999);
+    //_doctorNumber = NumberGenerator(1000000, 9999999);
 }
 
 Doctor::Doctor(std::string name, std::string surname, std::string adress, std::string phone_number):
@@ -24,25 +24,29 @@ _name(name), _surname(surname), _address(adress)
     {
         std::cout << e.what();
     }
+ 
+    _doctorNumber = NumberGenerator(1000000, 9999999);
 
-    _doctorNumber = _surname.substr(0,2) + NumberGenerator(1000000, 9999999);
-
-    _licenseNumber = NumberGenerator(100000000, 99999999);
+    _licenseNumber = NumberGenerator(10000000, 99999999);
 
 }
 
 void Doctor::DisplayDoctor() const
 {
-    std::cout << "Name: " << _name << std::endl;
-    std::cout << "Surname: " << _surname << std::endl;
-    std::cout << "Adress: " << _address << std::endl;
-    std::cout << "Phone number: " << _phoneNumber << std::endl;
-    std::cout << "Doctor number: " << _doctorNumber << std::endl;
-    std::cout << "License number: " << _licenseNumber << std::endl;
-    std::cout << std::endl;
-    std::vector<int> v;
-   
+    std::cout << "\n\033[1;35m=====================================================\033[0m\n";
+    std::cout << "\033[1;36m\t\t\tDOCTOR DETAILS\033[0m\n";
+    std::cout << "\033[1;35m=====================================================\033[0m\n";
+
+    std::cout << "\033[1;33mName:\033[0m " << std::left << std::setw(0) << _name << "\n\n";
+    std::cout << "\033[1;33mSurname:\033[0m " << std::left << std::setw(0) << _surname << "\n\n";
+    std::cout << "\033[1;33mAddress:\033[0m " << std::left << std::setw(0) << _address << "\n\n";
+    std::cout << "\033[1;33mPhone number:\033[0m " << std::left << std::setw(0) << _phoneNumber << "\n\n";
+    std::cout << "\033[1;33mDoctor number:\033[0m " << std::left << std::setw(0) << _doctorNumber << "\n\n";
+    std::cout << "\033[1;33mLicense number:\033[0m " << std::left << std::setw(0) << _licenseNumber << "\n\n";
+
+    std::cout << "\033[1;35m=====================================================\033[0m\n\n";
 }
+
 
 std::string Doctor::getName() const
 {

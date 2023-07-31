@@ -10,6 +10,7 @@ class Date
 public:
     //constructor
     Date();
+    Date(int year, int month, int day);
     //getter
     int getYear() const;
     int getMonth() const;

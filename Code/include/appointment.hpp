@@ -10,37 +10,47 @@
 #include <fstream>
 #include <iostream>
 #include <algorithm>
-#include "doctor.hpp"
 #include "numberGenerator.hpp"
+#include <locale>
+#include <iomanip>
+
+
+
 class Appointment
 {
 public:
 //constructor and destructor
-//constructor with parameters which are the date, the patient, the doctor and the reason of the appointment
-Appointment(Date& date, Patient& patient,Doctor& doctor, std::string reason); 
 //constructor with parameters which are the date, the patient and the reason of the appointment
 Appointment(Date& date, Patient& patient, std::string reason);
 //constructor by default
 Appointment() = default;
+//destructor
+~Appointment() = default;
+
+//methods   
+//display the appointment
+void DisplayAppointment() const;
 
 //getter and setter
-std::string getAppointmentId() const;
-std::vector<Date> getAppointmentDate() const;
-std::string getAppointmentReason() const;
-void getPatientInfo() const;
-void getDoctorInfo() const;
-
+//getter
+std::string getAppointmentId() const; //return appointment id
+Date getAppointmentDate() const; //return appointment date
+std::string getAppointmentReason() const; //return appointment reason
+void getPatientInfo() const; // display patient info
+//setter
+void setAppointmentDate(Date& date); //set appointment date
+void setAppointmentTime(Times& time); //set appointment time
+//void setAppointmentReason(std::string reason); //set appointment reason
 
 private:
-std::string appointment_id;
-std::vector <Date> appointmentDate;
-//Doctor doctor_info;
-std::string appointment_reason;
-Patient patient_info;
-Doctor doctor_info;
+std::string _appointmentId;
+Date appointmentDate;
+std::string _appointmentReason;
+Patient _patient; //patient_info
 std::string _reason;
 Date _date;
-Times _timeslot;
+//Times _timeslot;
+static NumberGenerator _numberGenerator;
 
 };
 #endif

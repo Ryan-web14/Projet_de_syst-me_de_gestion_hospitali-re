@@ -1,4 +1,4 @@
-
+#pragma once 
 struct Birth
 {
     int year;

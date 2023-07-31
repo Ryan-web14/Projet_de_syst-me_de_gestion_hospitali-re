@@ -8,6 +8,12 @@ Date::Date()
     _day = 0;
 }
 
+Date::Date(int year, int month, int day)
+{
+    _year = year;
+    _month = month;
+    _day = day;
+}
 //getter and setter
 //getter for year, month and day
 int Date::getYear() const{return _year;};
@@ -19,6 +25,8 @@ Times Date::getTime() const {return theTime;};
 void Date::setYear(int year){_year = year;};
 void Date::setMonth(int month){_month = month;};
 void Date::setDay(int day){_day = day;};
+
+void Date::setTime(const Times& time){theTime = time;};
 
 //operator compare date and time
 bool Date::operator==(const Date& date) const
@@ -167,37 +175,37 @@ std::string Date::ToLongDate() const
    day = ConvertIntToString(_day);
    year = ConvertIntToString(_year);
 
-   longDate = day + " ";
+   longDate = year + " ";
 
    switch(_month)
    {
-      case 1 : longDate += "January";
+      case 1 : longDate += "Janvier";
                break;
-      case 2 : longDate += "February";
+      case 2 : longDate += "Fevrier";
                break;
-      case 3 : longDate += "March";
+      case 3 : longDate += "Mars";
                break;
-      case 4 : longDate += "April";
+      case 4 : longDate += "Avril";
                break;
-      case 5 : longDate += "May";
+      case 5 : longDate += "Mai";
                break;
-      case 6 : longDate += "June";
+      case 6 : longDate += "Juin";
                break;
-      case 7 : longDate += "July";
+      case 7 : longDate += "Juiller";
                break;
-      case 8 : longDate += "August";
+      case 8 : longDate += "Aout";
                break;
-      case 9 : longDate += "September";
+      case 9 : longDate += "Septembre";
                break;
-      case 10 : longDate += "October";
+      case 10 : longDate += "Octobre";
                break;
-      case 11 : longDate += "November";
+      case 11 : longDate += "Novembre";
                break;
-      case 12 : longDate += "December";
+      case 12 : longDate += "Decembre";
                break;
    }
 
-   longDate = longDate + " " + year;
+   longDate = longDate + " " + day;
 
    return longDate;
 }

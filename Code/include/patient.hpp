@@ -3,13 +3,11 @@
 
 #include "birth.hpp"
 #include <string>
-#include <vector>
-#include <sstream>
-#include <random>
-#include <set>
 #include <algorithm>
 #include <iostream>
 #include <regex>
+#include "numberGenerator.hpp"
+#include <iomanip>
 
 class Patient
 {
@@ -51,8 +49,7 @@ std::string _surname;
 Birth _birthday;
 std::string _address;
 std::string _phone_number;
-static std::set<std::string> existing_numbers; //set of existing numbers
-static std::string NumberGenerator(); //generate a new number
+static NumberGenerator _numberGenerator;
 //std::vector<Hospitalisation> hospitalisation;
 //std::vector<Appointment> appointment;
 //std::vector<Billing> billing;

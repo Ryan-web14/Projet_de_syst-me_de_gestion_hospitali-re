@@ -155,7 +155,7 @@ void Times::SimplifyTimes()
 
 //overloading of the ostream operator
 //Display the time in the 24 hours format
-std::ostream& operator <<(std::ostream& os, Times& tm)
+std::ostream& operator <<(std::ostream& os,const Times& tm)
 {
   os << tm.getHours() << ":" << std::setw(2) << std::setfill('0') <<tm.getMinutes();
   return os;

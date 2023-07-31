@@ -1,0 +1,1 @@
+Un des problèmes rencontrer lors de l'implémentation du projet était les inclusions circulaires
