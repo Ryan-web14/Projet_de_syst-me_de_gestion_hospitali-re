@@ -17,9 +17,10 @@ public:
 //constructor and destructor
 //constructor by default
 Doctor();
-
 //constructor with parameters which are the name, the surname, the adress and the phone number
 Doctor(std::string name, std::string surname, std::string adress, std::string phone_number);
+//destructor
+~Doctor() = default;
 
 //Methods
 //verify if the phone number is valid

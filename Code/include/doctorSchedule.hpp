@@ -13,10 +13,14 @@
 class DoctorSchedule
 {
 public:
+//constructor and destructor
 //default constructor
 DoctorSchedule() = default;
 //constructor with parameters
 DoctorSchedule(std::shared_ptr<Doctor> doctor);
+//desctructor
+~DoctorSchedule() = default;
+
 //methods
 //add an appointment to the schedule
 void AddAppointment(std::shared_ptr<Appointment> appointment);
