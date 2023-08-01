@@ -107,7 +107,7 @@ void Consultation::DisplayConsultationWithDiagnosisAndSymptoms() const
     std::cout << "\033[1;33m|Symptoms: \033[0m" <<"\n";
     for (auto symptom : _symptoms)
     {
-        std::cout << "\033[1;33m\033[0m" << std::left << std::setw(57) << std::setfill(' ')<<symptom << "\033[1;33m|\033[0m\n";
+        std::cout << "\033[1;33m\033[0m" << std::left << std::setw(56) << std::setfill(' ')<<symptom << "\033[1;33m|\033[0m\n";
     }
 
     std::cout << "\033[1;36m" << separator << "\033[0m\n\n";
