@@ -1,6 +1,7 @@
 #include "appointment.hpp"
 #include "doctor.hpp"
 
+//initialization of the static variable
 NumberGenerator Appointment::_numberGenerator(10000, 99999);
 
 //constructor with parameters which are the date, the patient and the reason of the appointment

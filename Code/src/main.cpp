@@ -1,5 +1,5 @@
 
-#include "patient.hpp"
+#include "consultation.hpp"
 #include "doctorSchedule.hpp"
 #include <memory>
 
@@ -13,9 +13,9 @@ Patient patient1("Jean", "Dupont", "12 rue de la paix", "066950431");
 //patient1.DisplayPatient();
 
 Doctor doctor("Jean-luc", "Moretti", "12 rue de la paix", "066950431");
-doctor.DisplayDoctor();
+//doctor.DisplayDoctor();
 
-Date date(12, 12, 2020);
+Date date(12, 12, 2023);
 std::string reason = "I have a headache";
 Appointment appointment(date, patient1, reason);
 
@@ -23,7 +23,7 @@ Times timeslot(12, 30);
 
 appointment.setAppointmentTime(timeslot);
 
-//appointment.DisplayAppointment();
+appointment.DisplayAppointment();
 std::cout << "\n\n";
 
 
@@ -43,5 +43,15 @@ std::cout << "\n\n";
     // Displaying the doctor's schedule
     doctorSchedule.DisplaySchedule();
 
+    std::shared_ptr<Patient> patientPtr = std::make_shared<Patient>(patient1);
+    // Creating a new consultation
+    Consultation consultation(patientPtr,docPtr, doctorAppointment,"Paludisme");
+    consultation.DisplayConsultationWithDiagnosis();
+ consultation.AddSymptom("Fievre");
+    consultation.AddSymptom("Maux de tete");
+    consultation.AddSymptom("Maux de ventre");
+    consultation.AddSymptom("Maux de dos");
+    consultation.AddSymptom("Maux de gorge");
+    consultation.DisplayConsultationWithDiagnosisAndSymptoms();
 return 0;
 }

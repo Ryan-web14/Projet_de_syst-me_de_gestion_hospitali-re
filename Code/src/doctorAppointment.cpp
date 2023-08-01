@@ -1,15 +1,13 @@
 #include "doctorAppointment.hpp"
 
-
-//constructors
+// constructors
 DoctorAppointment::DoctorAppointment(std::shared_ptr<Appointment> appointment, std::shared_ptr<Doctor> doctor)
 {
     _appointment = appointment;
     _doctor = doctor;
 }
 
-
-//getter
+// getter
 std::shared_ptr<Doctor> DoctorAppointment::getDoctor() const
 {
     return _doctor;
@@ -22,13 +20,13 @@ std::shared_ptr<Appointment> DoctorAppointment::getAppointment() const
 
 Date DoctorAppointment::getAppointmentDate() const
 {
-     return _appointment->getAppointmentDate();
+    return _appointment->getAppointmentDate();
 }
 
-//method
+// method
 void DoctorAppointment::DisplayDoctorAppointment() const
 {
-     std::cout << "Doctor: " << _doctor->getName() << std::endl;
+    std::cout << "Doctor: " << _doctor->getName() << std::endl;
     _appointment->DisplayAppointment();
     return;
 }

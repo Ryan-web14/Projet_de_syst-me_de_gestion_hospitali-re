@@ -30,13 +30,13 @@ Appointment() = default;
 //methods   
 //display the appointment
 void DisplayAppointment() const;
+void getPatientInfo() const; // display patient info
 
 //getter and setter
 //getter
 std::string getAppointmentId() const; //return appointment id
 Date getAppointmentDate() const; //return appointment date
 std::string getAppointmentReason() const; //return appointment reason
-void getPatientInfo() const; // display patient info
 //setter
 void setAppointmentDate(Date& date); //set appointment date
 void setAppointmentTime(Times& time); //set appointment time

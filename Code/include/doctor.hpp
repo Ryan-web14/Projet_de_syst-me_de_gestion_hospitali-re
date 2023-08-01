@@ -31,7 +31,7 @@ void DisplayDoctor() const;
 //getter
 std::string getName() const;
 std::string getSurname() const;
-Birth getBirthday() const;
+//Birth getBirthday() const;
 std::string getAddress() const;
 std::string getPhoneNumber() const;
 //void getPatients() const;
@@ -42,7 +42,7 @@ std::string getDoctorNumber() const;
 //setter
 void setName(const std::string& name);
 void setSurname(const std::string& surname);
-void setBirthday(Birth birthday);
+//void setBirthday(Birth birthday);
 void setAddress(const std::string& address);
 void setPhoneNumber(const std::string& phone_number);
 
@@ -54,9 +54,7 @@ std::string _phoneNumber;
 std::string _licenseNumber;
 Birth _birthday;
 std::string _doctorNumber;
-//std::vector<Patient> _patients;
 //Speciality _speciality;
-//std::vector<Consultation> _consultations;
 
 static std::set<std::string> existing_numbers; //set of existing numbers
 static std::string NumberGenerator(int min, int max); //generate a new number
