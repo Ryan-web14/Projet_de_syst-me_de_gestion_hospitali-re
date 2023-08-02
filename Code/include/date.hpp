@@ -62,7 +62,7 @@ private:
     bool IsLeapYear() const;
 
     //return the number of days in a month
-    int DaysInMonth() const; 
+    int DaysInMonth() const;   
 
     friend std::ostream& operator <<(std::ostream& os, const Date& date);
     friend std::istream& operator >>(std::istream& is, Date& date);

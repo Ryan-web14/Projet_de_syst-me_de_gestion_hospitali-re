@@ -1,7 +1,7 @@
 #include "consultation.hpp"
 
 // initialization of the static variable
-std::map<std::string, int> Consultation::_symptomFrequency;
+//std::map<std::string, int> Consultation::_symptomFrequency;
 NumberGenerator Consultation::_numberGenerator(100000, 999999);
 
 // constructors
@@ -29,7 +29,7 @@ bool Consultation::DeleteSymptom(std::string symptom)
     if (it != std::end(_symptoms))
     {
         _symptoms.erase(it);
-        _symptomFrequency[symptom]--;
+        //_symptomFrequency[symptom]--;
         return true; //return true if the symptom has been deleted
     }
     return false; //return false if the symptom has not been deleted
@@ -266,3 +266,88 @@ void Consultation::setFollowUps(std::shared_ptr<DoctorAppointment> followUps)
 
 }
 //other methods
+
+std::string Consultation::getMostFrequentSymptoms() const
+{
+    if(_symptoms.empty())
+    {
+        throw std::runtime_error("Symptoms is empty");
+    }
+
+    std::map<std::string, int> symptomsMap;
+    for(auto& symptom : _symptoms)
+    {
+        symptomsMap[symptom]++;
+    }
+
+    std::string mostFrequentSymptom = _symptoms[0];
+    int max = symptomsMap[mostFrequentSymptom];
+
+    for(const auto& symptom : symptomsMap)
+    {
+        if(symptom.second > max)
+        {
+            mostFrequentSymptom = symptom.first;
+            max = symptom.second;
+        }
+    }
+
+    return mostFrequentSymptom;
+}
+
+std::string Consultation::getMostFrequentSymptomsFromConsultation(std::vector<std::shared_ptr<Consultation>> consultationList) const 
+{
+    std::vector<std::string> symptomsList;
+    for(auto& consultList : consultationList)
+    {
+     std::vector<std::string> symptoms;
+     symptoms = consultList->getSymptoms();
+     symptomsList.insert(symptomsList.end(), symptoms.begin(), symptoms.end());
+    }
+
+    std::map<std::string, int> symptomsMap;
+    for(auto& symptom : symptomsList)
+    {
+        symptomsMap[symptom]++;
+    }
+    std::string mostFrequentSymptom = symptomsList[0];
+    int max = symptomsMap[mostFrequentSymptom];
+
+    for(const auto& symptom : symptomsMap)
+    {
+        if(symptom.second > max)
+        {
+            mostFrequentSymptom = symptom.first;
+            max = symptom.second;
+        }
+    }
+
+    return mostFrequentSymptom;
+}
+
+std::string Consultation::getMostFrequentDiagnosisFromConsultation(std::vector<std::shared_ptr<Consultation>> consultationList) const
+{
+    std::vector<std::string> diagnosisList;
+    for(auto& consult : consultationList)
+    {
+        diagnosisList.push_back(consult->getDiagnosis());
+    }
+    std::map<std::string, int> diagnosisMap;
+    for(auto& diagnosis : diagnosisList)
+    {
+        diagnosisMap[diagnosis]++;
+    }
+    std::string mostFrequentDiagnosis = diagnosisList[0];
+    int max = diagnosisMap[mostFrequentDiagnosis];
+
+    for(const auto& diagnosis : diagnosisMap)
+    {
+        if(diagnosis.second > max)
+        {
+            mostFrequentDiagnosis = diagnosis.first;
+            max = diagnosis.second;
+        }
+    }
+
+    return mostFrequentDiagnosis;
+}

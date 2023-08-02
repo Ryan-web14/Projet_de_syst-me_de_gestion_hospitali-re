@@ -5,6 +5,7 @@
 #include <vector>
 #include <stdexcept>
 #include <algorithm>
+#include <map>
 #include "Patient.hpp"
 #include "doctorAppointment.hpp"
 #include "numberGenerator.hpp"
@@ -54,7 +55,9 @@ std::shared_ptr<Doctor> getDoctor() const; //return the doctor of the consultati
 double getCost() const; //return the cost of the consultation
 std::shared_ptr<DoctorAppointment> getDoctorAppointment() const; //return the doctorAppointment of the consultation
 bool getIsPaid() const; //return if the consultation is paid or not
-static std::vector<std::pair<std::string, int>> getMostCommonSymptoms();
+std::string getMostFrequentSymptoms() const;
+std::string getMostFrequentSymptomsFromConsultation(std::vector<std::shared_ptr<Consultation>> consultationList) const;
+std::string getMostFrequentDiagnosisFromConsultation(std::vector<std::shared_ptr<Consultation>> consultationList) const;
 //setter
 void setDiagnosis(std::string diagnosis); //set the diagnosis of the consultation
 void setSymptoms(std::string symptoms); //set the symptoms of the consultation
@@ -77,6 +80,6 @@ std::vector<std::string>_symptoms; //vector of strings containing the symptoms o
 std::shared_ptr<DoctorAppointment> _followUps; 
 double _cost; //double containing the cost of the consultation
 bool _isPaid; //boolean to know if the consultation is paid or not
-static std::map<std::string, int> _symptomFrequency;
+//static std::map<std::string, int> _symptomFrequency;
 };
 

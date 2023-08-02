@@ -106,7 +106,8 @@
     "ctime": "cpp",
     "regex": "cpp",
     "iomanip": "cpp",
-    "fstream": "cpp"
+    "fstream": "cpp",
+    "map": "cpp"
   },
   "C_Cpp.dimInactiveRegions": false
 }
