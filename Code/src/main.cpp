@@ -53,5 +53,11 @@ std::cout << "\n\n";
     consultation.AddSymptom("Maux de dos");
     consultation.AddSymptom("Maux de gorge");
     consultation.DisplayConsultationWithDiagnosisAndSymptoms();
+    consultation.AddNote("Le patient a de la fievre");
+    consultation.AddNote ("Le patient a mal a la tete");
+    consultation.AddNote ("Le patient a mal au ventre");
+    consultation.DisplayConsultationWithDiagnosisAndSymptomsAndNotes();
+
+    std::cout << consultation.getDiagnosis();
 return 0;
 }

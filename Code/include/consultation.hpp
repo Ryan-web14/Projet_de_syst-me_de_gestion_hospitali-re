@@ -45,9 +45,10 @@ void DisplayConsultationWithDiagnosisAndSymptomsAndNotesAndCost() const;
 
 //getters and setters
 //getter
+std::string getConsultationId() const;
 std::string getDiagnosis() const; //return the diagnosis of the consultation
-std::vector<std::string>& getSymptoms() const; //return the symptoms of the consultation
-std::vector<std::string>& getNote() const; //return the notes of the consultation
+std::vector<std::string> getSymptoms() const; //return the symptoms of the consultation
+std::vector<std::string> getNotes() const; //return the notes of the consultation
 std::shared_ptr<Patient> getPatient() const; //return the patient of the consultation
 std::shared_ptr<Doctor> getDoctor() const; //return the doctor of the consultation
 double getCost() const; //return the cost of the consultation
@@ -72,7 +73,7 @@ std::shared_ptr<Doctor> _doctor; //doctor smart_ptr associated with the consulta
 std::shared_ptr<DoctorAppointment> _doctorAppointment; //doctorAppointment smart_ptr associated with the consultation
 std::vector<std::string> _notes; //vector of strings containing the notes of the consultation
 std::string _diagnosis; //string containing the diagnosis of the consultation
-std::vector<std::string> _symptoms; //vector of strings containing the symptoms of the consultation
+std::vector<std::string>_symptoms; //vector of strings containing the symptoms of the consultation
 std::shared_ptr<DoctorAppointment> _followUps; 
 double _cost; //double containing the cost of the consultation
 bool _isPaid; //boolean to know if the consultation is paid or not
