@@ -44,7 +44,7 @@ void Consultation::AddNote (std::string note)
 void Consultation::DisplayConsultation() const
 {
     std::string separator = "+-------------------------------------------------------+";
-    std::string title = "|                     CONSULTATION                      |";
+    std::string title = "|                     CONSULTATION                   |";
 
     std::cout << "\n\033[1;36m" << separator << "\033[0m\n";
     std::cout << "\033[1;36m" << title << "\033[0m\n";
@@ -64,7 +64,7 @@ void Consultation::DisplayConsultation() const
 void Consultation::DisplayConsultationWithDiagnosis() const
 {
     std::string separator = "+-------------------------------------------------------+";
-    std::string title = "|             CONSULTATION WITH DIAGNOSIS               |";
+    std::string title = "|             CONSULTATION AVEC DIAGNOSTIQUE            |";
 
     std::cout << "\n\033[1;36m" << separator << "\033[0m\n";
     std::cout << "\033[1;36m" << title << "\033[0m\n";
@@ -87,7 +87,7 @@ void Consultation::DisplayConsultationWithDiagnosis() const
 void Consultation::DisplayConsultationWithDiagnosisAndSymptoms() const
 {
     std::string separator = "+-------------------------------------------------------+";
-    std::string title = "|  CONSULTATION WITH DIAGNOSIS AND SYMPTOMS             |";
+    std::string title = "|  CONSULTATION AVEC DIAGNOSTIQUE ET SYMPTOMES          |";
 
     std::cout << "\n\033[1;36m" << separator << "\033[0m\n";
     std::cout << "\033[1;36m" << title << "\033[0m\n";
@@ -118,7 +118,7 @@ void Consultation::DisplayConsultationWithDiagnosisAndSymptoms() const
 void Consultation::DisplayConsultationWithDiagnosisAndSymptomsAndNotes() const
 {
     std::string separator = "+-------------------------------------------------------+";
-    std::string title = "| CONSULTATION WITH DIAGNOSIS, SYMPTOMS, AND NOTES      |";
+    std::string title = "| CONSULTATION AVEC DIAGNOSTIQUE,SYMPTOMES ET NOTE      |";
 
     std::cout << "\n\033[1;36m" << separator << "\033[0m\n";
     std::cout << "\033[1;36m" << title << "\033[0m\n";

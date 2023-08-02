@@ -28,16 +28,15 @@ Date Appointment::getAppointmentDate() const
 void Appointment::DisplayAppointment() const
 {
     std::cout << "\n\033[1;35m=====================================================\033[0m\n";
-    std::cout << "\033[1;36m\t\tAPPOINTMENT DETAILS\033[0m\n";
+    std::cout << "\033[1;36m\t\tDETAIL DE RENDEZ-VOUS\033[0m\n";
     std::cout << "\033[1;35m=====================================================\033[0m\n";
 
-    std::cout << "\033[1;33mAppointment ID:\033[0m " << std::left << std::setw(0) << _appointmentId << "\n\n";
+    std::cout << "\033[1;33m ID rendez-vous:\033[0m " << std::left << std::setw(0) << _appointmentId << "\n\n";
 
-   std::cout << "\033[1;33mAppointment Date:\033[0m " << std::left << std::setw(0) << appointmentDate.ToLongDate() <<" a " <<appointmentDate.getTime() << std::setw(0) << "\n\n";
+   std::cout << "\033[1;33m Date rendez-vous:\033[0m " << std::left << std::setw(0) << appointmentDate.ToLongDate() <<" a " <<appointmentDate.getTime() << std::setw(0) << "\n\n";
 
-    std::cout << "\033[1;33mAppointment Reason:\033[0m \n" << std::left << std::setw(0) << _appointmentReason << "\n\n";
+    std::cout << "\033[1;33m Raison de rendez-vous :\033[0m \n" << std::left << std::setw(0) << _appointmentReason << "\n\n";
 
-    std::cout << "\033[1;33mPatient Details:\033[0m \n";
     _patient.DisplayPatient();
 
     std::cout << "\033[1;35m=====================================================\033[0m\n\n";

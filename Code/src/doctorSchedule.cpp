@@ -33,7 +33,7 @@ void DoctorSchedule::AddAppointment(std::shared_ptr<Appointment> appointment)
 void DoctorSchedule::DisplaySchedule() const
 {
     std::cout << "\n\033[1;35m========================================\033[0m\n";
-    std::cout << "\033[1;36m          DOCTOR'S SCHEDULE\033[0m\n";
+    std::cout << "\033[1;36m            EMPLOI DU TEMPS DOCTEUR\033[0m\n";
     std::cout << "\033[1;35m========================================\033[0m\n";
 
     if (_appointmentList.empty())

@@ -53,15 +53,15 @@ void Patient::setAdress(const std::string &adress)
 void Patient::DisplayPatient() const
 {
     std::cout << "\n\033[1;35m=====================================================\033[0m\n";
-    std::cout << "\033[1;36m\t\t\tPATIENT DETAILS\033[0m\n";
+    std::cout << "\033[1;36m\t\t\tDETAILS PATIENT\033[0m\n";
     std::cout << "\033[1;35m=====================================================\033[0m\n";
 
-    std::cout << "\033[1;33mName:\033[0m " << std::left << std::setw(0) << _name << "\n\n";
-    std::cout << "\033[1;33mSurname:\033[0m " << std::left << std::setw(0) << _surname << "\n\n";
-    std::cout << "\033[1;33mAddress:\033[0m " << std::left << std::setw(0) << _address << "\n\n";
-    std::cout << "\033[1;33mPhone number:\033[0m " << std::left << std::setw(0) << _phone_number << "\n\n";
-    std::cout << "\033[1;33mTemporary number:\033[0m " << std::left << std::setw(0) << _temporary_number << "\n\n";
-    std::cout << "\033[1;33mPermanent number:\033[0m " << std::left << std::setw(0) << _permanent_number << "\n\n";
+    std::cout << "\033[1;33mPrenom:\033[0m " << std::left << std::setw(0) << _name << "\n\n";
+    std::cout << "\033[1;33mNom:\033[0m " << std::left << std::setw(0) << _surname << "\n\n";
+    std::cout << "\033[1;33mAdresse:\033[0m " << std::left << std::setw(0) << _address << "\n\n";
+    std::cout << "\033[1;33mTelephone:\033[0m " << std::left << std::setw(0) << _phone_number << "\n\n";
+    std::cout << "\033[1;33mNumero temporaire:\033[0m " << std::left << std::setw(0) << _temporary_number << "\n\n";
+    std::cout << "\033[1;33mNumero permanent:\033[0m " << std::left << std::setw(0) << _permanent_number << "\n\n";
 
     std::cout << "\033[1;35m=====================================================\033[0m\n\n";
 }
