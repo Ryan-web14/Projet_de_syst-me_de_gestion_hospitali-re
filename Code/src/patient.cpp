@@ -5,7 +5,36 @@ NumberGenerator Patient::_numberGenerator(100000, 999999);
 
 Patient::Patient(std::string name, std::string surname, std::string adress, std::string phone_number)
 {
+    
+    for (char c : name)
+    {
+        if (isdigit(c)) // check if the name contains a number
+        {
+            throw std::invalid_argument("Invalid name");
+        }
+    }
+    if(name.empty())
+    {
+        throw std::runtime_error("Invalid name");
+    }
     _name = name;
+
+     for (char c : surname) 
+    {
+        if (isdigit(c)) //check if the name contains a number
+        {
+            throw std::invalid_argument("Invalid surname");
+        }
+    }
+    if(surname.empty())
+    {
+        throw std::runtime_error("Invalid surname");
+    }
+
+       for (auto &sur : surname)
+    {
+        sur = std::toupper(sur);
+    }
     for (auto &sur : surname)
     {
         sur = std::toupper(sur);

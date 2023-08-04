@@ -16,7 +16,7 @@ int main() {
     Doctor doctor("Jean-luc", "Moretti", "12 rue de la paix", "066950431");
     Date date(12, 12, 2023);
 
-    std::shared_ptr<Appointment> _appointment = std::make_shared<Appointment>(date, patient1, "check-up");
+    std::shared_ptr<Appointment> _appointment = std::make_shared<Appointment>(date, patient1, "checkup");
     std::shared_ptr<Doctor> docPtr = std::make_shared<Doctor>(doctor);
     std::shared_ptr<DoctorAppointment> doctorAppointment = std::make_shared<DoctorAppointment>(_appointment, docPtr);
 

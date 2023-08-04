@@ -1,0 +1,335 @@
+#include <string>
+#include <vector>
+#include <memory>
+#include <iostream>
+#include <algorithm>
+#include <ctime>
+
+class Doctor; // Forward declaration
+class Patient; // Forward declaration
+
+class Prescription {
+public:
+    // The Medicine struct represents a single medicine in the prescription
+    struct Medicine {
+        std::string name;
+        std::string instructions;
+    };
+
+    // Constructor
+    Prescription(const std::shared_ptr<Doctor>& doctor,
+                 const std::shared_ptr<Patient>& patient,
+                 const std::string& notes)
+        : _doctor(doctor),
+          _patient(patient),
+          _notes(notes) 
+    {
+        // Generate a unique ID for the prescription and set the date
+        _prescriptionID = std::time(nullptr); // Using epoch time as a unique ID
+        _dateOfPrescription = std::time(nullptr); // Setting current date
+    }
+
+    // Getters
+    std::time_t getPrescriptionID() const { return _prescriptionID; }
+    const std::shared_ptr<Doctor>& getDoctor() const { return _doctor; }
+    const std::shared_ptr<Patient>& getPatient() const { return _patient; }
+    const std::vector<Medicine>& getMedicines() const { return _medicines; }
+    const std::string& getNotes() const { return _notes; }
+    std::time_t getDateOfPrescription() const { return _dateOfPrescription; }
+
+    // Methods to manage medicines
+    void addMedicine(const Medicine& med) { _medicines.push_back(med); }
+    void removeMedicine(const std::string& medName);
+    void modifyMedicineInstructions(const std::string& medName, const std::string& newInstructions);
+
+    // Method to set expiration date
+    void setExpirationDate(std::time_t expiry) { _expirationDate = expiry; }
+
+    // Method to check validity
+    bool isPrescriptionValid() const { return std::time(nullptr) <= _expirationDate; }
+
+    // Function to print the prescription
+    void printPrescription() const;
+
+private:
+    std::time_t _prescriptionID;
+    std::shared_ptr<Doctor> _doctor;
+    std::shared_ptr<Patient> _patient;
+    std::vector<Medicine> _medicines;
+    std::string _notes;
+    std::time_t _dateOfPrescription;
+    std::time_t _expirationDate;
+};
+
+// Implementation for the removeMedicine method
+void Prescription::removeMedicine(const std::string& medName) {
+    _medicines.erase(std::remove_if(_medicines.begin(), _medicines.end(),
+                                    [&](const Medicine& med) { return med.name == medName; }),
+                     _medicines.end());
+}
+
+// Implementation for the modifyMedicineInstructions method
+void Prescription::modifyMedicineInstructions(const std::string& medName, const std::string& newInstructions) {
+    auto it = std::find_if(_medicines.begin(), _medicines.end(),
+                           [&](const Medicine& med) { return med.name == medName; });
+    if (it != _medicines.end()) {
+        it->instructions = newInstructions;
+    }
+}
+
+// Implementation for printPrescription can remain similar to before, but extended to include the new fields.
+
+
+#include <string>
+#include <stdexcept>
+#include <vector>
+
+class Prescription {
+public:
+    enum class PrescriptionStatus { NotFilled, PartiallyFilled, Filled, Expired };
+
+private:
+    std::string _doctorName;
+    std::string _patientName;
+    std::vector<std::string> _medications;
+    std::string _pharmacyInfo;
+    std::string _insuranceInfo;
+    PrescriptionStatus _status;
+    std::string _doctorSignature;
+    std::string _medicalRecordLink;
+
+public:
+    Prescription(const std::string& doctorName, const std::string& patientName) : 
+        _doctorName(doctorName), _patientName(patientName), _status(PrescriptionStatus::NotFilled) {}
+
+    // Getters and setters for all the private members
+    const std::string& getDoctorName() const { return _doctorName; }
+    const std::string& getPatientName() const { return _patientName; }
+    const std::vector<std::string>& getMedications() const { return _medications; }
+    const std::string& getPharmacyInfo() const { return _pharmacyInfo; }
+    const std::string& getInsuranceInfo() const { return _insuranceInfo; }
+    PrescriptionStatus getStatus() const { return _status; }
+    const std::string& getDoctorSignature() const { return _doctorSignature; }
+    const std::string& getMedicalRecordLink() const { return _medicalRecordLink; }
+
+    void setDoctorName(const std::string& doctorName) { _doctorName = doctorName; }
+    void setPatientName(const std::string& patientName) { _patientName = patientName; }
+    void setPharmacyInfo(const std::string& pharmacyInfo) { _pharmacyInfo = pharmacyInfo; }
+    void setInsuranceInfo(const std::string& insuranceInfo) { _insuranceInfo = insuranceInfo; }
+    void setStatus(PrescriptionStatus status) { _status = status; }
+    void setDoctorSignature(const std::string& doctorSignature) { _doctorSignature = doctorSignature; }
+    void setMedicalRecordLink(const std::string& medicalRecordLink) { _medicalRecordLink = medicalRecordLink; }
+
+    void addMedication(const std::string& medication) { _medications.push_back(medication); }
+    void removeMedication(const std::string& medication) {
+        auto it = std::find(_medications.begin(), _medications.end(), medication);
+        if (it != _medications.end()) {
+            _medications.erase(it);
+        } else {
+            throw std::invalid_argument("Medication not found in prescription");
+        }
+    }
+};
+
+#include <string>
+#include <vector>
+#include <memory>
+#include <iostream>
+#include <algorithm>
+#include <ctime>
+
+class Doctor; // Forward declaration
+class Patient; // Forward declaration
+
+class Prescription {
+public:
+    // The Medicine struct represents a single medicine in the prescription
+    struct Medicine {
+        std::string name;
+        std::string instructions;
+    };
+
+    // Constructor
+    Prescription(const std::shared_ptr<Doctor>& doctor,
+                 const std::shared_ptr<Patient>& patient,
+                 const std::string& notes)
+        : _doctor(doctor),
+          _patient(patient),
+          _notes(notes) 
+    {
+        // Generate a unique ID for the prescription and set the date
+        _prescriptionID = std::time(nullptr); // Using epoch time as a unique ID
+        _dateOfPrescription = std::time(nullptr); // Setting current date
+    }
+
+    // Getters
+    std::time_t getPrescriptionID() const { return _prescriptionID; }
+    const std::shared_ptr<Doctor>& getDoctor() const { return _doctor; }
+    const std::shared_ptr<Patient>& getPatient() const { return _patient; }
+    const std::vector<Medicine>& getMedicines() const { return _medicines; }
+    const std::string& getNotes() const { return _notes; }
+    std::time_t getDateOfPrescription() const { return _dateOfPrescription; }
+
+    // Methods to manage medicines
+    void addMedicine(const Medicine& med) { _medicines.push_back(med); }
+    void removeMedicine(const std::string& medName);
+    void modifyMedicineInstructions(const std::string& medName, const std::string& newInstructions);
+
+    // Method to set expiration date
+    void setExpirationDate(std::time_t expiry) { _expirationDate = expiry; }
+
+    // Method to check validity
+    bool isPrescriptionValid() const { return std::time(nullptr) <= _expirationDate; }
+
+    // Function to print the prescription
+    void printPrescription() const;
+
+private:
+    std::time_t _prescriptionID;
+    std::shared_ptr<Doctor> _doctor;
+    std::shared_ptr<Patient> _patient;
+    std::vector<Medicine> _medicines;
+    std::string _notes;
+    std::time_t _dateOfPrescription;
+    std::time_t _expirationDate;
+};
+
+// Implementation for the removeMedicine method
+void Prescription::removeMedicine(const std::string& medName) {
+    _medicines.erase(std::remove_if(_medicines.begin(), _medicines.end(),
+                                    [&](const Medicine& med) { return med.name == medName; }),
+                     _medicines.end());
+}
+
+// Implementation for the modifyMedicineInstructions method
+void Prescription::modifyMedicineInstructions(const std::string& medName, const std::string& newInstructions) {
+    auto it = std::find_if(_medicines.begin(), _medicines.end(),
+                           [&](const Medicine& med) { return med.name == medName; });
+    if (it != _medicines.end()) {
+        it->instructions = newInstructions;
+    }
+}
+
+// Implementation for printPrescription can remain similar to before, but extended to include the new fields.
+
+#include <string>
+#include <stdexcept>
+#include <vector>
+#include <memory>
+#include <algorithm>
+
+class Prescription {
+public:
+    enum class PrescriptionStatus { NotFilled, PartiallyFilled, Filled, Expired };
+
+private:
+    std::shared_ptr<Doctor> _doctor;
+    std::shared_ptr<Patient> _patient;
+    std::vector<std::string> _medications;
+    std::string _pharmacyInfo;
+    std::string _insuranceInfo;
+    PrescriptionStatus _status;
+    std::string _doctorSignature;
+    std::string _medicalRecordLink;
+
+public:
+    Prescription(std::shared_ptr<Doctor> doctor, std::shared_ptr<Patient> patient) : 
+        _doctor(doctor), _patient(patient), _status(PrescriptionStatus::NotFilled) {}
+
+    // Getters and setters for all the private members
+    std::shared_ptr<Doctor> getDoctor() const { return _doctor; }
+    std::shared_ptr<Patient> getPatient() const { return _patient; }
+    const std::vector<std::string>& getMedications() const { return _medications; }
+    const std::string& getPharmacyInfo() const { return _pharmacyInfo; }
+    const std::string& getInsuranceInfo() const { return _insuranceInfo; }
+    PrescriptionStatus getStatus() const { return _status; }
+    const std::string& getDoctorSignature() const { return _doctorSignature; }
+    const std::string& getMedicalRecordLink() const { return _medicalRecordLink; }
+
+    void setPharmacyInfo(const std::string& pharmacyInfo) { _pharmacyInfo = pharmacyInfo; }
+    void setInsuranceInfo(const std::string& insuranceInfo) { _insuranceInfo = insuranceInfo; }
+    void setStatus(PrescriptionStatus status) { _status = status; }
+    void setDoctorSignature(const std::string& doctorSignature) { _doctorSignature = doctorSignature; }
+    void setMedicalRecordLink(const std::string& medicalRecordLink) { _medicalRecordLink = medicalRecordLink; }
+
+    void addMedication(const std::string& medication) { _medications.push_back(medication); }
+
+    void removeMedication(const std::string& medication) {
+        auto it = std::find(_medications.begin(), _medications.end(), medication);
+        if (it != _medications.end()) {
+            _medications.erase(it);
+        } else {
+            throw std::invalid_argument("Medication not found in prescription");
+        }
+    }
+    
+    // Method to print prescription details
+    void printPrescription() const {
+        std::cout << "Prescription for: " << _patient->getName() << "\n";
+        std::cout << "Prescribed by: " << _doctor->getName() << "\n";
+        std::cout << "Medications: ";
+        for (auto& med : _medications) {
+            std::cout << med << ", ";
+        }
+        std::cout << "\nStatus: " << static_cast<int>(_status) << "\n";
+    }
+};
+
+
+#include <ctime>
+
+class Prescription {
+public:
+    enum class PrescriptionStatus { NotFilled, PartiallyFilled, Filled, Expired };
+
+private:
+    std::shared_ptr<Doctor> _doctor;
+    std::shared_ptr<Patient> _patient;
+    std::vector<std::string> _medications;
+    std::string _pharmacyInfo;
+    std::string _insuranceInfo;
+    PrescriptionStatus _status;
+    std::string _doctorSignature;
+    std::string _medicalRecordLink;
+    std::time_t _creationDate;
+    std::time_t _expirationDate;
+
+public:
+    Prescription(std::shared_ptr<Doctor> doctor, std::shared_ptr<Patient> patient) : 
+        _doctor(doctor), _patient(patient), _status(PrescriptionStatus::NotFilled) 
+    {
+        // Setting creation and expiration dates
+        _creationDate = std::time(nullptr); // current date/time
+        _expirationDate = _creationDate + 30*24*60*60; // 30 days later
+    }
+
+    // Getters and setters for the dates
+    std::time_t getCreationDate() const { return _creationDate; }
+    std::time_t getExpirationDate() const { return _expirationDate; }
+
+    // Other getters and setters...
+    // ...
+
+    // Method to print prescription details
+    void printPrescription() const {
+        std::cout << "Prescription for: " << _patient->getName() << "\n";
+        std::cout << "Prescribed by: " << _doctor->getName() << "\n";
+        std::cout << "Creation date: " << std::ctime(&_creationDate);
+        std::cout << "Expiration date: " << std::ctime(&_expirationDate);
+        std::cout << "Medications: ";
+        for (auto& med : _medications) {
+            std::cout << med << ", ";
+        }
+        std::cout << "\nStatus: " << static_cast<int>(_status) << "\n";
+    }
+};
+
+#include <chrono>
+#include <format>
+
+auto now = std::chrono::system_clock::now();
+std::time_t now_time_t = std::chrono::system_clock::to_time_t(now);
+std::tm* now_tm = std::localtime(&now_time_t);
+
+std::string formatted_date = std::format("{:%Y-%m-%d %H:%M:%S}", *now_tm);
+

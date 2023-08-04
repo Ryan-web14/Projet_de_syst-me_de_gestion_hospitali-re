@@ -11,9 +11,13 @@ Consultation::Consultation(std::shared_ptr<Patient> patient, std::shared_ptr<Doc
     _patient = patient;
     _doctor = doctor;
     _doctorAppointment = doctorAppointment;
-    _diagnosis = diagnosis;
     _cost = 0;
     _isPaid = false;
+    if(diagnosis.empty())
+    {
+        throw std::invalid_argument("Diagnosis cannot be empty");
+    }
+    _diagnosis = diagnosis;
 }
 
 // methods
@@ -216,6 +220,14 @@ void Consultation::setDiagnosis(std::string diagnosis)
     if(diagnosis.empty())
     {
         throw std::invalid_argument("Diagnosis cannot be empty");
+    }
+
+    for(auto& diagno : diagnosis)
+    {
+        if(!isalpha(diagno) || !isspace(diagno))
+        {
+            throw std::runtime_error("Diagnosis must be a string");
+        }
     }
     _diagnosis = diagnosis;
 }

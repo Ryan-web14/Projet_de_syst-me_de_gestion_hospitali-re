@@ -1,5 +1,4 @@
-#ifndef __PATIENT__ //if this class is not define then define it
-#define __PATIENT__
+#pragma once
 
 #include "birth.hpp"
 #include <string>
@@ -56,8 +55,3 @@ static NumberGenerator _numberGenerator;
 
 };
 
-
-
-
-
-#endif

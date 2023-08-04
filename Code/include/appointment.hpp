@@ -40,6 +40,8 @@ std::string getAppointmentReason() const; //return appointment reason
 //setter
 void setAppointmentDate(Date& date); //set appointment date
 void setAppointmentTime(Times& time); //set appointment time
+void setPatient(Patient& patient); //set patient info (name, surname, phone number, address)
+void setReason(std::string reason); //set reason
 //void setAppointmentReason(std::string reason); //set appointment reason
 
 private:

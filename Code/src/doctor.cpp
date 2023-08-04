@@ -5,7 +5,7 @@ Doctor::Doctor()
     //_doctorNumber = NumberGenerator(1000000, 9999999);
 }
 
-Doctor::Doctor(std::string name, std::string surname, std::string adress, std::string phone_number) : _name(name), _surname(surname), _address(adress)
+Doctor::Doctor(std::string name, std::string surname, std::string adress, std::string phone_number) :  _address(adress)
 {
     try
     {
@@ -26,7 +26,39 @@ Doctor::Doctor(std::string name, std::string surname, std::string adress, std::s
     _doctorNumber = NumberGenerator(1000000, 9999999);
 
     _licenseNumber = NumberGenerator(10000000, 99999999);
+
+ for (char c : surname) 
+    {
+        if (isdigit(c)) //check if the name contains a number
+        {
+            throw std::invalid_argument("Invalid surname");
+        }
+    }
+    if(surname.empty())
+    {
+        throw std::runtime_error("Invalid surname");
+    }
+
+       for (auto &sur : surname)
+    {
+        sur = std::toupper(sur);
+    }
+    _surname = surname;
+
+    for (char c : name)
+    {
+        if (isdigit(c)) // check if the name contains a number
+        {
+            throw std::invalid_argument("Invalid name");
+        }
+    }
+    if(name.empty())
+    {
+        throw std::runtime_error("Invalid name");
+    }
+    _name = name;
 }
+
 
 void Doctor::DisplayDoctor() const
 {
@@ -51,6 +83,7 @@ std::string Doctor::getName() const
 
 std::string Doctor::getSurname() const
 {
+
     return _surname;
 }
 
@@ -76,11 +109,33 @@ std::string Doctor::getLicenseNumber() const
 
 void Doctor::setName(const std::string &name)
 {
+    for (char c : name)
+    {
+        if (isdigit(c))
+        {
+            throw std::invalid_argument("Invalid name");
+        }
+    }
+    if(name.empty())
+    {
+        throw std::runtime_error("Invalid name");
+    }
     _name = name;
 }
 
 void Doctor::setSurname(const std::string &surname)
 {
+    for (char c : surname)
+    {
+        if (isdigit(c))
+        {
+            throw std::invalid_argument("Invalid surname");
+        }
+    }
+    if(surname.empty())
+    {
+        throw std::runtime_error("Invalid surname");
+    }
     _surname = surname;
 }
 
