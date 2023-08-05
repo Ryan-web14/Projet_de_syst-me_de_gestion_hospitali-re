@@ -26,6 +26,28 @@ Hospital() = default;
 Hospital(std::string name);
 
 //methods
+void AddPatient(std::shared_ptr<Patient> patient); //add a patient in the vector of patient
+void DeletePatient(const std::string patientId); //delete a patient in the vector of patient
+void AddDoctor(std::shared_ptr<Doctor> doctor); //add a doctor in the vector of doctor
+void DeleteDoctor(const std::string doctorId); //delete a doctor in the vector of doctor
+void AddPrescription(std::shared_ptr<Prescription> prescription); //add a prescription in the vector of prescription
+void DeletePrescription(const std::string prescriptionId); //delete a prescription in the vector of prescription
+void AddConsultation(std::shared_ptr<Consultation> consultation); //add a consultation in the vector of consultation
+void DeleteConsultation(const std::string consultationId); //delete a consultation in the vector of consultation
+void AddDoctorAppointment(std::shared_ptr<DoctorAppointment> doctorApppointment); //add a doctorAppointment in the vector of doctorAppointment
+void DeleteDoctorAppointment(std::shared_ptr<Appointment> appointment, std::shared_ptr<Doctor> doctor); //delete a doctorAppointment in the vector of doctorAppointment
+void AddToDoctorSchedule(std::shared_ptr<Doctor> doctor, std::shared_ptr<Appointment> appointment); //add an appointment in the vector of appointment of the doctor
+void DeleteFromDoctorSchedule(std::shared_ptr<Doctor> doctor, std::shared_ptr<Appointment> appointment); //delete an appointment in the vector of appointment of the doctor
+//more specifics methods
+std::shared_ptr<Patient> FindPatient(const std::string patientId); //find a patient in the vector of patient by id
+std::shared_ptr<Doctor> FindDoctor(const std::string doctorId); //find a doctor in the vector of doctor by id
+std::shared_ptr<Prescription> FindPrescription(const std::string prescriptionId); //find a prescription in the vector of prescription by id
+std::shared_ptr<Consultation> FindConsultation(const std::string consultationId); //find a consultation in the vector of consultation by id
+std::shared_ptr<DoctorAppointment> FindDoctorAppointment(std::shared_ptr<Appointment> appointment, std::shared_ptr<Doctor> doctor); //find a doctorAppointment in the vector of doctorAppointment by appointment and doctor
+std::vector<std::shared_ptr<Patient>> FindPatientByName(const std::string name); //find a patient in the vector of patient by name
+std::vector<std::shared_ptr<Doctor>> FindDoctorByName(const std::string name); //find a doctor in the vector of doctor by name
+
+
 
 //getter and setter
 //getter 
