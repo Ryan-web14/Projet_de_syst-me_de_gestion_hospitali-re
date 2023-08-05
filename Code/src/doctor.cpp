@@ -1,11 +1,13 @@
 #include "doctor.hpp"
 
+NumberGenerator Doctor::_numberGenerator(1000000, 9999999);
+
 Doctor::Doctor()
 {
     //_doctorNumber = NumberGenerator(1000000, 9999999);
 }
 
-Doctor::Doctor(std::string name, std::string surname, std::string adress, std::string phone_number) :  _address(adress)
+Doctor::Doctor(std::string name, std::string surname,Birth birthday,std::string adress, std::string phone_number) :  _address(adress)
 {
     try
     {
@@ -23,9 +25,9 @@ Doctor::Doctor(std::string name, std::string surname, std::string adress, std::s
         std::cout << e.what();
     }
 
-    _doctorNumber = NumberGenerator(1000000, 9999999);
+    _doctorNumber = _numberGenerator.generateNumber();
 
-    _licenseNumber = NumberGenerator(10000000, 99999999);
+    _licenseNumber = _numberGenerator.generateNumber();
 
  for (char c : surname) 
     {
@@ -169,22 +171,5 @@ bool Doctor::IsValidPhoneNumber(const std::string &phone_number)
     return std::regex_match(phone_number, phoneregex);
 }
 
-std::string Doctor::NumberGenerator(int min, int max)
-{
-    std::random_device rd;
-    std::mt19937 gen(rd());
-    std::stringstream ss;
-    std::uniform_int_distribution<> dis(min, max);
-    ss << dis(gen);
-    std::string number = ss.str();
-    while (existing_numbers.find(number) != existing_numbers.end())
-    {
-        ss.str(std::string());
-        ss << dis(gen);
-        number = ss.str();
-    }
-    existing_numbers.insert(number);
-    return number;
-}
 
-std::set<std::string> Doctor::existing_numbers; // set of existing numbers
+

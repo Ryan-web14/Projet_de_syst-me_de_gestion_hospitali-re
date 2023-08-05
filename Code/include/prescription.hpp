@@ -3,6 +3,7 @@
 #include <vector>
 //#include <map>
 #include <iostream>
+#include <algorithm>
 #include <iomanip>
 #include <memory>
 #include <chrono>
@@ -18,8 +19,6 @@ std::string dosage;
 std::string frequency;
 std::string duration;
 std::string precision;
-int quantity;
-
 };
 class Prescription
 {
@@ -29,11 +28,14 @@ public:
 Prescription() = default;
 //constructor with parameters which are the patient, doctor 
 Prescription(std::shared_ptr<Patient> patient, std::shared_ptr<Doctor> doctor);
+//destructor
+~Prescription() = default;
 
 //methods
 //add a medecine to the prescription
-void AddMedecine(std::string name, std::string dosage, std::string frequency, std::string duration, std::string precision, int quantity);
+void AddMedecine(std::string name, std::string dosage, std::string frequency, std::string duration, std::string precision);
 void RemoveMedecine(std::string name);
+void DisplayPrescription() const;
 
 //getter and setter
 //getter
@@ -46,6 +48,8 @@ void setPatient(std::shared_ptr<Patient> patient);
 void setDoctor(std::shared_ptr<Doctor> doctor);
 
 private:
+static NumberGenerator _numberGenerator;
+std::string _prescriptionId;
 std::shared_ptr<Patient> _patient;
 std::shared_ptr<Doctor> _doctor;
 std::vector<Medecine> _medecines;

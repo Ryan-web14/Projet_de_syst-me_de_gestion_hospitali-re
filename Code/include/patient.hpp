@@ -12,13 +12,17 @@ class Patient
 {
 public:
 Patient() = default;
-Patient( std::string name, std::string surname,std::string adress, std::string phone_number); 
+Patient( std::string name, std::string surname,Birth birthday,std::string adress, std::string phone_number); 
 
 
 //Modification menu for a patient
 void ModifyPatient();
 //Display the information of a patient
 void DisplayPatient() const;
+//Display the information of a patient in a file
+void DisplayPatientInFile(std::ofstream& file) const;
+//Verify the validity of the birthday
+bool IsValidBirthDate(const Birth& birthday);
 
 //verify if the phone number is valid
 bool IsValidPhoneNumber(const std::string& phone_number);

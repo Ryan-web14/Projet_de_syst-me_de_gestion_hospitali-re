@@ -3,9 +3,9 @@
 // initialization of the static variable
 NumberGenerator Patient::_numberGenerator(100000, 999999);
 
-Patient::Patient(std::string name, std::string surname, std::string adress, std::string phone_number)
+Patient::Patient(std::string name, std::string surname,Birth birthday, std::string adress, std::string phone_number)
 {
-    
+
     for (char c : name)
     {
         if (isdigit(c)) // check if the name contains a number
@@ -40,7 +40,7 @@ Patient::Patient(std::string name, std::string surname, std::string adress, std:
         sur = std::toupper(sur);
     }
     _surname = surname;
-    //_birthday = birthday;
+    _birthday = birthday;
     _address = adress;
     _temporary_number = _numberGenerator.generateNumber();
     _permanent_number = _surname.substr(0, 2) + _numberGenerator.generateNumber();
@@ -55,6 +55,56 @@ Patient::Patient(std::string name, std::string surname, std::string adress, std:
     }
 }
 
+//methods
+void Patient::DisplayPatient() const
+{
+    std::cout << "\n\033[1;35m=====================================================\033[0m\n";
+    std::cout << "\033[1;36m\t\t\tDETAILS PATIENT\033[0m\n";
+    std::cout << "\033[1;35m=====================================================\033[0m\n";
+
+    std::cout << "\033[1;33mPrenom:\033[0m " << std::left << std::setw(0) << _name << "\n\n";
+    std::cout << "\033[1;33mNom:\033[0m " << std::left << std::setw(0) << _surname << "\n\n";
+    std::cout << "\033[1;33mDate de naissance:\033[0m " << std::left << std::setw(0) << _birthday.day<<"/"<< _birthday.month<<"/"<<_birthday.year << "\n\n";
+    std::cout << "\033[1;33mAdresse:\033[0m " << std::left << std::setw(0) << _address << "\n\n";
+    std::cout << "\033[1;33mTelephone:\033[0m " << std::left << std::setw(0) << _phone_number << "\n\n";
+    std::cout << "\033[1;33mNumero temporaire:\033[0m " << std::left << std::setw(0) << _temporary_number << "\n\n";
+    std::cout << "\033[1;33mNumero permanent:\033[0m " << std::left << std::setw(0) << _permanent_number << "\n\n";
+
+    std::cout << "\033[1;35m=====================================================\033[0m\n\n";
+}
+
+bool Patient::IsValidPhoneNumber(const std::string &phone_number)
+{
+    std::regex phoneregex("^0[456]\\d{7}$");
+    return std::regex_match(phone_number, phoneregex);
+}
+
+bool Patient::IsValidBirthDate(const Birth& birthday)
+{
+    if(birthday.year<1900 || birthday.year>2022)
+    {
+        return false;
+    }
+    if(birthday.month<1 || birthday.month>12)
+    {
+        return false;
+    }
+    if(birthday.day<1 || birthday.day>31)
+    {
+        return false;
+    }
+    return true;
+    if(birthday.month==2)
+    {
+        if(birthday.day>29)
+        {
+            return false;
+        }
+    }
+}
+
+//getter and setter
+//setters
 void Patient::setName(const std::string &name)
 {
     _name = name;
@@ -79,22 +129,19 @@ void Patient::setAdress(const std::string &adress)
     _address = adress;
 }
 
-void Patient::DisplayPatient() const
+void Patient::setPhoneNumber(const std::string &phone_number)
 {
-    std::cout << "\n\033[1;35m=====================================================\033[0m\n";
-    std::cout << "\033[1;36m\t\t\tDETAILS PATIENT\033[0m\n";
-    std::cout << "\033[1;35m=====================================================\033[0m\n";
-
-    std::cout << "\033[1;33mPrenom:\033[0m " << std::left << std::setw(0) << _name << "\n\n";
-    std::cout << "\033[1;33mNom:\033[0m " << std::left << std::setw(0) << _surname << "\n\n";
-    std::cout << "\033[1;33mAdresse:\033[0m " << std::left << std::setw(0) << _address << "\n\n";
-    std::cout << "\033[1;33mTelephone:\033[0m " << std::left << std::setw(0) << _phone_number << "\n\n";
-    std::cout << "\033[1;33mNumero temporaire:\033[0m " << std::left << std::setw(0) << _temporary_number << "\n\n";
-    std::cout << "\033[1;33mNumero permanent:\033[0m " << std::left << std::setw(0) << _permanent_number << "\n\n";
-
-    std::cout << "\033[1;35m=====================================================\033[0m\n\n";
+    if (IsValidPhoneNumber(phone_number))
+    {
+        _phone_number = phone_number;
+    }
+    else
+    {
+        std::cout << "Invalid phone number" << std::endl;
+    }
 }
 
+//getters
 std::string Patient::getTemporaryNumber() const
 {
     return _temporary_number;
@@ -130,20 +177,6 @@ std::string Patient::getPhoneNumber() const
     return _phone_number;
 }
 
-bool Patient::IsValidPhoneNumber(const std::string &phone_number)
-{
-    std::regex phoneregex("^0[456]\\d{7}$");
-    return std::regex_match(phone_number, phoneregex);
-}
 
-void Patient::setPhoneNumber(const std::string &phone_number)
-{
-    if (IsValidPhoneNumber(phone_number))
-    {
-        _phone_number = phone_number;
-    }
-    else
-    {
-        std::cout << "Invalid phone number" << std::endl;
-    }
-}
+
+

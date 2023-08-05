@@ -9,51 +9,80 @@
 #include <iostream>
 #include <memory>
 #include "Consultation.hpp" // Assuming you have a Consultation.hpp header file
+#include "prescription.hpp"
 
 int main() {
-    // Creating some mock consultations
-    Patient patient1("Jean", "Dupont", "12 rue de la paix", "066950431");
-    Doctor doctor("Jean-luc", "Moretti", "12 rue de la paix", "066950431");
-    Date date(12, 12, 2023);
+// Birth birth;
+// birth.day = 12;
+// birth.month = 12;
+// birth.year = 2000;
+//     // Creating some mock consultations
+//     Patient patient1("Jean", "Dupont",birth, "12 rue de la paix", "066950431");
+//     Doctor doctor("Jean-luc", "Moretti", "12 rue de la paix", "066950431");
+//     Date date(12, 12, 2023);
 
-    std::shared_ptr<Appointment> _appointment = std::make_shared<Appointment>(date, patient1, "checkup");
-    std::shared_ptr<Doctor> docPtr = std::make_shared<Doctor>(doctor);
-    std::shared_ptr<DoctorAppointment> doctorAppointment = std::make_shared<DoctorAppointment>(_appointment, docPtr);
+//     std::shared_ptr<Appointment> _appointment = std::make_shared<Appointment>(date, patient1, "checkup");
+//     std::shared_ptr<Doctor> docPtr = std::make_shared<Doctor>(doctor);
+//     std::shared_ptr<DoctorAppointment> doctorAppointment = std::make_shared<DoctorAppointment>(_appointment, docPtr);
 
-    std::shared_ptr<Patient> patientPtr = std::make_shared<Patient>(patient1);
+//     std::shared_ptr<Patient> patientPtr = std::make_shared<Patient>(patient1);
 
-    auto consultation1 = std::make_shared<Consultation>(patientPtr, docPtr, doctorAppointment, "Paludisme");
-    consultation1->AddSymptom("fever");
-    consultation1->AddSymptom("cough");
-    consultation1->AddSymptom("fever");
+//     auto consultation1 = std::make_shared<Consultation>(patientPtr, docPtr, doctorAppointment, "Paludisme");
+//     consultation1->AddSymptom("fever");
+//     consultation1->AddSymptom("cough");
+//     consultation1->AddSymptom("fever");
 
-    auto consultation2 = std::make_shared<Consultation>(patientPtr, docPtr, doctorAppointment, "Headache");
-    consultation2->AddSymptom("headache");
-    consultation2->AddSymptom("cough");
-    consultation2->AddSymptom("fever");
+//     auto consultation2 = std::make_shared<Consultation>(patientPtr, docPtr, doctorAppointment, "Headache");
+//     consultation2->AddSymptom("headache");
+//     consultation2->AddSymptom("cough");
+//     consultation2->AddSymptom("fever");
 
-    auto consultation3 = std::make_shared<Consultation>(patientPtr, docPtr, doctorAppointment, "Nausea");
-    consultation3->AddSymptom("headache");
-    consultation3->AddSymptom("cough");
-    consultation3->AddSymptom("nausea");
+//     auto consultation3 = std::make_shared<Consultation>(patientPtr, docPtr, doctorAppointment, "Nausea");
+//     consultation3->AddSymptom("headache");
+//     consultation3->AddSymptom("cough");
+//     consultation3->AddSymptom("nausea");
 
     
-    auto consultation4 = std::make_shared<Consultation>(patientPtr, docPtr, doctorAppointment, "Paludisme");
-    consultation1->AddSymptom("fever");
-    consultation1->AddSymptom("diarrhea");
-    consultation1->AddSymptom("fever");
+//     auto consultation4 = std::make_shared<Consultation>(patientPtr, docPtr, doctorAppointment, "Paludisme");
+//     consultation1->AddSymptom("fever");
+//     consultation1->AddSymptom("diarrhea");
+//     consultation1->AddSymptom("fever");
 
-    // Putting consultations in a vector
-    std::vector<std::shared_ptr<Consultation>> consultations = {consultation1, consultation2, consultation3, consultation4};
-    Consultation consul;
-    // Finding the most frequent symptom across all consultations
-    std::string mostFrequentSymptom = consul.getMostFrequentSymptomsFromConsultation(consultations);
-    std::cout << "The most frequent symptom across all consultations is: " << mostFrequentSymptom << std::endl;
+//     // Putting consultations in a vector
+//     std::vector<std::shared_ptr<Consultation>> consultations = {consultation1, consultation2, consultation3, consultation4};
+//     Consultation consul;
+//     // Finding the most frequent symptom across all consultations
+//     std::string mostFrequentSymptom = consul.getMostFrequentSymptomsFromConsultation(consultations);
+//     std::cout << "The most frequent symptom across all consultations is: " << mostFrequentSymptom << std::endl;
     
-    std::string mostFrequentDiagnosis = consul.getMostFrequentDiagnosisFromConsultation(consultations);
+//     std::string mostFrequentDiagnosis = consul.getMostFrequentDiagnosisFromConsultation(consultations);
 
-    // Print out the most frequent diagnosis
-    std::cout << "The most frequent diagnosis is: " << mostFrequentDiagnosis << std::endl;
+//     // Print out the most frequent diagnosis
+//     std::cout << "The most frequent diagnosis is: " << mostFrequentDiagnosis << std::endl;
+
+//     // Creating a prescription
+//     Prescription prescription(patientPtr, docPtr);
+//     prescription.AddMedecine("Doliprane", "1", "3" , "5", "avant les repas");
+//     prescription.AddMedecine("Confantrine", "1", "3" , "5", "avant les repas");
+//     prescription.DisplayPrescription();
+
+//     try
+//     {
+//         prescription.RemoveMedecine("Doliprane");
+//     }
+//     catch(const std::exception& e)
+//     {
+//         std::cerr << e.what() << '\n';
+//     }
+    
+    // prescription.DisplayPrescription();
+//  Birth birth;
+// birth.day = 12;
+// birth.month = 12;
+// birth.year = 2000;
+//     Patient patient1 ("Jean", "Dupont", birth, "12 rue de la paix", "066950431");
+//     patient1.DisplayPatient();
+
     return 0;
 }
 

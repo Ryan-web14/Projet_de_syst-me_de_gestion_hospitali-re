@@ -107,7 +107,13 @@
     "regex": "cpp",
     "iomanip": "cpp",
     "fstream": "cpp",
-    "map": "cpp"
+    "map": "cpp",
+    "charconv": "cpp",
+    "chrono": "cpp",
+    "ratio": "cpp",
+    "format": "cpp",
+    "span": "cpp",
+    "variant": "cpp"
   },
   "C_Cpp.dimInactiveRegions": false
 }
