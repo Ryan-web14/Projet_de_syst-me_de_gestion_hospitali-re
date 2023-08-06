@@ -130,3 +130,8 @@ std::vector<Medecine> Prescription::getMedecines() const
 {
     return _medecines;
 }
+
+std::string Prescription::getPrescriptionId() const
+{
+    return _prescriptionId;
+}

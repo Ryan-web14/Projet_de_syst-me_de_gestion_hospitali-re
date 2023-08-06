@@ -39,6 +39,7 @@ void DisplayPrescription() const;
 
 //getter and setter
 //getter
+std::string getPrescriptionId() const;
 std::shared_ptr<Patient> getPatient() const;
 std::shared_ptr<Doctor> getDoctor() const;
 std::vector<Medecine> getMedecines() const;

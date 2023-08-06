@@ -34,6 +34,8 @@ void AddPrescription(std::shared_ptr<Prescription> prescription); //add a prescr
 void DeletePrescription(const std::string prescriptionId); //delete a prescription in the vector of prescription
 void AddConsultation(std::shared_ptr<Consultation> consultation); //add a consultation in the vector of consultation
 void DeleteConsultation(const std::string consultationId); //delete a consultation in the vector of consultation
+void AddAppointment(std::shared_ptr<Appointment> appointment); //add an appointment in the vector of appointment
+void DeleteAppointment(const std::string appointmentId); //delete an appointment in the vector of appointment
 void AddDoctorAppointment(std::shared_ptr<DoctorAppointment> doctorApppointment); //add a doctorAppointment in the vector of doctorAppointment
 void DeleteDoctorAppointment(std::shared_ptr<Appointment> appointment, std::shared_ptr<Doctor> doctor); //delete a doctorAppointment in the vector of doctorAppointment
 void AddToDoctorSchedule(std::shared_ptr<Doctor> doctor, std::shared_ptr<Appointment> appointment); //add an appointment in the vector of appointment of the doctor
@@ -90,7 +92,7 @@ std::shared_ptr<DoctorAppointment> _doctorAppointment;
 std::vector<std::shared_ptr<Patient>> _patientList;
 std::vector<std::shared_ptr<Doctor>> _doctorList;
 std::vector<std::shared_ptr<Appointment>> _appointmentList;
-std::vector<std::shared_ptr<DoctorAppointment>> DoctorAppointmentList;
+std::vector<std::shared_ptr<DoctorAppointment>> _doctorAppointmentList;
 std::vector<std::shared_ptr<Consultation>> _consultationList;
 std::vector<std::shared_ptr<Prescription>> _prescriptionList;
 
