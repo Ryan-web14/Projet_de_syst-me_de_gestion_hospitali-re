@@ -1,4 +1,5 @@
 #include "patient.hpp"
+#include <locale>
 
 // initialization of the static variable
 NumberGenerator Patient::_numberGenerator(100000, 999999);
@@ -13,11 +14,7 @@ Patient::Patient(std::string name, std::string surname,Birth birthday, std::stri
             throw std::invalid_argument("Invalid name");
         }
     }
-    if(name.empty())
-    {
-        throw std::runtime_error("Invalid name");
-    }
-    _name = name;
+
 
      for (char c : surname) 
     {
@@ -35,10 +32,11 @@ Patient::Patient(std::string name, std::string surname,Birth birthday, std::stri
     {
         name [0] = std::toupper(name[0]); //capitalize the first letter of the name
         
-        for (size_t i = 1; i < name.size(); i++)
+        for (std::size_t i = 1; i < name.size(); i++)
         {
             name[i] = std::tolower(name[i]);
         }
+        std::cout <<"hello" <<"\n";
     }
 
 
@@ -50,6 +48,7 @@ Patient::Patient(std::string name, std::string surname,Birth birthday, std::stri
     {
         sur = std::toupper(sur);
     }
+    _name = name;
     _surname = surname;
     _birthday = birthday;
     _address = adress;

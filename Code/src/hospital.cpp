@@ -175,4 +175,30 @@ void Hospital::DisplayPrescriptionList(std::shared_ptr<Patient> patient) const
     }
 }
 
+void Hospital::DisplayDoctorAppointmentList(std::shared_ptr<Doctor> doctor) const
+{
+    auto it = find_if(std::begin(_doctorList),std::end(_doctorList), [&doctor](std::shared_ptr<Doctor> doc)
+    {return doc->getDoctorNumber() == doctor->getDoctorNumber();});
+
+    if(it != std::end(_doctorList))
+    {
+        std::cout << "Doctor appointment list: " << std::endl;
+        for(auto doctorAppointment : _doctorAppointmentList)
+        {
+            if(doctorAppointment->getDoctor() == doctor)
+            {
+                doctorAppointment->DisplayDoctorAppointment();
+            }
+        }
+    }
+    else if(it !=std::end(_doctorList) && _doctorAppointmentList.empty())
+    {
+        std::cout << "Doctor appointment list is empty" << std::endl;
+    }
+    else 
+    {
+        throw std::runtime_error("Doctor not found");
+    }
+}
+
 //more specific methods
