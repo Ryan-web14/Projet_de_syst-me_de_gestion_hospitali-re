@@ -13,6 +13,7 @@
 #include "numberGenerator.hpp"
 #include <locale>
 #include <iomanip>
+#include <memory>
 
 
 
@@ -44,6 +45,8 @@ void setPatient(Patient& patient); //set patient info (name, surname, phone numb
 void setReason(std::string reason); //set reason
 //void setAppointmentReason(std::string reason); //set appointment reason
 
+//operator
+bool operator == (std::shared_ptr<Appointment> other) const; //overload the operator == to compare two appointments
 private:
 std::string _appointmentId;
 Date appointmentDate;

@@ -48,6 +48,15 @@ std::shared_ptr<Consultation> FindConsultation(const std::string consultationId)
 std::shared_ptr<DoctorAppointment> FindDoctorAppointment(std::shared_ptr<Appointment> appointment, std::shared_ptr<Doctor> doctor); //find a doctorAppointment in the vector of doctorAppointment by appointment and doctor
 std::vector<std::shared_ptr<Patient>> FindPatientByName(const std::string name); //find a patient in the vector of patient by name
 std::vector<std::shared_ptr<Doctor>> FindDoctorByName(const std::string name); //find a doctor in the vector of doctor by name
+//methods to display information
+void DisplayPatientList() const; //display the list of patient
+void DisplayDoctorList() const; //display the list of doctor
+void DisplayPrescriptionList(std::shared_ptr<Patient> patient) const; //display the list of prescription
+void DisplayConsultationList() const; //display the list of consultation
+void DisplayAppointmentList() const; //display the list of appointment
+void DisplayDoctorAppointmentList(std::shared_ptr<Doctor> doctor) const; //display the appointment list for a specific doctor
+void DisplayDoctorSchedule(std::shared_ptr<Doctor> doctor) const; //Display the schedule of a specific doctor 
+void DisplayAppointmentListForPatient(std::shared_ptr<Patient> patient) const; //display the list of appointment
 
 
 

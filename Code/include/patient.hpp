@@ -5,8 +5,9 @@
 #include <algorithm>
 #include <iostream>
 #include <regex>
-#include "numberGenerator.hpp"
 #include <iomanip>
+#include <memory>
+#include "numberGenerator.hpp"
 
 class Patient
 {
@@ -43,6 +44,9 @@ void setSurname(const std::string& surname) ;
 void setBirthday(Birth birthday) ;
 void setAdress(const std::string& adress) ;
 void setPhoneNumber(const std::string& phone_number) ;
+
+//operator
+bool operator ==(std::shared_ptr<Patient> other) const; //overload the operator == to compare two patients
 
 private:
 std::string _permanent_number;

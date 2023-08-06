@@ -40,6 +40,11 @@ Date Appointment::getAppointmentDate() const
     return appointmentDate;
 }
 
+std::string Appointment::getAppointmentId() const
+{
+    return _appointmentId;
+}
+
 void Appointment::DisplayAppointment() const
 {
     std::cout << "\n\033[1;35m=====================================================\033[0m\n";
@@ -95,4 +100,9 @@ void Appointment::setReason(std::string reason)
     }
     _appointmentReason = reason;
     return;
+}
+
+bool Appointment::operator ==(std::shared_ptr<Appointment> other) const
+{
+    return _appointmentId == other->getAppointmentId();
 }

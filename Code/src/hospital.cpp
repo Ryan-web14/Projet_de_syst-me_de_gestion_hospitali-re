@@ -105,3 +105,74 @@ void Hospital::AddDoctorAppointment(std::shared_ptr<DoctorAppointment> doctorApp
 {
     _doctorAppointmentList.push_back(doctorAppointment);
 }
+
+void Hospital::DeleteDoctorAppointment(std::shared_ptr<Appointment> appointment, std::shared_ptr<Doctor> doctor)
+{
+    auto it = std::remove_if(std::begin(_doctorAppointmentList),std::end(_doctorAppointmentList),
+    [&appointment,&doctor](std::shared_ptr<DoctorAppointment> doctorAppointment){return doctorAppointment->getAppointment() == appointment && doctorAppointment->getDoctor() == doctor;});
+
+    if(it != std::end(_doctorAppointmentList))
+    {
+        _doctorAppointmentList.erase(it);
+    }
+    else
+    {
+        throw std::runtime_error("Doctor appointment not found");
+    }
+}
+
+
+// void Hospital::AddToDoctorSchedule(std::shared_ptr<Doctor> doctor, std::shared_ptr<Appointment> appointment)
+// {
+//     auto it = std::find_if(std::begin(_doctorList), std::end(_doctorList),[&doctor](std::shared_ptr<Doctor> doc)
+//     {return doc->getDoctorNumber() == doctor->getDoctorNumber();});
+// }
+
+//methods for displaying
+void Hospital::DisplayPatientList() const
+{
+    std::cout << "Patient list: " << std::endl;
+    for(auto patient : _patientList)
+    {
+       patient->DisplayPatient();
+    }
+}
+
+void Hospital::DisplayDoctorList() const
+{
+    std::cout << "Doctor list: " << std::endl;
+    for(auto doctor : _doctorList)
+    {
+       doctor->DisplayDoctor();
+    }
+}
+
+void Hospital::DisplayAppointmentList() const
+{
+    std::cout << "Appointment list: " << std::endl;
+    for(auto appointment : _appointmentList)
+    {
+       appointment->DisplayAppointment();
+    }
+}
+
+void Hospital::DisplayConsultationList() const
+{
+    std::cout << "Consultation list: " << std::endl;
+    for(auto consultation : _consultationList)
+    {
+       consultation->DisplayConsultationWithDiagnosis();
+    }
+}
+
+void Hospital::DisplayPrescriptionList(std::shared_ptr<Patient> patient) const
+{
+    std::cout << "Prescription list: " << std::endl;
+    for(auto prescription : _prescriptionList)
+    {
+        if(prescription->getPatient() == patient)
+       prescription->DisplayPrescription();
+    }
+}
+
+//more specific methods

@@ -46,6 +46,9 @@ void setBirthday(Birth birthday);
 void setAddress(const std::string& address);
 void setPhoneNumber(const std::string& phone_number);
 
+//operator
+bool operator ==(std::shared_ptr<Doctor> other) const; //overload the operator == to compare two doctors
+
 private:
 std::string _name;
 std::string _surname;

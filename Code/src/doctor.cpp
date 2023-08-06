@@ -2,11 +2,6 @@
 
 NumberGenerator Doctor::_numberGenerator(1000000, 9999999);
 
-Doctor::Doctor()
-{
-    //_doctorNumber = NumberGenerator(1000000, 9999999);
-}
-
 Doctor::Doctor(std::string name, std::string surname,Birth birthday,std::string adress, std::string phone_number) :  _address(adress)
 {
     try
@@ -58,6 +53,16 @@ Doctor::Doctor(std::string name, std::string surname,Birth birthday,std::string 
     {
         throw std::runtime_error("Invalid name");
     }
+    else if (!name.empty())
+    {
+        name [0] = std::toupper(name[0]);
+        
+        for (size_t i = 1; i < name.size(); i++)
+        {
+            name[i] = std::tolower(name[i]);
+        }
+    }
+
     _name = name;
 }
 
@@ -171,5 +176,9 @@ bool Doctor::IsValidPhoneNumber(const std::string &phone_number)
     return std::regex_match(phone_number, phoneregex);
 }
 
+bool Doctor::operator ==(std::shared_ptr<Doctor> other) const
+{
+    return _doctorNumber == other->getDoctorNumber();
+}
 
 

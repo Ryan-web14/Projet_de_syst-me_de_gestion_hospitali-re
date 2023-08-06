@@ -26,6 +26,16 @@ Patient::Patient(std::string name, std::string surname,Birth birthday, std::stri
             throw std::invalid_argument("Invalid surname");
         }
     }
+     else if (!name.empty())
+    {
+        name [0] = std::toupper(name[0]);
+        
+        for (size_t i = 1; i < name.size(); i++)
+        {
+            name[i] = std::tolower(name[i]);
+        }
+    }
+
     if(surname.empty())
     {
         throw std::runtime_error("Invalid surname");
@@ -175,6 +185,11 @@ std::string Patient::getAdress() const
 std::string Patient::getPhoneNumber() const
 {
     return _phone_number;
+}
+
+bool Patient::operator ==(std::shared_ptr<Patient> patient) const
+{
+    return _permanent_number == patient->getPermanentNumber();
 }
 
 
