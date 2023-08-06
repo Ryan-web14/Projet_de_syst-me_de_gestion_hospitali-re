@@ -55,7 +55,7 @@ Doctor::Doctor(std::string name, std::string surname,Birth birthday,std::string 
     }
     else if (!name.empty())
     {
-        name [0] = std::toupper(name[0]);
+        name [0] = std::toupper(name[0]);//capitalize the first letter of the name
         
         for (size_t i = 1; i < name.size(); i++)
         {

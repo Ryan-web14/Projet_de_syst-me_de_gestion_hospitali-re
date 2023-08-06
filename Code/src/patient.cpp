@@ -26,9 +26,14 @@ Patient::Patient(std::string name, std::string surname,Birth birthday, std::stri
             throw std::invalid_argument("Invalid surname");
         }
     }
-     else if (!name.empty())
+    
+    if(surname.empty())
     {
-        name [0] = std::toupper(name[0]);
+        throw std::runtime_error("Invalid surname");
+    } 
+    else if (!name.empty()) 
+    {
+        name [0] = std::toupper(name[0]); //capitalize the first letter of the name
         
         for (size_t i = 1; i < name.size(); i++)
         {
@@ -36,10 +41,6 @@ Patient::Patient(std::string name, std::string surname,Birth birthday, std::stri
         }
     }
 
-    if(surname.empty())
-    {
-        throw std::runtime_error("Invalid surname");
-    }
 
        for (auto &sur : surname)
     {
