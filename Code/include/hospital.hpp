@@ -41,11 +41,11 @@ void DeleteDoctorAppointment(std::shared_ptr<Appointment> appointment, std::shar
 void AddToDoctorSchedule(std::shared_ptr<Doctor> doctor, std::shared_ptr<Appointment> appointment); //add an appointment in the vector of appointment of the doctor
 void DeleteFromDoctorSchedule(std::shared_ptr<Doctor> doctor, std::shared_ptr<Appointment> appointment); //delete an appointment in the vector of appointment of the doctor
 //more specifics methods
-std::shared_ptr<Patient> FindPatient(const std::string patientId); //find a patient in the vector of patient by id
-std::shared_ptr<Doctor> FindDoctor(const std::string doctorId); //find a doctor in the vector of doctor by id
-std::shared_ptr<Prescription> FindPrescription(const std::string prescriptionId); //find a prescription in the vector of prescription by id
-std::shared_ptr<Consultation> FindConsultation(const std::string consultationId); //find a consultation in the vector of consultation by id
-std::shared_ptr<DoctorAppointment> FindDoctorAppointment(std::shared_ptr<Appointment> appointment, std::shared_ptr<Doctor> doctor); //find a doctorAppointment in the vector of doctorAppointment by appointment and doctor
+void FindPatient(const std::string patientId); //find a patient in the vector of patient by id
+void FindDoctor(const std::string doctorId); //find a doctor in the vector of doctor by id
+void FindPrescription(const std::string prescriptionId); //find a prescription in the vector of prescription by id
+void FindConsultation(const std::string consultationId); //find a consultation in the vector of consultation by id
+void FindDoctorAppointment(std::shared_ptr<Appointment> appointment, std::shared_ptr<Doctor> doctor); //find a doctorAppointment in the vector of doctorAppointment by appointment and doctor
 std::vector<std::shared_ptr<Patient>> FindPatientByName(const std::string name); //find a patient in the vector of patient by name
 std::vector<std::shared_ptr<Doctor>> FindDoctorByName(const std::string name); //find a doctor in the vector of doctor by name
 //methods to display information
@@ -57,7 +57,7 @@ void DisplayAppointmentList() const; //display the list of appointment
 void DisplayDoctorAppointmentList(std::shared_ptr<Doctor> doctor) const; //display the appointment list for a specific doctor
 void DisplayDoctorSchedule(std::shared_ptr<Doctor> doctor) const; //Display the schedule of a specific doctor 
 void DisplayAppointmentListForPatient(std::shared_ptr<Patient> patient) const; //display the list of appointment
-
+void DisplayConsultationForDoctor(std::shared_ptr<Doctor> doctor) const;
 
 
 //getter and setter

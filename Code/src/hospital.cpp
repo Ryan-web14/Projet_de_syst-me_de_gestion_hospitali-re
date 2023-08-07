@@ -21,7 +21,7 @@ void Hospital::DeletePatient(const std::string patientId)
     }
     else
     {
-        throw std::runtime_error("Patient not found");
+        throw std::runtime_error("Patient non trouve");
     }
 }
 
@@ -40,7 +40,7 @@ void Hospital::DeleteDoctor(const std::string doctorId)
     }
     else
     {
-        throw std::runtime_error("Doctor not found");
+        throw std::runtime_error("Docteur non trouve");
     }
 }
 
@@ -59,7 +59,7 @@ void Hospital::DeletePrescription(const std::string prescriptionId)
     }
     else
     {
-        throw std::runtime_error("Prescription not found");
+        throw std::runtime_error("Prescription non trouvee");
     }
 }
 
@@ -78,7 +78,7 @@ void Hospital::DeleteConsultation(const std::string consultationId)
     }
     else
     {
-        throw std::runtime_error("Consultation not found");
+        throw std::runtime_error("Consultation non trouve");
     }
 }
 
@@ -97,7 +97,7 @@ void Hospital::DeleteAppointment(const std::string appointmentId)
     }
     else
     {
-        throw std::runtime_error("Appointment not found");
+        throw std::runtime_error("rendez-vous non trouve");
     }
 }
 
@@ -117,7 +117,7 @@ void Hospital::DeleteDoctorAppointment(std::shared_ptr<Appointment> appointment,
     }
     else
     {
-        throw std::runtime_error("Doctor appointment not found");
+        throw std::runtime_error("Pas de rendez-vous de docteur");
     }
 }
 
@@ -131,7 +131,7 @@ void Hospital::DeleteDoctorAppointment(std::shared_ptr<Appointment> appointment,
 //methods for displaying
 void Hospital::DisplayPatientList() const
 {
-    std::cout << "Patient list: " << std::endl;
+    std::cout << "Liste des patient " << std::endl;
     for(auto patient : _patientList)
     {
        patient->DisplayPatient();
@@ -140,7 +140,7 @@ void Hospital::DisplayPatientList() const
 
 void Hospital::DisplayDoctorList() const
 {
-    std::cout << "Doctor list: " << std::endl;
+    std::cout << "Liste des docteurs " << std::endl;
     for(auto doctor : _doctorList)
     {
        doctor->DisplayDoctor();
@@ -149,7 +149,7 @@ void Hospital::DisplayDoctorList() const
 
 void Hospital::DisplayAppointmentList() const
 {
-    std::cout << "Appointment list: " << std::endl;
+    std::cout << "Liste des rendez-vous" << std::endl;
     for(auto appointment : _appointmentList)
     {
        appointment->DisplayAppointment();
@@ -158,7 +158,7 @@ void Hospital::DisplayAppointmentList() const
 
 void Hospital::DisplayConsultationList() const
 {
-    std::cout << "Consultation list: " << std::endl;
+    std::cout << "Liste de consultation" << std::endl;
     for(auto consultation : _consultationList)
     {
        consultation->DisplayConsultationWithDiagnosis();
@@ -182,7 +182,7 @@ void Hospital::DisplayDoctorAppointmentList(std::shared_ptr<Doctor> doctor) cons
 
     if(it != std::end(_doctorList))
     {
-        std::cout << "Doctor appointment list: " << std::endl;
+        std::cout << "Liste de rendez-vous des docteurs" << std::endl;
         for(auto doctorAppointment : _doctorAppointmentList)
         {
             if(doctorAppointment->getDoctor() == doctor)
@@ -193,12 +193,95 @@ void Hospital::DisplayDoctorAppointmentList(std::shared_ptr<Doctor> doctor) cons
     }
     else if(it !=std::end(_doctorList) && _doctorAppointmentList.empty())
     {
-        std::cout << "Doctor appointment list is empty" << std::endl;
+        std::cout << "Liste de rendez-vous des docteurs vide" << std::endl;
     }
     else 
     {
-        throw std::runtime_error("Doctor not found");
+        throw std::runtime_error("Docteur non trouve");
+    }
+}
+
+void Hospital::DisplayConsultationForDoctor(std::shared_ptr<Doctor> doctor) const
+{
+    auto it = find_if(std::begin(_doctorList),std::end(_doctorList), [&doctor](std::shared_ptr<Doctor> doc)
+    {return doc->getDoctorNumber() == doctor->getDoctorNumber();});
+
+    if(it != std::end(_doctorList))
+    {
+        std::cout << "Consultation list: " << std::endl;
+        for(auto consultation : _consultationList)
+        {
+            if(consultation->getDoctor() == doctor)
+            {
+                consultation->DisplayConsultationWithDiagnosis();
+            }
+        }
+    }
+    else if(it !=std::end(_doctorList) && _consultationList.empty())
+    {
+        std::cout << " Liste de consultation vide " << std::endl;
+    }
+    else 
+    {
+        throw std::runtime_error("Docteur non trouve");
+    }
+}
+
+void Hospital::DisplayAppointmentListForPatient(std::shared_ptr<Patient> patient) const
+{
+    auto it = find_if(std::begin(_patientList),std::end(_patientList), [&patient](std::shared_ptr<Patient> pat)
+    {return pat->getPermanentNumber() == patient->getPermanentNumber();});
+
+    if(it != std::end(_patientList))
+    {
+        std::cout << "Liste des rendez-vous: " << std::endl;
+        for(auto appointment : _appointmentList)
+        {
+            if(appointment->getPatient() == patient)
+            {
+                appointment->DisplayAppointment();
+            }
+        }
+    }
+    else if(it !=std::end(_patientList) && _appointmentList.empty())
+    {
+        std::cout << "Liste de rendez-vous vide" << std::endl;
+    }
+    else 
+    {
+        throw std::runtime_error("Patient non trouve");
     }
 }
 
 //more specific methods
+
+void Hospital::FindPatient(const std::string patientId) 
+{
+    auto it = std::find_if(std::begin(_patientList), std::end(_patientList),
+    [&patientId](std::shared_ptr<Patient> patient){return patient->getPermanentNumber() == patientId;});
+
+    if(it != std::end(_patientList))
+    {
+        (*it)->DisplayPatient();
+    }
+    else
+    {
+        throw std::runtime_error("Patient non trouve");
+    }
+}
+
+void Hospital::FindDoctor(const std::string doctorId)
+{
+    auto it = std::find_if(std::begin(_doctorList),std::end(_doctorList),[&doctorId](std::shared_ptr<Doctor> doctor)
+    {return doctor->getDoctorNumber() == doctorId;});
+
+    if(it != std::end(_doctorList))
+    {
+        (*it)->DisplayDoctor();
+    }
+    else
+    {
+        throw std::runtime_error("Docteur non trouve");
+    }
+    
+}

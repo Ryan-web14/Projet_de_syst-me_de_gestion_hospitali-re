@@ -35,6 +35,7 @@ void getPatientInfo() const; // display patient info
 
 //getter and setter
 //getter
+Patient getPatient() const; //return patient info
 std::string getAppointmentId() const; //return appointment id
 Date getAppointmentDate() const; //return appointment date
 std::string getAppointmentReason() const; //return appointment reason

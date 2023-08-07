@@ -29,6 +29,23 @@ Appointment::Appointment(Date& date, Patient& patient, std::string reason)
  
 }
 
+void Appointment::DisplayAppointment() const
+{
+    std::cout << "\n\033[1;35m=====================================================\033[0m\n";
+    std::cout << "\033[1;36m\t\tDETAIL DE RENDEZ-VOUS\033[0m\n";
+    std::cout << "\033[1;35m=====================================================\033[0m\n";
+
+    std::cout << "\033[1;33m ID rendez-vous:\033[0m " << std::left << std::setw(0) << _appointmentId << "\n\n";
+
+   std::cout << "\033[1;33m Date rendez-vous:\033[0m " << std::left << std::setw(0) << appointmentDate.ToLongDate() <<" a " <<appointmentDate.getTime() << std::setw(0) << "\n\n";
+
+    std::cout << "\033[1;33m Raison de rendez-vous :\033[0m \n" << std::left << std::setw(0) << _appointmentReason << "\n\n";
+
+    _patient.DisplayPatient();
+
+    std::cout << "\033[1;35m=====================================================\033[0m\n\n";
+}
+
 //getter
 void Appointment::getPatientInfo() const
 {
@@ -45,21 +62,9 @@ std::string Appointment::getAppointmentId() const
     return _appointmentId;
 }
 
-void Appointment::DisplayAppointment() const
+Patient Appointment::getPatient() const
 {
-    std::cout << "\n\033[1;35m=====================================================\033[0m\n";
-    std::cout << "\033[1;36m\t\tDETAIL DE RENDEZ-VOUS\033[0m\n";
-    std::cout << "\033[1;35m=====================================================\033[0m\n";
-
-    std::cout << "\033[1;33m ID rendez-vous:\033[0m " << std::left << std::setw(0) << _appointmentId << "\n\n";
-
-   std::cout << "\033[1;33m Date rendez-vous:\033[0m " << std::left << std::setw(0) << appointmentDate.ToLongDate() <<" a " <<appointmentDate.getTime() << std::setw(0) << "\n\n";
-
-    std::cout << "\033[1;33m Raison de rendez-vous :\033[0m \n" << std::left << std::setw(0) << _appointmentReason << "\n\n";
-
-    _patient.DisplayPatient();
-
-    std::cout << "\033[1;35m=====================================================\033[0m\n\n";
+    return _patient;
 }
 
 
