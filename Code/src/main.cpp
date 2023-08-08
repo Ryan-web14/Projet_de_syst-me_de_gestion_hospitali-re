@@ -67,7 +67,7 @@ birth.month = 12;
 birth.year = 2000;
     // Creating some mock consultations
     Patient patient1("kean", "Dupont",birth, "12 rue de la paix", "066950431");
-    Patient patient2("auc", "coco",birth, "12 rue de la paix", "066770431");
+    Patient patient2("kean", "coco",birth, "12 rue de la paix", "066770431");
     Doctor doctor("Jean-luc", "Moretti",birth, "12 rue mboula", "066950431");
     Doctor doctor2("Joel", "Yollei",birth, "12 rue de la danse", "066957851");
    
@@ -133,7 +133,7 @@ birth.year = 2000;
     hospital.AddAppointment(_appointment2);
     hospital.AddDoctorAppointment(doctorAppointment2);
     hospital.AddDoctorAppointment(doctorAppointment2);
-    try{
+    //try{
     //     hospital.DisplayAppointmentList();
     // hospital.DisplayDoctorList();
     // hospital.DisplayPatientList();
@@ -141,16 +141,20 @@ birth.year = 2000;
      hospital.DisplayPrescriptionList(patientPtr);
     //hospital.DisplayDoctorAppointmentList(docPtr2);
     std::cout << "-------------------" << std::endl;
-    std::cout <<"Entrer le numero du rendez vous a supprimer" << std::endl;
-    std::string num;
-    std::cin >> num;
+    // std::cout <<"Entrer le numero du rendez vous a supprimer" << std::endl;
+    // std::string num;
+    // std::cin >> num;
+    std::cout << "entrer le nom du patient à rechercher ";
+    std::string name;
+    std::cin >> name;
+    hospital.FindPatientByName(name);
     //hospital.DeleteAppointment(num);
     //hospital.DisplayAppointmentList();
-    }
-    catch(const std::exception& e)
-    {
-        std::cerr << e.what() << '\n';
-    }
+    // }
+    // catch(const std::exception& e)
+    // {
+    //     std::cerr << e.what() << '\n';
+    // }
     
    
     // prescription.DisplayPrescription();
@@ -229,4 +233,4 @@ birth.year = 2000;
 
 // //     std::cout << consultation.getDiagnosis();
 // // return 0;
-// // }
+//  }

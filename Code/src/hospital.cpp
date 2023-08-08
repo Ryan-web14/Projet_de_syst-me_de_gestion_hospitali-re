@@ -254,7 +254,6 @@ void Hospital::DisplayAppointmentListForPatient(std::shared_ptr<Patient> patient
 }
 
 //more specific methods
-
 void Hospital::FindPatient(const std::string patientId) 
 {
     auto it = std::find_if(std::begin(_patientList), std::end(_patientList),
@@ -284,4 +283,131 @@ void Hospital::FindDoctor(const std::string doctorId)
         throw std::runtime_error("Docteur non trouve");
     }
     
+}
+
+void Hospital::FindPrescription(const std::string prescriptionId)
+{
+    auto it = std::find_if(std::begin(_prescriptionList),std::end(_prescriptionList),[&prescriptionId](std::shared_ptr<Prescription> prescription)
+    {return prescription->getPrescriptionId() == prescriptionId;});
+
+    if(it != std::end(_prescriptionList))
+    {
+        (*it)->DisplayPrescription();
+    }
+    else
+    {
+        throw std::runtime_error("Prescription non trouve");
+    }
+}
+
+void Hospital::FindConsultation(const std::string consultationId)
+{
+    auto it = std::find_if(std::begin(_consultationList),std::end(_consultationList),[&consultationId](std::shared_ptr<Consultation> consultation)
+    {return consultation->getConsultationId() == consultationId;});
+
+    if(it != std::end(_consultationList))
+    {
+        (*it)->DisplayConsultationWithDiagnosis();
+    }
+    else
+    {
+        throw std::runtime_error("Consultation non trouve");
+    }
+}
+
+void Hospital::FindAppointment(const std::string appointmentId)
+{
+    auto it = std::find_if(std::begin(_appointmentList),std::end(_appointmentList),[&appointmentId](std::shared_ptr<Appointment> appointment)
+    {return appointment->getAppointmentId() == appointmentId;});
+
+    if(it != std::end(_appointmentList))
+    {
+        (*it)->DisplayAppointment();
+    }
+    else
+    {
+        throw std::runtime_error("Rendez-vous non trouve");
+    }
+}
+
+void Hospital::FindDoctorAppointment(std::shared_ptr<Appointment> appointment, std::shared_ptr<Doctor> doctor)
+{
+    auto it = std::find_if(std::begin(_doctorAppointmentList),std::end(_doctorAppointmentList),[&appointment,&doctor](std::shared_ptr<DoctorAppointment> doctorAppointment)
+    {return doctorAppointment->getAppointment() == appointment && doctorAppointment->getDoctor() == doctor;});
+    
+    if(it != std::end(_doctorAppointmentList))
+    {
+        (*it)->DisplayDoctorAppointment();
+    }
+    else
+    {
+        throw std::runtime_error("Rendez-vous docteur non trouve");
+    }
+}
+
+void Hospital::FindPatientByName(std::string name)
+{
+    if(name.empty())
+    {
+        throw std::length_error("Nom vide");
+    }
+    else
+    {
+        name[0] =std::toupper(name[0]);
+
+        for(std::size_t i = 1; i < name.size(); ++i)
+        {
+            name[i] = std::tolower(name[i]);
+        }
+    }
+    std::vector<std::shared_ptr<Patient>> patientList;
+
+    auto it = std::copy_if(std::begin(_patientList), std::end(_patientList),std::back_inserter(patientList),
+    [&name](std::shared_ptr<Patient> patient){return patient->getName() == name;});
+
+    std::cout << "Resultat de la recherche: " << std::endl;
+
+    if(patientList.empty())
+    {
+        throw std::runtime_error("Patient non trouve");
+        return;
+    }
+
+    for(const auto patient : patientList)
+    {
+        patient->DisplayPatient();
+    }
+}
+
+void Hospital::FindDoctorByName(std::string name)
+{
+     if(name.empty())
+    {
+        throw std::length_error("Nom vide");
+    }
+    else
+    {
+        name[0] =std::toupper(name[0]);
+
+        for(std::size_t i = 1; i < name.size(); ++i)
+        {
+            name[i] = std::tolower(name[i]);
+        }
+    }
+    
+    std::vector<std::shared_ptr<Doctor>> doctorList;
+    auto it = std::copy_if(std::begin(_doctorList), std::end(_doctorList),std::back_inserter(_doctorList),
+    [&name](std::shared_ptr<Doctor> doctor){return doctor->getName() == name;});
+
+   if(doctorList.empty())
+   {
+       throw std::runtime_error("Docteur non trouve");
+       return;
+   }
+
+   for(const auto doctor : doctorList)
+   {
+       doctor->DisplayDoctor();
+   }
+
 }
