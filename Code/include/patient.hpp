@@ -8,6 +8,7 @@
 #include <iomanip>
 #include <memory>
 #include "numberGenerator.hpp"
+#include "medicalRecord.hpp"
 
 class Patient
 {

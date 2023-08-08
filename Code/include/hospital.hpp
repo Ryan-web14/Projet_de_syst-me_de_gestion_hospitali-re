@@ -12,6 +12,7 @@
 #include "doctorSchedule.hpp"
 #include "prescription.hpp"
 #include "consultation.hpp"
+#include "medicalRecord.hpp"
 
 
 
@@ -94,11 +95,6 @@ void setConsultationDoctor(std::shared_ptr<Consultation> consultation, std::shar
 
 private:
 std::string _name;
-std::shared_ptr<Patient> _patient;
-std::shared_ptr<Doctor> _doctor;
-std::shared_ptr<Consultation> _consultation;
-std::shared_ptr<Appointment> _appointment;
-std::shared_ptr<DoctorAppointment> _doctorAppointment;
 std::vector<std::shared_ptr<Patient>> _patientList;
 std::vector<std::shared_ptr<Doctor>> _doctorList;
 std::vector<std::shared_ptr<Appointment>> _appointmentList;

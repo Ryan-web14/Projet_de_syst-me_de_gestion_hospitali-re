@@ -394,7 +394,7 @@ void Hospital::FindDoctorByName(std::string name)
             name[i] = std::tolower(name[i]);
         }
     }
-    
+
     std::vector<std::shared_ptr<Doctor>> doctorList;
     auto it = std::copy_if(std::begin(_doctorList), std::end(_doctorList),std::back_inserter(_doctorList),
     [&name](std::shared_ptr<Doctor> doctor){return doctor->getName() == name;});
@@ -409,5 +409,4 @@ void Hospital::FindDoctorByName(std::string name)
    {
        doctor->DisplayDoctor();
    }
-
 }
