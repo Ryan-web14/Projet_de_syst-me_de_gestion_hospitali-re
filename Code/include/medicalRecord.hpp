@@ -3,6 +3,7 @@
 #include <iostream>
 #include <vector>
 #include <memory>
+#include <iomanip>
 #include <algorithm>
 #include "appointment.hpp"
 #include "consultation.hpp"
@@ -17,6 +18,7 @@ public:
 //constructor and destructor
 //default constructor
 MedicalRecord() = default;
+MedicalRecord();
 //default destructor
 ~MedicalRecord() = default;
 
@@ -29,6 +31,18 @@ void AddConsultation(std::shared_ptr<Consultation> consultation);
 void AddPrescription(std::shared_ptr<Prescription> prescription);
 //add a doctor appointment to the doctor appointment list
 void AddDoctorAppointment(std::shared_ptr<DoctorAppointment> doctorAppointment);
+//add chronic disease
+void AddChronicDisease(std::string ChronicDisease);
+//add chronic medication
+void AddChronicMedication(std::string ChronicMedication);
+//add allergy
+void AddAllergy(std::string Allergy);
+//remove allergy
+void RemoveAllergy(std::string Allergy);
+//remove chronic medication
+void RemoveChronicMedication(std::string ChronicMedication);
+//remove chronic disease
+void RemoveChronicDisease(std::string ChronicDisease);
 //remove an appointment from the appointment list
 void RemoveAppointment(std::shared_ptr<Appointment> appointment);
 //remove a consultation from the consultation list
@@ -36,7 +50,7 @@ void RemoveConsultation(std::shared_ptr<Consultation> consultation);
 //remove a prescription from the prescription list
 void RemovePrescription(std::shared_ptr<Prescription> prescription);
 //remove a doctor appointment from the doctor appointment list
-void RemoveDoctorAppointment(std::shared_ptr<DoctorAppointment> doctorAppointment);
+//void RemoveDoctorAppointment(std::shared_ptr<DoctorAppointment> doctorAppointment);
 //display all the medical record of the patient
 void DisplayMedicalRecord() const;
 //display all the appointment of the patient
@@ -58,15 +72,12 @@ std::vector<std::shared_ptr<Appointment>> getAppointmentList() const;
 std::vector<std::shared_ptr<Consultation>> getConsultationList() const;
 std::vector<std::shared_ptr<Prescription>> getPrescriptionList() const;
 std::vector<std::shared_ptr<DoctorAppointment>> getDoctorAppointmentList() const;
+//implémentation à réaliser 
 //setter
-void setMedicalRecordId(std::string medicalRecordId);
-void setAllergies(std::vector<std::string> allergies);
-void setChronicDiseases(std::vector<std::string> chronicDiseases);
-void setChronicMedications(std::vector<std::string> chronicMedications);
-void setAppointmentList(std::vector<std::shared_ptr<Appointment>> appointmentList);
-void setConsultationList(std::vector<std::shared_ptr<Consultation>> consultationList);
-void setPrescriptionList(std::vector<std::shared_ptr<Prescription>> prescriptionList);
-void setDoctorAppointmentList(std::vector<std::shared_ptr<DoctorAppointment>> doctorAppointmentList);
+// void setAllergies(std::vector<std::string> allergies);
+// void setChronicDiseases(std::vector<std::string> chronicDiseases);
+// void setChronicMedications(std::vector<std::string> chronicMedications);
+
 
 
 
