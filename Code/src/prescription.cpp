@@ -38,13 +38,52 @@ void Prescription::RemoveMedecine(std::string name)
   auto it = std::remove_if(std::begin(_medecines), std::end(_medecines),[&name](const Medecine& medecine){return medecine.name == name;});
   if(it != std::end(_medecines))
   {
-    _medecines.erase(it);
+    _medecines.erase(it, std::end(_medecines));
     std::cout << "Suppression effectue" << std::endl;
   }
   else 
   {
     throw std::runtime_error("Medicament non trouve"); //throw an exception if the medecine is not found
   }
+}
+void Prescription::AddBiologicalExam(std::shared_ptr<BiologicalExam> bioExam)
+{
+    _bioExam.push_back(bioExam);
+}
+
+void Prescription::RemoveBiologicalExam(std::string IdbioExam)
+{
+   auto it = std::remove_if(std::begin(_bioExam), std::end(_bioExam), [&IdbioExam](const std::shared_ptr<BiologicalExam>bioexam)
+   {return bioexam->getExamId() == IdbioExam;});
+
+    if(it != std::end(_bioExam))
+    {
+        _bioExam.erase(it);
+    }
+    else
+    {
+        throw std::runtime_error("Examen biologique non trouve");
+    }
+}
+
+void Prescription::AddXrayExam(std::shared_ptr<XrayExam> xrayExam)
+{
+    _xrayExam.push_back(xrayExam);
+}
+
+void Prescription::RemoveXrayExam(std::string IdXrayExam)
+{
+    auto it = std::remove_if(std::begin(_xrayExam), std::end(_xrayExam), [&IdXrayExam](const std::shared_ptr<XrayExam>xrayexam)
+   {return xrayexam->getExamId() == IdXrayExam;});
+
+    if(it != std::end(_xrayExam))
+    {
+        _xrayExam.erase(it);
+    }
+    else
+    {
+        throw std::runtime_error("Examen radiologique non trouve");
+    }
 }
 
 void Prescription::DisplayPrescription() const
@@ -64,6 +103,7 @@ void Prescription::DisplayPrescription() const
         std::cout << "Duree: " << medecine.duration << " J "<<std::endl;
         std::cout << "Precision: " << medecine.precision << std::endl;
     }
+    
  
 }
 /*void Prescription::DisplayPrescription() const

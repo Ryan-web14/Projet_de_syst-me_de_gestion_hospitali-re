@@ -26,6 +26,12 @@ void Specialty::SetName(std::string name)
 {
     if(name.empty())
         throw std::invalid_argument("The name of the specialty cannot be empty, Please enter a valid name");
+    
+    for(char c : name)
+    {
+        if(isdigit(c))
+            throw std::invalid_argument("The name of the specialty cannot contain a number, Please enter a valid name");
+    }
      
     _name = name;
 }
@@ -34,5 +40,11 @@ void Specialty::SetDescription(std::string description)
 {
     if(description.empty())
         throw std::invalid_argument("The description of the specialty cannot be empty, Please enter a valid description");
+
+    for(char c : description)
+    {
+        if(isdigit(c))
+            throw std::invalid_argument("The description of the specialty cannot contain a number, Please enter a valid description");
+    }
     _description = description;
 }

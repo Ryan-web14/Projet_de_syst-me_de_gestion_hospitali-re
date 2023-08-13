@@ -54,6 +54,20 @@ void Exam::setDoctor(std::shared_ptr<Doctor> doctor)
 
 void Exam::setExamType(std::string examType)
 {
+     if(examType.empty())
+    {
+        throw std::invalid_argument("ce champs ne peut pas etre vide!");
+        return;
+    }
+
+    for(auto& c : examType)
+    {
+        if(!std::isalpha(c) && !std::isspace(c))
+        {
+            throw std::runtime_error("ce champs ne peut pas contenir de chiffre!");
+            return;
+        }
+    }
     _examType = examType;
 }
 
@@ -64,6 +78,12 @@ void Exam::setExamDate(Date& date)
 
 void Exam::setResult(std::string result)
 {
+      if(result.empty())
+    {
+        throw std::invalid_argument("ce champs ne peut pas etre vide!");
+        return;
+    }
+
     _result = result;
 }
 

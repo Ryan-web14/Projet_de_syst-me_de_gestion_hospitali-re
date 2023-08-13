@@ -11,6 +11,8 @@
 #include <ctime>
 #include "patient.hpp"
 #include "doctor.hpp"
+#include "xrayExam.hpp"
+#include "biologicalExam.hpp"
 
 struct Medecine
 {
@@ -35,6 +37,10 @@ Prescription(std::shared_ptr<Patient> patient, std::shared_ptr<Doctor> doctor);
 //add a medecine to the prescription
 void AddMedecine(std::string name, std::string dosage, std::string frequency, std::string duration, std::string precision);
 void RemoveMedecine(std::string name);
+void AddBiologicalExam(std::shared_ptr<BiologicalExam> bioExam);
+void RemoveBiologicalExam(std::string IdbioExam);
+void AddXrayExam(std::shared_ptr<XrayExam> xrayExam);
+void RemoveXrayExam(std::string IdXrayExam);
 void DisplayPrescription() const;
 
 //getter and setter
@@ -53,6 +59,8 @@ static NumberGenerator _numberGenerator;
 std::string _prescriptionId;
 std::shared_ptr<Patient> _patient;
 std::shared_ptr<Doctor> _doctor;
+std::vector<std::shared_ptr<BiologicalExam>> _bioExam;
+std::vector<std::shared_ptr<XrayExam>> _xrayExam;
 std::vector<Medecine> _medecines;
 std::time_t _prescriptionDate;
 
