@@ -104,6 +104,17 @@ void Prescription::DisplayPrescription() const
         std::cout << "Precision: " << medecine.precision << std::endl;
     }
     
+    for(const auto& bioExam : _bioExam)
+    {
+        std::cout << "Examen biologique: " << std::endl;
+        std::cout << "Nom: " << bioExam->getBiologicalExamTechnique() << std::endl;
+    }
+
+    for(const auto& xrayExam : _xrayExam)
+    {
+        std::cout << "Examen radiologique: " << std::endl;
+        std::cout << "Nom: " << xrayExam->getXrayTechnique() << std::endl;
+    }
  
 }
 /*void Prescription::DisplayPrescription() const
