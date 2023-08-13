@@ -9,7 +9,7 @@ class BiologicalExam :public Exam
     //default constructor
     BiologicalExam() = default;
     //constructor with parameters
-    BiologicalExam(std::shared_ptr<Patient> patient, std::shared_ptr<Doctor> doctor, std::string examType, Date& examDate,
+    BiologicalExam(std::shared_ptr<Patient> patient, std::shared_ptr<Doctor> doctor, std::string examType, Date& examDate, double cost,
      std::string biologicalSample, std::string biologicalExamTechnique,std::string typeOfAnalysis,std::string methodOfAnalysis,int duration);
     //destructor
     ~BiologicalExam() = default;
@@ -37,4 +37,5 @@ class BiologicalExam :public Exam
     std::string _typeOfAnalysis;
     std::string _methodOfAnalysis;
     int _duration;
+    
 };

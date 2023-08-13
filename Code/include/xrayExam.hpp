@@ -10,7 +10,7 @@ class XrayExam : public Exam
     //default constructor
     XrayExam() = default;
     //constructor with parameters
-    XrayExam(std::shared_ptr<Patient> patient, std::shared_ptr<Doctor> doctor, std::string examType, Date& examDate, std::string bodyPart,
+    XrayExam(std::shared_ptr<Patient> patient, std::shared_ptr<Doctor> doctor, std::string examType, Date& examDate,double cost, std::string bodyPart,
     std::string xrayTechnique, std::string equipment);
     //destructor
     ~XrayExam() = default;

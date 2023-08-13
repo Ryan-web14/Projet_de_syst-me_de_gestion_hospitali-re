@@ -1,9 +1,9 @@
 #include "xrayExam.hpp"
 
 //constructor with parameters
-XrayExam::XrayExam(std::shared_ptr<Patient> patient, std::shared_ptr<Doctor> doctor, std::string examType, Date& examDate, std::string bodyPart,
+XrayExam::XrayExam(std::shared_ptr<Patient> patient, std::shared_ptr<Doctor> doctor, std::string examType, Date& examDate,double cost, std::string bodyPart,
     std::string xrayTechnique, std::string equipment) : 
-Exam(patient, doctor, examType, examDate), _bodyPart(bodyPart), _xrayTechnique(xrayTechnique), _equipment(equipment)
+Exam(patient, doctor, examType, examDate,cost), _bodyPart(bodyPart), _xrayTechnique(xrayTechnique), _equipment(equipment)
 {
 }
 

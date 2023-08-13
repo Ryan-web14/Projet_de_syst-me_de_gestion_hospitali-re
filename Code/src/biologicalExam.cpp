@@ -2,9 +2,9 @@
 
 // constructor with parameters
 
-BiologicalExam::BiologicalExam(std::shared_ptr<Patient> patient, std::shared_ptr<Doctor> doctor, std::string examType, Date &examDate,
+BiologicalExam::BiologicalExam(std::shared_ptr<Patient> patient, std::shared_ptr<Doctor> doctor, std::string examType, Date &examDate, double cost,
                                std::string biologicalSample, std::string biologicalExamTechnique, std::string typeOfAnalysis, std::string methodOfAnalysis,
-                               int duration) : Exam(patient, doctor, examType, examDate), _biologicalSample(biologicalSample), _biologicalExamTechnique(biologicalExamTechnique), _typeOfAnalysis(typeOfAnalysis),
+                               int duration) : Exam(patient, doctor, examType, examDate,cost), _biologicalSample(biologicalSample), _biologicalExamTechnique(biologicalExamTechnique), _typeOfAnalysis(typeOfAnalysis),
                                                   _methodOfAnalysis(methodOfAnalysis), _duration(duration)
 
 {

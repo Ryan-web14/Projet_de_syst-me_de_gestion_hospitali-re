@@ -11,7 +11,7 @@ Consultation::Consultation(std::shared_ptr<Patient> patient, std::shared_ptr<Doc
     _patient = patient;
     _doctor = doctor;
     _doctorAppointment = doctorAppointment;
-    _cost = 0;
+    _cost = 15000;
     _isPaid = false;
     if(diagnosis.empty())
     {

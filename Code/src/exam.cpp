@@ -2,8 +2,8 @@
 
 NumberGenerator Exam::_numberGenerator(100000, 300000);
 
-Exam::Exam(std::shared_ptr<Patient> patient, std::shared_ptr<Doctor> doctor, std::string examType, Date& examDate) :
- _patient(patient), _doctor(doctor), _examType(examType), _examDate(examDate)
+Exam::Exam(std::shared_ptr<Patient> patient, std::shared_ptr<Doctor> doctor, std::string examType, Date& examDate,double cost) :
+ _patient(patient), _doctor(doctor), _examType(examType), _examDate(examDate), _cost(cost)
 {
     _examId = _numberGenerator.generateNumber();
     _examTime = std::chrono::system_clock::to_time_t(std::chrono::system_clock::now());
@@ -39,6 +39,11 @@ Date Exam::getExamDate() const
 std::string Exam::getResult() const
 {
     return _result;
+}
+
+double Exam::getCost() const
+{
+    return _cost;
 }
 
 //setter
@@ -86,4 +91,6 @@ void Exam::setResult(std::string result)
 
     _result = result;
 }
+
+
 

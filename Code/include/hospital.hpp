@@ -14,6 +14,7 @@
 #include "consultation.hpp"
 #include "patientRecord.hpp"
 #include "hospitalisation.hpp"
+#include "billing.hpp"
 
 
 
@@ -44,6 +45,7 @@ void AddPatientRecord(std::shared_ptr<PatientRecord> patientRecord); //add a pat
 void AddToDoctorSchedule(std::shared_ptr<Doctor> doctor, std::shared_ptr<Appointment> appointment); //add an appointment in the vector of appointment of the doctor
 void AddHospitalisation(std::shared_ptr<Hospitalisation> hospitalisation); //add an hospitalisation
 void DeleteHospitalisation(std::string& hospitalisationId);
+void AddBilling(std::shared_ptr<Billing> bill);
 //void DeleteFromDoctorSchedule(std::shared_ptr<Doctor> doctor, std::shared_ptr<Appointment> appointment); //delete an appointment in the vector of appointment of the doctor
 void AddTreatment(std::shared_ptr<Treatment> treatment,std::shared_ptr<Patient> patient); //add a treatment in the vector of treatment
 void DeleteTreatment(std::string treatmentId); //delete a treatment in the vector of treatment
@@ -73,6 +75,8 @@ void DisplayDoctorSchedule(std::shared_ptr<Doctor> doctor) const; //Display the 
 void DisplayAppointmentListForPatient(std::shared_ptr<Patient> patient) const; //display the list of appointment
 void DisplayConsultationForDoctor(std::shared_ptr<Doctor> doctor) const;
 void DisplayConsultationForPatient(std::string surname, std::string name);
+void DisplayPatientBill(std::string patientId);
+void DisplayPatientBillByName(std::string surname, std::string name);
 //method link to the medicalRecord and patientRecord
 void AddAppointmentToPatientRecord(std::string& patientId, std::shared_ptr<Appointment> appointment); //add an appointment in the vector of appointment of the patient in PatientRecord
 void AddConsultationToPatientRecord(std::string& patientId, std::shared_ptr<Consultation> consultation); //add a consultation in the vector of consultation of the patient in PatientRecord
@@ -131,6 +135,7 @@ std::vector<std::shared_ptr<Treatment>> _treatmentList;
 std::vector<std::shared_ptr<BiologicalExam>> _biologicalExamList;
 std::vector<std::shared_ptr<XrayExam>> _xrayExamList;
 std::vector <std::shared_ptr<Hospitalisation>> _hospitalisationList;
+std::vector<std::shared_ptr<Billing>> _billingList;
 
 };
 

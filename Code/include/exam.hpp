@@ -17,7 +17,7 @@ class Exam
     //default constructor
     Exam() = default;
     //constructor with parameters which are the patient, doctor,exam type)
-    Exam(std::shared_ptr<Patient> patient, std::shared_ptr<Doctor> doctor, std::string examType, Date& examDate);
+    Exam(std::shared_ptr<Patient> patient, std::shared_ptr<Doctor> doctor, std::string examType, Date& examDate, double cost);
     //destructor
     virtual ~Exam() = default;	
 
@@ -32,12 +32,14 @@ class Exam
     std::string getExamType() const;
     Date getExamDate() const;
     std::string getResult() const;
+    double getCost() const;
     //setter
     void setPatient(std::shared_ptr<Patient> patient);
     void setDoctor(std::shared_ptr<Doctor> doctor);
     void setExamType(std::string examType);
     void setExamDate(Date& date);
     void setResult(std::string result);
+  
 
     protected:
     static NumberGenerator _numberGenerator;
@@ -48,7 +50,7 @@ class Exam
     Date _examDate;
     std::string _result;
     std::time_t _examTime;
-
+    double _cost;
 
     
 
