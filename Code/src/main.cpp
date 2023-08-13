@@ -46,7 +46,7 @@
 //     return 0;
 // }
 
-#include "patient.hpp"
+#include "xrayExam.hpp"
 #include <memory>
 
 int main()
@@ -60,4 +60,23 @@ int main()
   std::shared_ptr<Patient> patient = std::make_shared<Patient>("Jean", "Dupont", birth, "Rue de la gare 1", "064568525");
 
   patient->DisplayPatient();
+try
+{
+ Birth birth2;
+  birth2.day = 2;
+  birth2.month = 2;
+  birth2.year = 1990;
+  Specialty specialty("ORL", "Oto-rhino-laryngologie");
+  std::shared_ptr<Doctor> doctor = std::make_shared<Doctor>("Alain", "bikindou",birth2,"12 rue mpandou auguste", specialty,"066643440");
+  Date dateExam(2021,1,1);
+  Times timeExam(17,30);
+  dateExam.setTime(timeExam);
+  XrayExam xray(patient,doctor,"Xray",dateExam,"head","Xray","IRM");
+  xray.DisplayExam();
+}
+catch(const std::exception& e)
+{
+  std::cout << e.what();
+}
+  
 }
