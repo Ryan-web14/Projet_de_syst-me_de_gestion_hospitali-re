@@ -126,6 +126,8 @@ void Hospital::DeleteDoctorAppointment(std::shared_ptr<Appointment> appointment,
 // {
 //     auto it = std::find_if(std::begin(_doctorList), std::end(_doctorList),[&doctor](std::shared_ptr<Doctor> doc)
 //     {return doc->getDoctorNumber() == doctor->getDoctorNumber();});
+
+
 // }
 
 //methods for displaying
@@ -269,6 +271,19 @@ void Hospital::FindPatient(const std::string patientId)
     }
 }
 
+std::shared_ptr<Patient> Hospital::FindPatientById(const std::string patientId)
+{
+    auto it = std::find_if(std::begin(_patientList), std::end(_patientList),
+    [&patientId](std::shared_ptr<Patient> patient){return patient->getPermanentNumber() == patientId;});
+
+    if(it != std::end(_patientList))
+    {
+        return *it;
+    }
+
+    return nullptr;
+}
+
 void Hospital::FindDoctor(const std::string doctorId)
 {
     auto it = std::find_if(std::begin(_doctorList),std::end(_doctorList),[&doctorId](std::shared_ptr<Doctor> doctor)
@@ -329,6 +344,15 @@ void Hospital::FindAppointment(const std::string appointmentId)
         throw std::runtime_error("Rendez-vous non trouve");
     }
 }
+
+void Hospital::SortAppointmentByDate(std::vector<std::shared_ptr<Appointment>>& appointments)
+{
+    std::sort(appointments.begin(), appointments.end(), [](const std::shared_ptr<Appointment> &a1, const std::shared_ptr<Appointment> &a2)
+    {
+        return a1->getAppointmentDate() < a2->getAppointmentDate();
+    });
+}
+
 
 void Hospital::FindDoctorAppointment(std::shared_ptr<Appointment> appointment, std::shared_ptr<Doctor> doctor)
 {
@@ -409,4 +433,158 @@ void Hospital::FindDoctorByName(std::string name)
    {
        doctor->DisplayDoctor();
    }
+}
+
+//methods link to the medicalRecord
+void Hospital::AddAppointmentToMedicalRecord(std::string patientId, std::shared_ptr<Appointment> appointment)
+{
+    auto patient = FindPatientById(patientId);
+    if(patient)
+    {
+        patient->getMedicalRecord().AddAppointment(appointment);
+    }
+    else
+    {
+        throw std::runtime_error("Patient non trouve");
+    }
+}
+
+void Hospital::AddConsultationToMedicalRecord(std::string patientId, std::shared_ptr<Consultation> consultation)
+{
+    auto patient = FindPatientById(patientId);
+    if(patient)
+    {
+        patient->getMedicalRecord().AddConsultation(consultation);
+    }
+    else
+    {
+        throw std::runtime_error("Patient non trouve");
+    }
+}
+
+void Hospital::AddPrescriptionToMedicalRecord(std::string patientId, std::shared_ptr<Prescription> prescription)
+{
+    auto patient = FindPatientById(patientId);
+    if(patient)
+    {
+        patient->getMedicalRecord().AddPrescription(prescription);
+    }
+    else
+    {
+        throw std::runtime_error("Patient non trouve");
+    }
+}
+
+void Hospital::AddChronicDiseaseToMedicalRecord(std::string patientId, std::string chronicDisease)
+{
+  auto patient = FindPatientById(patientId);
+  if(patient)
+  {
+    patient->getMedicalRecord().AddChronicDisease(chronicDisease);
+  }
+  else
+  {
+    throw std::runtime_error("Patient non trouve");
+  }
+}
+
+void Hospital::AddChronicMedicationToMedicalRecord(std::string patientId, std::string chronicMedication)
+{
+  auto patient = FindPatientById(patientId);
+  if(patient)
+  {
+    patient->getMedicalRecord().AddChronicMedication(chronicMedication);
+  }
+  else
+  {
+    throw std::runtime_error("Patient non trouve");
+  }
+}
+
+void Hospital::AddAllergyToMedicalRecord(std::string patientId, std::string allergy)
+{
+    auto patientFound = FindPatientById(patientId);
+    if(patientFound)
+    {
+        patientFound->getMedicalRecord().AddAllergy(allergy);
+    }
+}
+
+void Hospital::AddDoctorAppointmentToMedicalRecord(std::string patientId, std::shared_ptr<DoctorAppointment> DoctorAppointment)
+{
+    auto patientFound = FindPatientById(patientId);
+    if(patientFound)
+    {
+        patientFound->getMedicalRecord().AddDoctorAppointment(DoctorAppointment);
+    }
+    else
+    {
+        throw std::runtime_error("Patient non trouve");
+    }
+}
+
+void Hospital::DeleteAppointmentToMedicalRecord(std::string patientId, std::shared_ptr<Appointment> appointment)
+{
+    auto patientFound = FindPatientById(patientId);
+    if(patientFound)
+    {
+        patientFound->getMedicalRecord().RemoveAppointment(appointment);
+    }
+    else
+    {
+        throw std::runtime_error("Patient non trouve");
+    }
+}
+
+void Hospital::DeleteConsultationToMedicalRecord(std::string patientId, std::shared_ptr<Consultation> consultation)
+{
+    auto patientFound = FindPatientById(patientId);
+    if(patientFound)
+    {
+        patientFound->getMedicalRecord().RemoveConsultation(consultation);
+    }
+    else
+    {
+        throw std::runtime_error("Patient non trouve");
+    }
+}
+
+void Hospital::DeletePrescriptionToMedicalRecord(std::string patientId, std::shared_ptr<Prescription> prescription)
+{
+    auto patientFound = FindPatientById(patientId);
+    if(patientFound)
+    {
+        patientFound->getMedicalRecord().RemovePrescription(prescription);
+    }
+    else
+    {
+        throw std::runtime_error("Patient non trouve");
+    }
+}
+
+void Hospital::DeleteDoctorAppointmentToMedicalRecord(std::string patientId, std::shared_ptr<Appointment> Appointment, std::shared_ptr<Doctor> doctor)
+{
+    auto patientFound = FindPatientById(patientId);
+    if(patientFound)
+    {
+        patientFound->getMedicalRecord().RemoveDoctorAppointment(Appointment, doctor);
+    }
+    else
+    {
+        throw std::runtime_error("Patient non trouve");
+    }
+}
+
+void Hospital::DisplayMedicalRecord(std::string patientId) 
+{
+    auto patientFound = FindPatientById(patientId);
+
+    if(patientFound)
+    {
+        patientFound->getMedicalRecord().DisplayMedicalRecord();
+    }
+    else
+    {
+        throw std::runtime_error("Patient non trouve");
+    }
 }

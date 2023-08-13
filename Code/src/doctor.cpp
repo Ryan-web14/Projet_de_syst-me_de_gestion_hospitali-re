@@ -2,7 +2,7 @@
 
 NumberGenerator Doctor::_numberGenerator(1000000, 9999999);
 
-Doctor::Doctor(std::string name, std::string surname,Birth birthday,std::string adress, std::string phone_number) :  _address(adress)
+Doctor::Doctor(std::string name, std::string surname,Birth birthday,std::string adress,Specialty specialty, std::string phone_number) :  _address(adress), _speciality(specialty)
 {
     try
     {
@@ -116,6 +116,11 @@ std::string Doctor::getLicenseNumber() const
     return _licenseNumber;
 }
 
+Specialty Doctor::getSpecialty() const
+{
+    return _speciality;
+}
+
 void Doctor::setName(const std::string &name)
 {
     for (char c : name)
@@ -172,6 +177,12 @@ void Doctor::setPhoneNumber(const std::string &phone_number)
     }
 }
 
+void Doctor::setSpecialty(Specialty specialty)
+{
+    _speciality = specialty;
+}
+
+//method
 bool Doctor::IsValidPhoneNumber(const std::string &phone_number)
 {
     std::regex phoneregex("^0[456]\\d{7}$");

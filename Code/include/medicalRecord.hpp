@@ -5,7 +5,6 @@
 #include <memory>
 #include <iomanip>
 #include <algorithm>
-#include "appointment.hpp"
 #include "consultation.hpp"
 #include "prescription.hpp"
 #include "doctorAppointment.hpp"
@@ -17,7 +16,6 @@ class MedicalRecord
 public:
 //constructor and destructor
 //default constructor
-MedicalRecord() = default;
 MedicalRecord();
 //default destructor
 ~MedicalRecord() = default;
@@ -50,7 +48,7 @@ void RemoveConsultation(std::shared_ptr<Consultation> consultation);
 //remove a prescription from the prescription list
 void RemovePrescription(std::shared_ptr<Prescription> prescription);
 //remove a doctor appointment from the doctor appointment list
-//void RemoveDoctorAppointment(std::shared_ptr<DoctorAppointment> doctorAppointment);
+void RemoveDoctorAppointment(std::shared_ptr<Appointment> appointment, std::shared_ptr<Doctor> doctor);
 //display all the medical record of the patient
 void DisplayMedicalRecord() const;
 //display all the appointment of the patient

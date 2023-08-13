@@ -13,23 +13,23 @@ void DoctorSchedule::AddAppointment(std::shared_ptr<Appointment> appointment)
     
 }
 
-// void DoctorSchedule::DeleteAppointment(std::shared_ptr<Appointment> appointment)
-// {
-//   _appointmentList.erase(std::remove(std::begin(_appointmentList), std::end(_appointmentList),appointment));
-//   return;
-// }
+void DoctorSchedule::DeleteAppointment(std::shared_ptr<Appointment> appointment)
+{
+  _appointmentList.erase(std::remove(std::begin(_appointmentList), std::end(_appointmentList),appointment));
+  return;
+}
 
-// bool DoctorSchedule::IsAvalaible(const Date& date) const
-// {
-//    for(const auto appointment: _appointmentList)
-//    {
-//     if(appointment->getAppointmentDate() == date)
-//     {
-//         return false;
-//     }
-//    }
-//    return true;
-// }
+bool DoctorSchedule::IsAvalaible(const Date& date) const
+{
+   for(const auto appointment: _appointmentList)
+   {
+    if(appointment->getAppointmentDate() == date)
+    {
+        return false;
+    }
+   }
+   return true;
+}
 void DoctorSchedule::DisplaySchedule() const
 {
     std::cout << "\n\033[1;35m========================================\033[0m\n";

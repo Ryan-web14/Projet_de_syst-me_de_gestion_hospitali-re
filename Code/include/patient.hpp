@@ -38,7 +38,7 @@ std::string getSurname() const;
 Birth getBirthday() const;
 std::string getAdress() const;
 std::string getPhoneNumber() const;
-
+MedicalRecord getMedicalRecord() const;
 //setter
 void setName(const std::string& name) ;
 void setSurname(const std::string& surname) ;
@@ -58,6 +58,7 @@ Birth _birthday;
 std::string _address;
 std::string _phone_number;
 static NumberGenerator _numberGenerator;
+MedicalRecord _medicalRecord;
 //std::vector<Hospitalisation> hospitalisation;
 //std::vector<Appointment> appointment;
 //std::vector<Billing> billing;

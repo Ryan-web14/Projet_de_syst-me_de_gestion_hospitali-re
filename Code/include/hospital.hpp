@@ -39,10 +39,11 @@ void AddAppointment(std::shared_ptr<Appointment> appointment); //add an appointm
 void DeleteAppointment(const std::string appointmentId); //delete an appointment in the vector of appointment
 void AddDoctorAppointment(std::shared_ptr<DoctorAppointment> doctorApppointment); //add a doctorAppointment in the vector of doctorAppointment
 void DeleteDoctorAppointment(std::shared_ptr<Appointment> appointment, std::shared_ptr<Doctor> doctor); //delete a doctorAppointment in the vector of doctorAppointment
-void AddToDoctorSchedule(std::shared_ptr<Doctor> doctor, std::shared_ptr<Appointment> appointment); //add an appointment in the vector of appointment of the doctor
-void DeleteFromDoctorSchedule(std::shared_ptr<Doctor> doctor, std::shared_ptr<Appointment> appointment); //delete an appointment in the vector of appointment of the doctor
+//void AddToDoctorSchedule(std::shared_ptr<Doctor> doctor, std::shared_ptr<Appointment> appointment); //add an appointment in the vector of appointment of the doctor
+//void DeleteFromDoctorSchedule(std::shared_ptr<Doctor> doctor, std::shared_ptr<Appointment> appointment); //delete an appointment in the vector of appointment of the doctor
 //more specifics methods
 void FindPatient(const std::string patientId); //find a patient in the vector of patient by id
+std::shared_ptr<Patient> FindPatientById(const std::string patientId); //complementary method to be use in another function
 void FindDoctor(const std::string doctorId); //find a doctor in the vector of doctor by id
 void FindPrescription(const std::string prescriptionId); //find a prescription in the vector of prescription by id
 void FindConsultation(const std::string consultationId); //find a consultation in the vector of consultation by id
@@ -50,6 +51,7 @@ void FindDoctorAppointment(std::shared_ptr<Appointment> appointment, std::shared
 void FindAppointment(const std::string appointmentId);
 void FindPatientByName(std::string name); //find a patient in the vector of patient by name
 void FindDoctorByName(std::string name); //find a doctor in the vector of doctor by name
+void SortAppointmentByDate(std::vector<std::shared_ptr<Appointment>>& appointmentList); //sort the appointment by date
 //methods to display information
 void DisplayPatientList() const; //display the list of patient
 void DisplayDoctorList() const; //display the list of doctor
@@ -60,8 +62,19 @@ void DisplayDoctorAppointmentList(std::shared_ptr<Doctor> doctor) const; //displ
 void DisplayDoctorSchedule(std::shared_ptr<Doctor> doctor) const; //Display the schedule of a specific doctor 
 void DisplayAppointmentListForPatient(std::shared_ptr<Patient> patient) const; //display the list of appointment
 void DisplayConsultationForDoctor(std::shared_ptr<Doctor> doctor) const;
-
-
+//method link to the medicalRecord
+void AddAppointmentToMedicalRecord(std::string patientId, std::shared_ptr<Appointment> appointment); //add an appointment in the vector of appointment of the patient in medicalRecord
+void AddConsultationToMedicalRecord(std::string patientId, std::shared_ptr<Consultation> consultation); //add a consultation in the vector of consultation of the patient in medicalRecord
+void AddPrescriptionToMedicalRecord(std::string patientId, std::shared_ptr<Prescription> prescription);//add a prescription in the vector of prescription of the patient  in medicalRecord 
+void AddChronicDiseaseToMedicalRecord(std::string patientId, std::string chronicDisease); //add a chronic disease in the vector of chronic disease of the patient in medicalRecord
+void AddChronicMedicationToMedicalRecord(std::string patientId, std::string chronicMedication); //add a chronic medication in the vector of chronic medication of the patient in medicalRecord
+void AddAllergyToMedicalRecord(std::string patientId, std::string allergy); //add an allergy in the vector of allergy of the patient in medicalRecord
+void AddDoctorAppointmentToMedicalRecord(std::string patientId, std::shared_ptr<DoctorAppointment> doctorAppointment); //add a doctorAppointment in the vector of doctorAppointment of the patient in medicalRecord
+void DeleteAppointmentToMedicalRecord(std::string patientId, std::shared_ptr<Appointment> appointment); //delete an appointment in the vector of appointment of the patient in medicalRecord
+void DeleteConsultationToMedicalRecord(std::string patientId, std::shared_ptr<Consultation> consultation); //delete a consultation in the vector of consultation of the patient in medicalRecord
+void DeletePrescriptionToMedicalRecord(std::string patientId, std::shared_ptr<Prescription> prescription); //delete a prescription in the vector of prescription of the patient in medicalRecord
+void DeleteDoctorAppointmentToMedicalRecord(std::string patientId, std::shared_ptr<Appointment> Appointment, std::shared_ptr<Doctor> doctor); //delete a doctorAppointment in the vector of doctorAppointment of the patient in medicalRecord
+void DisplayMedicalRecord(std::string patientId); //display the medical record of a patient   
 //getter and setter
 //getter 
 std::string getName() const; //return the name of hospital
@@ -101,6 +114,7 @@ std::vector<std::shared_ptr<Appointment>> _appointmentList;
 std::vector<std::shared_ptr<DoctorAppointment>> _doctorAppointmentList;
 std::vector<std::shared_ptr<Consultation>> _consultationList;
 std::vector<std::shared_ptr<Prescription>> _prescriptionList;
+std::vector<DoctorSchedule> _doctorSchedule;
 
 };
 

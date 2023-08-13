@@ -15,7 +15,7 @@ DoctorAppointment(std::shared_ptr<Appointment> appointment, std::shared_ptr<Doct
 //destructor
 ~DoctorAppointment() = default;
 
-//memthod
+//method
 void DisplayDoctorAppointment() const; //display the doctor appointment
 
 //getter

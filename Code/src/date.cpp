@@ -10,15 +10,30 @@ Date::Date()
 
 Date::Date(int year, int month, int day)
 {
+    if (year < 0 || month < 1 || month > 12 || day < 1 || day > DaysInMonth(month)) 
+    {
+        throw std::invalid_argument("Invalid date");
+    }
     _year = year;
     _month = month;
     _day = day;
 }
 //getter and setter
 //getter for year, month and day
-int Date::getYear() const{return _year;};
-int Date::getMonth() const{return _month;};
-int Date::getDay() const{return _day;};
+void Date::setYear(int year) {
+    if (year < 0) throw std::invalid_argument("Invalid year");
+    _year = year;
+}
+
+void Date::setMonth(int month) {
+    if (month < 1 || month > 12) throw std::invalid_argument("Invalid month");
+    _month = month;
+}
+
+void Date::setDay(int day) {
+    if (day < 1 || day > DaysInMonth(_month, _year)) throw std::invalid_argument("Invalid day");
+    _day = day;
+}
 Times Date::getTime() const {return theTime;};
 
 //setter for year, month and day
@@ -39,43 +54,92 @@ bool Date::operator==(const Date& date) const
    return false;
 }
 
-bool Date::operator<(const Date& date ) const
+// bool Date::operator<(const Date& date ) const
+// {
+//  int result = CompareDates(date);
+//  if(result == -1)
+//  {
+//    return true;
+//  }
+//  else if(result == 1)
+//  {
+//    return false;
+//  }
+//  else if(theTime < date.getTime())
+//  {
+//    return true;
+//  }
+//  else 
+//    return false;
+// }
+
+//More efficient and maintainable version of the above
+bool Date::operator<(const Date& otherDate) const 
 {
- int result = CompareDates(date);
- if(result == -1)
- {
+ if (_year < otherDate.getYear())
    return true;
- }
- else if(result == 1)
- {
+
+ if (_year > otherDate.getYear())
    return false;
- }
- else if(theTime < date.getTime())
- {
+
+ if (_month < otherDate.getMonth())
    return true;
- }
- else 
+
+ if (_month > otherDate.getMonth())
    return false;
+
+ if (_day < otherDate.getDay())
+   return true;
+
+ if (_day > otherDate.getDay())
+   return false;
+
+ return theTime < otherDate.getTime();
 }
 
-bool Date::operator>(const Date& date) const
+// bool Date::operator>(const Date& date) const
+// {
+//  int result = CompareDates(date);
+//  if(result == 1)
+//  {
+//    return true;
+//  }
+//  else if(result == -1)
+//  {
+//    return false;
+//  }
+//  else if(theTime > date.getTime())
+//  {
+//    return true;
+//  }
+//  else 
+//    return false;
+// }
+
+//More efficient and maintainable version of the above
+bool Date::operator>(const Date& otherDate) const 
 {
- int result = CompareDates(date);
- if(result == 1)
- {
-   return true;
- }
- else if(result == -1)
- {
-   return false;
- }
- else if(theTime > date.getTime())
- {
-   return true;
- }
- else 
-   return false;
+    if (_year > otherDate.getYear())
+        return true;
+
+    if (_year < otherDate.getYear())
+        return false;
+
+    if (_month > otherDate.getMonth())
+        return true;
+
+    if (_month < otherDate.getMonth())
+        return false;
+
+    if (_day > otherDate.getDay())
+        return true;
+
+    if (_day < otherDate.getDay())
+        return false;
+
+    return theTime > otherDate.getTime();
 }
+
 
 bool Date::operator <=(const Date& date) const
  {
@@ -137,23 +201,20 @@ int Date::CompareDates(const Date& otherDate) const
    return 0;
 }
 
-Date& Date::operator+=(int days)
+Date& Date::operator+=(int days) 
 {
-   days += _day;
-   if(days > DaysInMonth())
-   {
-    _day -= DaysInMonth();
-   }
-   if(_month < 12)
-   {
-      _month ++;
-   }
-   else
-   {
-      _month = 1;
-      _year++;
-   }
-   return *this;
+    _day += days;
+    while (_day > DaysInMonth(_month)) 
+    {
+        _day -= DaysInMonth(_month);
+        _month++;
+        if (_month > 12) 
+        {
+            _month = 1;
+            _year++;
+        }
+    }
+    return *this;
 }
 
  std::string Date::ConvertIntToString(int integer) const
@@ -191,7 +252,7 @@ std::string Date::ToLongDate() const
                break;
       case 6 : longDate += "Juin";
                break;
-      case 7 : longDate += "Juiller";
+      case 7 : longDate += "Juillet";
                break;
       case 8 : longDate += "Aout";
                break;
@@ -224,18 +285,27 @@ bool Date::IsLeapYear() const
       return false;
 }
 
-int Date::DaysInMonth() const
+bool Date::IsLeapYear(int year) const
 {
-   switch(_month)
+   if(year % 4 == 0 && year % 100 != 0)
+   {
+      return true;
+   }
+   else if(year % 4 == 0 && year % 100 == 0 && year % 400 == 0)
+   {
+      return true;
+   }
+   else 
+      return false;
+}
+
+int Date::DaysInMonth(int month) const
+{
+   switch(month)
    {
       case 1 : return 31;
                break;
-      case 2 : if(IsLeapYear())
-               {
-                  return 29;
-               }
-               else 
-                  return 28;
+      case 2 : return IsLeapYear() ? 29 : 28;
                break;
       case 3 : return 31;
                break;
@@ -257,8 +327,41 @@ int Date::DaysInMonth() const
                break;
       case 12 : return 31;
                break;
-      default:
-             return 30;
+      default: 
+            throw std::invalid_argument("Invalid month");
+   }
+}
+
+int Date::DaysInMonth(int month, int year) const
+{
+   switch(month)
+   {
+      case 1 : return 31;
+               break;
+      case 2 : return IsLeapYear(year) ? 29 : 28;
+               break;
+      case 3 : return 31;
+               break;
+      case 4 : return 30;
+               break;
+      case 5 : return 31;
+               break;
+      case 6 : return 30;
+               break;
+      case 7 : return 31;
+               break;
+      case 8 : return 31;
+               break;
+      case 9 : return 30;
+               break;
+      case 10 : return 31;
+               break;
+      case 11 : return 30;
+               break;
+      case 12 : return 31;
+               break;
+      default: 
+            throw std::invalid_argument("Invalid month");
    }
 }
 
@@ -268,17 +371,18 @@ std::ostream& operator<<(std::ostream& os, const Date& date)
    return os;
 }
 
-std::istream& operator >>(std::istream& is,Date& date)
-{
-   int month;
-   int year;
-   int day;
-   char slash;
-   is>>day>>slash>>month>>slash>>year;
-   date.setDay(day);
-   date.setMonth(month);
-   date.setYear(year);
-   return is;
+std::istream& operator >>(std::istream& is, Date& date) {
+    int month, year, day;
+    char slash;
+    is >> day >> slash >> month >> slash >> year;
+    if (year < 0 || month < 1 || month > 12 || day < 1 || day > date.DaysInMonth(month, year)) {
+        is.setstate(std::ios::failbit); // et the failbit
+        return is;
+    }
+    date.setDay(day);
+    date.setMonth(month);
+    date.setYear(year);
+    return is;
 }
 
 void Date::DisplayDate() const 

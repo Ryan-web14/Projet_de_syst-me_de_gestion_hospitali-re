@@ -1,20 +1,18 @@
-#ifndef __APPOINTMENT__
-#define __APPOINTMENT__
+#pragma once
 
 
 #include <random>
 #include <vector>
-#include "patient.hpp"
-#include "date.hpp"
 #include <vector>
 #include <fstream>
 #include <iostream>
 #include <algorithm>
-#include "numberGenerator.hpp"
 #include <locale>
 #include <iomanip>
 #include <memory>
-
+#include "patient.hpp"
+#include "date.hpp" 
+#include "numberGenerator.hpp"
 
 
 class Appointment
@@ -59,4 +57,3 @@ Date _date;
 static NumberGenerator _numberGenerator;
 
 };
-#endif

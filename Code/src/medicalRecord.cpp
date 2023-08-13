@@ -73,6 +73,21 @@ void MedicalRecord::RemoveChronicMedication(std::string ChronicMedication)
   _chronicMedications.erase(std::remove(_chronicMedications.begin(), _chronicMedications.end(), ChronicMedication), _chronicMedications.end());
 }
 
+void MedicalRecord::RemoveDoctorAppointment(std::shared_ptr<Appointment> appointment, std::shared_ptr<Doctor> doctor)
+{
+    auto it = std::remove_if(std::begin(_doctorAppointmentList),std::end(_doctorAppointmentList),
+    [&appointment,&doctor](std::shared_ptr<DoctorAppointment> doctorAppointment){return doctorAppointment->getAppointment() == appointment && doctorAppointment->getDoctor() == doctor;});
+
+    if(it != std::end(_doctorAppointmentList))
+    {
+        _doctorAppointmentList.erase(it);
+    }
+    else
+    {
+        throw std::runtime_error("Pas de rendez-vous de docteur");
+    }
+}
+
 void MedicalRecord::DisplayAppointmentList() const
 {
   std::cout << "\n\033[1;35m========================================\033[0m\n";
@@ -294,3 +309,4 @@ std::vector<std::shared_ptr<DoctorAppointment>> MedicalRecord::getDoctorAppointm
 {
   return _doctorAppointmentList;
 }
+

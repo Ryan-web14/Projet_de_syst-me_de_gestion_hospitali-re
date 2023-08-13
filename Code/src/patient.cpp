@@ -187,6 +187,12 @@ std::string Patient::getPhoneNumber() const
     return _phone_number;
 }
 
+MedicalRecord Patient::getMedicalRecord() const
+{
+    return _medicalRecord;
+}
+
+//operator
 bool Patient::operator ==(std::shared_ptr<Patient> patient) const
 {
     return _permanent_number == patient->getPermanentNumber();

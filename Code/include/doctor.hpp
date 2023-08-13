@@ -7,10 +7,13 @@
 #include <regex>
 #include <iostream>
 #include <vector>
-#include "birth.hpp"
 #include <algorithm>
 #include <iomanip>
+#include "birth.hpp"
+#include "specialty.hpp"
 #include "numberGenerator.hpp"
+#include "doctorSchedule.hpp"
+
 
 class Doctor
 {
@@ -19,7 +22,7 @@ public:
 //constructor by default
 Doctor() = default;
 //constructor with parameters which are the name, the surname, the adress and the phone number
-Doctor(std::string name, std::string surname,Birth birthday,std::string adress, std::string phone_number);
+Doctor(std::string name, std::string surname,Birth birthday,std::string adress,Specialty specialty ,std::string phone_number);
 //destructor
 ~Doctor() = default;
 
@@ -37,7 +40,7 @@ std::string getAddress() const;
 std::string getPhoneNumber() const;
 std::string getLicenseNumber() const;
 std::string getDoctorNumber() const;
-
+Specialty getSpecialty() const;
 
 //setter
 void setName(const std::string& name);
@@ -45,6 +48,7 @@ void setSurname(const std::string& surname);
 void setBirthday(Birth birthday);
 void setAddress(const std::string& address);
 void setPhoneNumber(const std::string& phone_number);
+void setSpecialty(Specialty specialty);
 
 //operator
 bool operator ==(std::shared_ptr<Doctor> other) const; //overload the operator == to compare two doctors
@@ -58,6 +62,6 @@ std::string _licenseNumber;
 Birth _birthday;
 std::string _doctorNumber;
 static NumberGenerator _numberGenerator;
-//Speciality _speciality;
+Specialty _speciality;
 static std::string NumberGenerator(int min, int max); //generate a new number
 };
