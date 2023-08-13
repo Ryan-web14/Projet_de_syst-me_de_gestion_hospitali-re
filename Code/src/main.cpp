@@ -71,7 +71,7 @@ try
   Date dateExam(2021,1,1);
   Times timeExam(17,30);
   dateExam.setTime(timeExam);
-  XrayExam xray(patient,doctor,"Xray",dateExam,"head","Xray","IRM",100000);
+  XrayExam xray(patient,doctor,"Xray",dateExam,100000,"head","Xray","IRM");
   xray.DisplayExam();
 }
 catch(const std::exception& e)

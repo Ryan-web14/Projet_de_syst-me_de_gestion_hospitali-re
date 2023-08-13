@@ -5,6 +5,7 @@
 #include <iostream>
 #include <memory>
 #include <algorithm>
+#include <map>
 #include "patient.hpp"
 #include "doctor.hpp"
 #include "appointment.hpp"
@@ -45,7 +46,7 @@ void AddPatientRecord(std::shared_ptr<PatientRecord> patientRecord); //add a pat
 void AddToDoctorSchedule(std::shared_ptr<Doctor> doctor, std::shared_ptr<Appointment> appointment); //add an appointment in the vector of appointment of the doctor
 void AddHospitalisation(std::shared_ptr<Hospitalisation> hospitalisation); //add an hospitalisation
 void DeleteHospitalisation(std::string& hospitalisationId);
-void AddBilling(std::shared_ptr<Billing> bill);
+void AddBill(std::shared_ptr<Billing> bill);
 //void DeleteFromDoctorSchedule(std::shared_ptr<Doctor> doctor, std::shared_ptr<Appointment> appointment); //delete an appointment in the vector of appointment of the doctor
 void AddTreatment(std::shared_ptr<Treatment> treatment,std::shared_ptr<Patient> patient); //add a treatment in the vector of treatment
 void DeleteTreatment(std::string treatmentId); //delete a treatment in the vector of treatment
@@ -63,6 +64,7 @@ void FindDoctorAppointment(std::shared_ptr<Appointment> appointment, std::shared
 void FindAppointment(const std::string& appointmentId);
 void FindPatientByName( std::string& name); //find a patient in the vector of patient by name
 void FindDoctorByName( std::string& name); //find a doctor in the vector of doctor by name
+void FindAppointmentByDate(Date &date);
 void SortAppointmentByDate(std::vector<std::shared_ptr<Appointment>>& appointmentList); //sort the appointment by date
 //methods to display information
 void DisplayPatientList() const; //display the list of patient
@@ -135,7 +137,7 @@ std::vector<std::shared_ptr<Treatment>> _treatmentList;
 std::vector<std::shared_ptr<BiologicalExam>> _biologicalExamList;
 std::vector<std::shared_ptr<XrayExam>> _xrayExamList;
 std::vector <std::shared_ptr<Hospitalisation>> _hospitalisationList;
-std::vector<std::shared_ptr<Billing>> _billingList;
-
+//std::vector<std::shared_ptr<Billing>> _billingList;
+std::map<std::string, Billing> _billingMap; 
 };
 

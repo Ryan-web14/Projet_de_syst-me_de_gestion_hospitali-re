@@ -23,7 +23,7 @@ class Billing
     //method
     void AddConsultation(std::shared_ptr<Consultation> consultation);
     void AddxrayExam(std::shared_ptr<XrayExam> xrayExam);
-    void AddbiologicalExam(std::shared_ptr<BiologicalExam> biologicalExam);
+    void AddBiologicalExam(std::shared_ptr<BiologicalExam> biologicalExam);
     void DisplayBilling() const; //display the billing
     void AddCharge();
 

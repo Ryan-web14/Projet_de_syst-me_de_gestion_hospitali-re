@@ -73,6 +73,20 @@ void Hospital::DeletePrescription(const std::string prescriptionId)
 void Hospital::AddConsultation(std::shared_ptr<Consultation> consultation)
 {
     _consultationList.push_back(consultation);
+    
+    auto patientId = consultation->getPatient()->getPermanentNumber();
+    auto it = _billingMap.find(patientId);
+
+    if(it == std::end(_billingMap))
+    {
+        std::shared_ptr<Billing> billing = std::make_shared<Billing>(consultation->getPatient());
+        billing->AddConsultation(consultation);
+        it = _billingMap.find(patientId);
+    }
+    else
+    {
+        it->second.AddConsultation(consultation);
+    }
 }
 
 void Hospital::DeleteConsultation(const std::string consultationId)
@@ -192,10 +206,27 @@ void Hospital::AddXrayExam(std::shared_ptr<XrayExam> xrayExam, std::shared_ptr<P
     auto patientFound = std::find_if(std::begin(_patientList), std::end(_patientList), [&patient](std::shared_ptr<Patient> pat)
                                      { return pat->getPermanentNumber() == patient->getPermanentNumber(); });
 
-    if(patientFound != std::end(_patientList))
+    if (patientFound != std::end(_patientList))
+
+    {
         _xrayExamList.push_back(xrayExam);
-    
-     for (const auto &record : _patientRecordList)
+
+        auto patientId = xrayExam->getPatient()->getPermanentNumber();
+        auto it = _billingMap.find(patientId);
+
+        if (it == std::end(_billingMap))
+        {
+            std::shared_ptr<Billing> billing = std::make_shared<Billing>(xrayExam->getPatient());
+            billing->AddxrayExam(xrayExam);
+            it = _billingMap.find(patientId);
+        }
+        else
+        {
+            it->second.AddxrayExam(xrayExam);
+        }
+    }
+
+    for (const auto &record : _patientRecordList)
     {
         if (patient == record->getPatient())
         {
@@ -226,7 +257,24 @@ void Hospital::AddBiologicalExam(std::shared_ptr<BiologicalExam> biologicalExam,
                                      { return pat->getPermanentNumber() == patient->getPermanentNumber(); });
 
     if(patientFound != std::end(_patientList))
-        _biologicalExamList.push_back(biologicalExam);
+        {
+
+         _biologicalExamList.push_back(biologicalExam);
+
+    auto patientId = biologicalExam->getPatient()->getPermanentNumber();
+    auto it = _billingMap.find(patientId);
+
+    if(it == std::end(_billingMap))
+    {
+        std::shared_ptr<Billing> billing = std::make_shared<Billing>(biologicalExam->getPatient());
+        billing->AddBiologicalExam(biologicalExam);
+        it = _billingMap.find(patientId);
+    }
+    else
+    {
+        it->second.AddBiologicalExam(biologicalExam);
+    }
+        }
     
      for (const auto &record : _patientRecordList)
     {
@@ -272,7 +320,9 @@ void Hospital::DeleteHospitalisation(std::string& hospitalisationId)
     {
         throw std::runtime_error("Examen biologique non trouve");
    }
+
 }
+
 
 // methods for displaying
 void Hospital::DisplayPatientList() const
@@ -392,6 +442,61 @@ void Hospital::DisplayAppointmentListForPatient(std::shared_ptr<Patient> patient
     else if (it != std::end(_patientList) && _appointmentList.empty())
     {
         std::cout << "Liste de rendez-vous vide" << std::endl;
+    }
+    else
+    {
+        throw std::runtime_error("Patient non trouve");
+    }
+}
+
+void Hospital::DisplayPatientBill(std::string patientId)
+{
+    auto it = _billingMap.find(patientId);
+
+    if (it != std::end(_billingMap))
+    {
+        it->second.DisplayBilling();
+    }
+    else
+    {
+        throw std::runtime_error("Patient non trouve");
+    }
+}
+
+void Hospital::DisplayPatientBillByName(std::string surname, std::string name)
+{
+    if (surname.empty() || name.empty())
+    {
+        throw std::length_error("Nom ou prenom vide");
+    }
+    else
+    {
+        surname[0] = std::toupper(surname[0]);
+        name[0] = std::toupper(name[0]);
+
+        for (std::size_t i = 1; i < surname.size(); ++i)
+        {
+            surname[i] = std::tolower(surname[i]);
+        }
+
+        for (std::size_t i = 1; i < name.size(); ++i)
+        {
+            name[i] = std::tolower(name[i]);
+        }
+    }
+
+    std::vector<std::shared_ptr<Patient>> patientList;
+
+    auto it = std::copy_if(std::begin(_patientList), std::end(_patientList), std::back_inserter(patientList),
+                           [&surname, &name](std::shared_ptr<Patient> patient)
+                           { return patient->getSurname() == surname && patient->getName() == name; });
+
+    if (!patientList.empty())
+    {
+        for (auto patient : patientList)
+        {
+            DisplayPatientBill(patient->getPermanentNumber());
+        }
     }
     else
     {
@@ -576,6 +681,26 @@ void Hospital::FindDoctorByName(std::string &name)
     for (const auto doctor : doctorList)
     {
         doctor->DisplayDoctor();
+    }
+}
+
+void Hospital::FindAppointmentByDate(Date &date)
+{
+    std::vector<std::shared_ptr<Appointment>> appointmentList;
+
+    auto it = std::copy_if(std::begin(_appointmentList), std::end(_appointmentList), std::back_inserter(appointmentList),
+                           [&date](std::shared_ptr<Appointment> appointment)
+                           { return appointment->getAppointmentDate() == date; });
+
+    if (appointmentList.empty())
+    {
+        throw std::runtime_error("Rendez-vous non trouve");
+        return;
+    }
+
+    for (const auto appointment : appointmentList)
+    {
+        appointment->DisplayAppointment();
     }
 }
 
