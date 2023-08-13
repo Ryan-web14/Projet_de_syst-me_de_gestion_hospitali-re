@@ -6,7 +6,6 @@
 #include <stdexcept>
 #include <algorithm>
 #include <map>
-#include "Patient.hpp"
 #include "doctorAppointment.hpp"
 #include "numberGenerator.hpp"
 

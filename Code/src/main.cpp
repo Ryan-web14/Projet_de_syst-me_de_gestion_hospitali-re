@@ -46,12 +46,12 @@
 //     return 0;
 // }
 
-#include "hospital.hpp"
+#include "patient.hpp"
 #include <memory>
 
 int main()
 {
-  Hospital hopital("Hopital de la Tour");
+
 
   Birth birth;
   birth.day = 1;

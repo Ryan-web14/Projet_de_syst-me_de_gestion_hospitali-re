@@ -1,5 +1,7 @@
 #include "patient.hpp"
+
 #include <locale>
+
 
 // initialization of the static variable
 NumberGenerator Patient::_numberGenerator(100000, 999999);
@@ -185,11 +187,6 @@ std::string Patient::getAdress() const
 std::string Patient::getPhoneNumber() const
 {
     return _phone_number;
-}
-
-MedicalRecord Patient::getMedicalRecord() const
-{
-    return _medicalRecord;
 }
 
 //operator

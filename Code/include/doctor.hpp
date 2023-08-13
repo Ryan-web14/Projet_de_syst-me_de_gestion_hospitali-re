@@ -12,7 +12,8 @@
 #include "birth.hpp"
 #include "specialty.hpp"
 #include "numberGenerator.hpp"
-#include "doctorSchedule.hpp"
+
+
 
 
 class Doctor

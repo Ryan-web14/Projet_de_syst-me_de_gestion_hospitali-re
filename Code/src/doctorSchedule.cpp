@@ -15,9 +15,21 @@ void DoctorSchedule::AddAppointment(std::shared_ptr<Appointment> appointment)
 
 void DoctorSchedule::DeleteAppointment(std::shared_ptr<Appointment> appointment)
 {
-  _appointmentList.erase(std::remove(std::begin(_appointmentList), std::end(_appointmentList),appointment));
-  return;
+  auto it  = remove_if(std::begin(_appointmentList),std::end(_appointmentList),
+    [appointment](std::shared_ptr<DoctorAppointment> doctorAppointment)
+    {
+        return doctorAppointment->getAppointment() == appointment;
+    });
+if(it != std::end(_appointmentList))
+{
+    _appointmentList.erase(it,std::end(_appointmentList));
 }
+else
+{
+    std::cout << "\033[1;31mThe appointment is not in the schedule.\033[0m\n";
+}
+}
+
 
 bool DoctorSchedule::IsAvalaible(const Date& date) const
 {
