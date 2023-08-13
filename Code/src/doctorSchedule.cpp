@@ -42,6 +42,7 @@ bool DoctorSchedule::IsAvalaible(const Date& date) const
    }
    return true;
 }
+
 void DoctorSchedule::DisplaySchedule() const
 {
     std::cout << "\n\033[1;35m========================================\033[0m\n";
@@ -50,7 +51,7 @@ void DoctorSchedule::DisplaySchedule() const
 
     if (_appointmentList.empty())
     {
-        std::cout << "\033[1;31mThe schedule is currently empty.\033[0m\n";
+        std::cout << "\033[1;31mL'emploi du temps est vide.\033[0m\n";
     }
     else
     {
@@ -63,4 +64,13 @@ void DoctorSchedule::DisplaySchedule() const
     std::cout << "\033[1;35m========================================\033[0m\n";
 }
 
+//getter
+std::shared_ptr<Doctor> DoctorSchedule::getDoctor() const
+{
+    return _doctor;
+}
 
+std::vector<std::shared_ptr<DoctorAppointment>> DoctorSchedule:: getAppointmentList() const
+{
+  return _appointmentList;
+}

@@ -1,11 +1,11 @@
-#include "hospital.hpp"	
+#include "hospital.hpp"
 
 Hospital::Hospital(std::string name)
 {
     _name = name;
 }
 
-//methods
+// methods
 void Hospital::AddPatient(std::shared_ptr<Patient> patient)
 {
     _patientList.push_back(patient);
@@ -13,11 +13,11 @@ void Hospital::AddPatient(std::shared_ptr<Patient> patient)
     _patientRecordList.push_back(std::make_shared<PatientRecord>(patientRecord));
 }
 
-void Hospital::DeletePatient(const std::string& patientId)
+void Hospital::DeletePatient(const std::string &patientId)
 {
-    auto it = std::remove_if(std::begin(_patientList),std::end(_patientList),[&patientId](std::shared_ptr<Patient> patient)
-    {return patient->getPermanentNumber() == patientId;});
-    if(it != std::end(_patientList))
+    auto it = std::remove_if(std::begin(_patientList), std::end(_patientList), [&patientId](std::shared_ptr<Patient> patient)
+                             { return patient->getPermanentNumber() == patientId; });
+    if (it != std::end(_patientList))
     {
         _patientList.erase(it);
     }
@@ -39,9 +39,9 @@ void Hospital::AddDoctor(std::shared_ptr<Doctor> doctor)
 
 void Hospital::DeleteDoctor(const std::string doctorId)
 {
-    auto it = std::remove_if(std::begin(_doctorList),std::end(_doctorList),[&doctorId](std::shared_ptr<Doctor> doctor)
-    {return doctor->getPhoneNumber() == doctorId;});
-    if(it != std::end(_doctorList))
+    auto it = std::remove_if(std::begin(_doctorList), std::end(_doctorList), [&doctorId](std::shared_ptr<Doctor> doctor)
+                             { return doctor->getPhoneNumber() == doctorId; });
+    if (it != std::end(_doctorList))
     {
         _doctorList.erase(it);
     }
@@ -58,9 +58,9 @@ void Hospital::AddPrescription(std::shared_ptr<Prescription> prescription)
 
 void Hospital::DeletePrescription(const std::string prescriptionId)
 {
-    auto it = std::remove_if(std::begin(_prescriptionList),std::end(_prescriptionList),[&prescriptionId](std::shared_ptr<Prescription> prescription)
-    {return prescription->getPrescriptionId() == prescriptionId;});
-    if(it != std::end(_prescriptionList))
+    auto it = std::remove_if(std::begin(_prescriptionList), std::end(_prescriptionList), [&prescriptionId](std::shared_ptr<Prescription> prescription)
+                             { return prescription->getPrescriptionId() == prescriptionId; });
+    if (it != std::end(_prescriptionList))
     {
         _prescriptionList.erase(it);
     }
@@ -77,9 +77,9 @@ void Hospital::AddConsultation(std::shared_ptr<Consultation> consultation)
 
 void Hospital::DeleteConsultation(const std::string consultationId)
 {
-    auto it = std::remove_if(std::begin(_consultationList),std::end(_consultationList),[&consultationId](std::shared_ptr<Consultation> consultation)
-    {return consultation->getConsultationId() == consultationId;});
-    if(it != std::end(_consultationList))
+    auto it = std::remove_if(std::begin(_consultationList), std::end(_consultationList), [&consultationId](std::shared_ptr<Consultation> consultation)
+                             { return consultation->getConsultationId() == consultationId; });
+    if (it != std::end(_consultationList))
     {
         _consultationList.erase(it);
     }
@@ -96,9 +96,9 @@ void Hospital::AddAppointment(std::shared_ptr<Appointment> appointment)
 
 void Hospital::DeleteAppointment(const std::string appointmentId)
 {
-    auto it = std::remove_if(std::begin(_appointmentList),std::end(_appointmentList),[&appointmentId](std::shared_ptr<Appointment> appointment)
-    {return appointment->getAppointmentId() == appointmentId;});
-    if(it != std::end(_appointmentList))
+    auto it = std::remove_if(std::begin(_appointmentList), std::end(_appointmentList), [&appointmentId](std::shared_ptr<Appointment> appointment)
+                             { return appointment->getAppointmentId() == appointmentId; });
+    if (it != std::end(_appointmentList))
     {
         _appointmentList.erase(it);
     }
@@ -115,10 +115,11 @@ void Hospital::AddDoctorAppointment(std::shared_ptr<DoctorAppointment> doctorApp
 
 void Hospital::DeleteDoctorAppointment(std::shared_ptr<Appointment> appointment, std::shared_ptr<Doctor> doctor)
 {
-    auto it = std::remove_if(std::begin(_doctorAppointmentList),std::end(_doctorAppointmentList),
-    [&appointment,&doctor](std::shared_ptr<DoctorAppointment> doctorAppointment){return doctorAppointment->getAppointment() == appointment && doctorAppointment->getDoctor() == doctor;});
+    auto it = std::remove_if(std::begin(_doctorAppointmentList), std::end(_doctorAppointmentList),
+                             [&appointment, &doctor](std::shared_ptr<DoctorAppointment> doctorAppointment)
+                             { return doctorAppointment->getAppointment() == appointment && doctorAppointment->getDoctor() == doctor; });
 
-    if(it != std::end(_doctorAppointmentList))
+    if (it != std::end(_doctorAppointmentList))
     {
         _doctorAppointmentList.erase(it);
     }
@@ -128,83 +129,226 @@ void Hospital::DeleteDoctorAppointment(std::shared_ptr<Appointment> appointment,
     }
 }
 
+void Hospital::AddToDoctorSchedule(std::shared_ptr<Doctor> doctor, std::shared_ptr<Appointment> appointment)
+{
+    auto doctorFound = std::find_if(std::begin(_doctorList), std::end(_doctorList), [&doctor](std::shared_ptr<Doctor> doc)
+                                    { return doc->getDoctorNumber() == doctor->getDoctorNumber(); });
 
-// void Hospital::AddToDoctorSchedule(std::shared_ptr<Doctor> doctor, std::shared_ptr<Appointment> appointment)
-// {
-//     auto it = std::find_if(std::begin(_doctorList), std::end(_doctorList),[&doctor](std::shared_ptr<Doctor> doc)
-//     {return doc->getDoctorNumber() == doctor->getDoctorNumber();});
+    auto appointmentFound = std::find_if(std::begin(_appointmentList), std::end(_appointmentList), [&appointment](std::shared_ptr<Appointment> app)
+                                         { return app->getAppointmentId() == appointment->getAppointmentId(); });
 
+    if (doctorFound != std::end(_doctorList) && appointmentFound != std::end(_appointmentList))
+    {
+        DoctorSchedule doctorSchedule(doctor);
+        doctorSchedule.AddAppointment(appointment);
+        _doctorScheduleList.push_back(doctorSchedule);
+    }
+    else
+    {
+        throw std::runtime_error("Docteur ou rendez-vous non trouve");
+    }
+}
 
-// }
+void Hospital::AddTreatment(std::shared_ptr<Treatment> treatment, std::shared_ptr<Patient> patient)
+{
+    auto patientFound = std::find_if(std::begin(_patientList), std::end(_patientList), [&patient](std::shared_ptr<Patient> pat)
+                                     { return pat->getPermanentNumber() == patient->getPermanentNumber(); });
 
-//methods for displaying
+    if (patientFound != std::end(_patientList))
+    {
+        _treatmentList.push_back(treatment);
+    }
+    else
+    {
+        throw std::runtime_error("Patient non trouve");
+    }
+    for (const auto &record : _patientRecordList)
+    {
+        if (patient == record->getPatient())
+        {
+            record->AddTreatement(treatment);
+            return;
+        }
+    }
+}
+
+void Hospital::DeleteTreatment(std::string treatmentId)
+{
+    auto it = std::remove_if(std::begin(_treatmentList), std::end(_treatmentList), [&treatmentId](std::shared_ptr<Treatment> treat)
+                             { return treat->getTreatmentId() == treatmentId; });
+
+    if (it != std::end(_treatmentList))
+    {
+        _treatmentList.erase(it);
+    }
+    else
+    {
+        throw std::runtime_error("Traitement non trouve");
+    }
+}
+
+void Hospital::AddXrayExam(std::shared_ptr<XrayExam> xrayExam, std::shared_ptr<Patient> patient)
+{
+    auto patientFound = std::find_if(std::begin(_patientList), std::end(_patientList), [&patient](std::shared_ptr<Patient> pat)
+                                     { return pat->getPermanentNumber() == patient->getPermanentNumber(); });
+
+    if(patientFound != std::end(_patientList))
+        _xrayExamList.push_back(xrayExam);
+    
+     for (const auto &record : _patientRecordList)
+    {
+        if (patient == record->getPatient())
+        {
+            record->AddXrayExam(xrayExam);
+            return;
+        }
+    }
+}
+
+void Hospital::DeleteXrayExam(std::string xrayExamId)
+{
+    auto it = std::remove_if(std::begin(_xrayExamList), std::end(_xrayExamList), [&xrayExamId](std::shared_ptr<XrayExam> xray)
+                             { return xray->getExamId() == xrayExamId; });
+
+    if (it != std::end(_xrayExamList))
+    {
+        _xrayExamList.erase(it);
+    }
+    else
+    {
+        throw std::runtime_error("Examen radiologique non trouve");
+    }
+}
+
+void Hospital::AddBiologicalExam(std::shared_ptr<BiologicalExam> biologicalExam, std::shared_ptr<Patient> patient)
+{
+    auto patientFound = std::find_if(std::begin(_patientList), std::end(_patientList), [&patient](std::shared_ptr<Patient> pat)
+                                     { return pat->getPermanentNumber() == patient->getPermanentNumber(); });
+
+    if(patientFound != std::end(_patientList))
+        _biologicalExamList.push_back(biologicalExam);
+    
+     for (const auto &record : _patientRecordList)
+    {
+        if (patient == record->getPatient())
+        {
+            record->AddBiologicalExam(biologicalExam);
+            return;
+        }
+    }
+}
+
+void Hospital::DeleteBiologicalExam(std::string biologicalExamId)
+{
+    auto it = std::remove_if(std::begin(_biologicalExamList), std::end(_biologicalExamList), [&biologicalExamId](std::shared_ptr<BiologicalExam> bio)
+                             { return bio->getExamId() == biologicalExamId; });
+
+    if (it != std::end(_biologicalExamList))
+    {
+        _biologicalExamList.erase(it);
+    }
+    else
+    {
+        throw std::runtime_error("Examen biologique non trouve");
+    }
+}
+
+//  void Hospital::DeleteFromDoctorSchedule(std::shared_ptr<Doctor> doctor, std::shared_ptr<Appointment> appointment)
+//  {
+//         auto doctorFound = std::find_if(std::begin(_doctorList), std::end(_doctorList),[&doctor](std::shared_ptr<Doctor> doc)
+//         {return doc->getDoctorNumber() == doctor->getDoctorNumber();});
+
+//         auto appointmentFound = std::find_if(std::begin(_appointmentList), std::end(_appointmentList),[&appointment](std::shared_ptr<Appointment> app)
+//         {return app->getAppointmentId() == appointment->getAppointmentId();});
+
+//         if(doctorFound != std::end(_doctorList) && appointmentFound != std::end(_appointmentList))
+//         {
+//             auto it = std::remove_if(std::begin(_doctorScheduleList), std::end(_doctorScheduleList),[&doctor](std::shared_ptr<DoctorSchedule> doctorSchedule)
+//             {return doctorSchedule->getDoctor()->getDoctorNumber() == doctor->getDoctorNumber() ;});
+
+//             if(it != std::end(_doctorScheduleList))
+//             {
+//                 _doctorScheduleList.erase(it);
+//             }
+//             else
+//             {
+//                 throw std::runtime_error("Rendez-vous docteur non trouve");
+//             }
+//         }
+//         else
+//         {
+//             throw std::runtime_error("Docteur ou rendez-vous non trouve");
+//         }
+//  }
+
+// methods for displaying
 void Hospital::DisplayPatientList() const
 {
     std::cout << "Liste des patient " << std::endl;
-    for(auto patient : _patientList)
+    for (auto patient : _patientList)
     {
-       patient->DisplayPatient();
+        patient->DisplayPatient();
     }
 }
 
 void Hospital::DisplayDoctorList() const
 {
     std::cout << "Liste des docteurs " << std::endl;
-    for(auto doctor : _doctorList)
+    for (auto doctor : _doctorList)
     {
-       doctor->DisplayDoctor();
+        doctor->DisplayDoctor();
     }
 }
 
 void Hospital::DisplayAppointmentList() const
 {
     std::cout << "Liste des rendez-vous" << std::endl;
-    for(auto appointment : _appointmentList)
+    for (auto appointment : _appointmentList)
     {
-       appointment->DisplayAppointment();
+        appointment->DisplayAppointment();
     }
 }
 
 void Hospital::DisplayConsultationList() const
 {
     std::cout << "Liste de consultation" << std::endl;
-    for(auto consultation : _consultationList)
+    for (auto consultation : _consultationList)
     {
-       consultation->DisplayConsultationWithDiagnosis();
+        consultation->DisplayConsultationWithDiagnosis();
     }
 }
 
 void Hospital::DisplayPrescriptionList(std::shared_ptr<Patient> patient) const
 {
     std::cout << "Prescription list: " << std::endl;
-    for(auto prescription : _prescriptionList)
+    for (auto prescription : _prescriptionList)
     {
-        if(prescription->getPatient() == patient)
-       prescription->DisplayPrescription();
+        if (prescription->getPatient() == patient)
+            prescription->DisplayPrescription();
     }
 }
 
 void Hospital::DisplayDoctorAppointmentList(std::shared_ptr<Doctor> doctor) const
 {
-    auto it = find_if(std::begin(_doctorList),std::end(_doctorList), [&doctor](std::shared_ptr<Doctor> doc)
-    {return doc->getDoctorNumber() == doctor->getDoctorNumber();});
+    auto it = find_if(std::begin(_doctorList), std::end(_doctorList), [&doctor](std::shared_ptr<Doctor> doc)
+                      { return doc->getDoctorNumber() == doctor->getDoctorNumber(); });
 
-    if(it != std::end(_doctorList))
+    if (it != std::end(_doctorList))
     {
         std::cout << "Liste de rendez-vous des docteurs" << std::endl;
-        for(auto doctorAppointment : _doctorAppointmentList)
+        for (auto doctorAppointment : _doctorAppointmentList)
         {
-            if(doctorAppointment->getDoctor() == doctor)
+            if (doctorAppointment->getDoctor() == doctor)
             {
                 doctorAppointment->DisplayDoctorAppointment();
             }
         }
     }
-    else if(it !=std::end(_doctorList) && _doctorAppointmentList.empty())
+    else if (it != std::end(_doctorList) && _doctorAppointmentList.empty())
     {
         std::cout << "Liste de rendez-vous des docteurs vide" << std::endl;
     }
-    else 
+    else
     {
         throw std::runtime_error("Docteur non trouve");
     }
@@ -212,25 +356,25 @@ void Hospital::DisplayDoctorAppointmentList(std::shared_ptr<Doctor> doctor) cons
 
 void Hospital::DisplayConsultationForDoctor(std::shared_ptr<Doctor> doctor) const
 {
-    auto it = find_if(std::begin(_doctorList),std::end(_doctorList), [&doctor](std::shared_ptr<Doctor> doc)
-    {return doc->getDoctorNumber() == doctor->getDoctorNumber();});
+    auto it = find_if(std::begin(_doctorList), std::end(_doctorList), [&doctor](std::shared_ptr<Doctor> doc)
+                      { return doc->getDoctorNumber() == doctor->getDoctorNumber(); });
 
-    if(it != std::end(_doctorList))
+    if (it != std::end(_doctorList))
     {
         std::cout << "Consultation list: " << std::endl;
-        for(auto consultation : _consultationList)
+        for (auto consultation : _consultationList)
         {
-            if(consultation->getDoctor() == doctor)
+            if (consultation->getDoctor() == doctor)
             {
                 consultation->DisplayConsultationWithDiagnosis();
             }
         }
     }
-    else if(it !=std::end(_doctorList) && _consultationList.empty())
+    else if (it != std::end(_doctorList) && _consultationList.empty())
     {
         std::cout << " Liste de consultation vide " << std::endl;
     }
-    else 
+    else
     {
         throw std::runtime_error("Docteur non trouve");
     }
@@ -238,37 +382,38 @@ void Hospital::DisplayConsultationForDoctor(std::shared_ptr<Doctor> doctor) cons
 
 void Hospital::DisplayAppointmentListForPatient(std::shared_ptr<Patient> patient) const
 {
-    auto it = find_if(std::begin(_patientList),std::end(_patientList), [&patient](std::shared_ptr<Patient> pat)
-    {return pat->getPermanentNumber() == patient->getPermanentNumber();});
+    auto it = find_if(std::begin(_patientList), std::end(_patientList), [&patient](std::shared_ptr<Patient> pat)
+                      { return pat->getPermanentNumber() == patient->getPermanentNumber(); });
 
-    if(it != std::end(_patientList))
+    if (it != std::end(_patientList))
     {
         std::cout << "Liste des rendez-vous: " << std::endl;
-        for(auto appointment : _appointmentList)
+        for (auto appointment : _appointmentList)
         {
-            if(appointment->getPatient() == patient)
+            if (appointment->getPatient() == patient)
             {
                 appointment->DisplayAppointment();
             }
         }
     }
-    else if(it !=std::end(_patientList) && _appointmentList.empty())
+    else if (it != std::end(_patientList) && _appointmentList.empty())
     {
         std::cout << "Liste de rendez-vous vide" << std::endl;
     }
-    else 
+    else
     {
         throw std::runtime_error("Patient non trouve");
     }
 }
 
-//more specific methods
-void Hospital::FindPatient(const std::string& patientId) 
+// more specific methods
+void Hospital::FindPatient(const std::string &patientId)
 {
     auto it = std::find_if(std::begin(_patientList), std::end(_patientList),
-    [&patientId](std::shared_ptr<Patient> patient){return patient->getPermanentNumber() == patientId;});
+                           [&patientId](std::shared_ptr<Patient> patient)
+                           { return patient->getPermanentNumber() == patientId; });
 
-    if(it != std::end(_patientList))
+    if (it != std::end(_patientList))
     {
         (*it)->DisplayPatient();
     }
@@ -278,12 +423,13 @@ void Hospital::FindPatient(const std::string& patientId)
     }
 }
 
-std::shared_ptr<Patient> Hospital::FindPatientById(const std::string& patientId)
+std::shared_ptr<Patient> Hospital::FindPatientById(const std::string &patientId)
 {
     auto it = std::find_if(std::begin(_patientList), std::end(_patientList),
-    [&patientId](std::shared_ptr<Patient> patient){return patient->getPermanentNumber() == patientId;});
+                           [&patientId](std::shared_ptr<Patient> patient)
+                           { return patient->getPermanentNumber() == patientId; });
 
-    if(it != std::end(_patientList))
+    if (it != std::end(_patientList))
     {
         return *it;
     }
@@ -293,10 +439,10 @@ std::shared_ptr<Patient> Hospital::FindPatientById(const std::string& patientId)
 
 void Hospital::FindDoctor(const std::string doctorId)
 {
-    auto it = std::find_if(std::begin(_doctorList),std::end(_doctorList),[&doctorId](std::shared_ptr<Doctor> doctor)
-    {return doctor->getDoctorNumber() == doctorId;});
+    auto it = std::find_if(std::begin(_doctorList), std::end(_doctorList), [&doctorId](std::shared_ptr<Doctor> doctor)
+                           { return doctor->getDoctorNumber() == doctorId; });
 
-    if(it != std::end(_doctorList))
+    if (it != std::end(_doctorList))
     {
         (*it)->DisplayDoctor();
     }
@@ -304,15 +450,14 @@ void Hospital::FindDoctor(const std::string doctorId)
     {
         throw std::runtime_error("Docteur non trouve");
     }
-    
 }
 
-void Hospital::FindPrescription(const std::string& prescriptionId)
+void Hospital::FindPrescription(const std::string &prescriptionId)
 {
-    auto it = std::find_if(std::begin(_prescriptionList),std::end(_prescriptionList),[&prescriptionId](std::shared_ptr<Prescription> prescription)
-    {return prescription->getPrescriptionId() == prescriptionId;});
+    auto it = std::find_if(std::begin(_prescriptionList), std::end(_prescriptionList), [&prescriptionId](std::shared_ptr<Prescription> prescription)
+                           { return prescription->getPrescriptionId() == prescriptionId; });
 
-    if(it != std::end(_prescriptionList))
+    if (it != std::end(_prescriptionList))
     {
         (*it)->DisplayPrescription();
     }
@@ -322,12 +467,12 @@ void Hospital::FindPrescription(const std::string& prescriptionId)
     }
 }
 
-void Hospital::FindConsultation(const std::string& consultationId)
+void Hospital::FindConsultation(const std::string &consultationId)
 {
-    auto it = std::find_if(std::begin(_consultationList),std::end(_consultationList),[&consultationId](std::shared_ptr<Consultation> consultation)
-    {return consultation->getConsultationId() == consultationId;});
+    auto it = std::find_if(std::begin(_consultationList), std::end(_consultationList), [&consultationId](std::shared_ptr<Consultation> consultation)
+                           { return consultation->getConsultationId() == consultationId; });
 
-    if(it != std::end(_consultationList))
+    if (it != std::end(_consultationList))
     {
         (*it)->DisplayConsultationWithDiagnosis();
     }
@@ -337,12 +482,12 @@ void Hospital::FindConsultation(const std::string& consultationId)
     }
 }
 
-void Hospital::FindAppointment(const std::string& appointmentId)
+void Hospital::FindAppointment(const std::string &appointmentId)
 {
-    auto it = std::find_if(std::begin(_appointmentList),std::end(_appointmentList),[&appointmentId](std::shared_ptr<Appointment> appointment)
-    {return appointment->getAppointmentId() == appointmentId;});
+    auto it = std::find_if(std::begin(_appointmentList), std::end(_appointmentList), [&appointmentId](std::shared_ptr<Appointment> appointment)
+                           { return appointment->getAppointmentId() == appointmentId; });
 
-    if(it != std::end(_appointmentList))
+    if (it != std::end(_appointmentList))
     {
         (*it)->DisplayAppointment();
     }
@@ -352,21 +497,18 @@ void Hospital::FindAppointment(const std::string& appointmentId)
     }
 }
 
-void Hospital::SortAppointmentByDate(std::vector<std::shared_ptr<Appointment>>& appointments)
+void Hospital::SortAppointmentByDate(std::vector<std::shared_ptr<Appointment>> &appointments)
 {
     std::sort(appointments.begin(), appointments.end(), [](const std::shared_ptr<Appointment> &a1, const std::shared_ptr<Appointment> &a2)
-    {
-        return a1->getAppointmentDate() < a2->getAppointmentDate();
-    });
+              { return a1->getAppointmentDate() < a2->getAppointmentDate(); });
 }
-
 
 void Hospital::FindDoctorAppointment(std::shared_ptr<Appointment> appointment, std::shared_ptr<Doctor> doctor)
 {
-    auto it = std::find_if(std::begin(_doctorAppointmentList),std::end(_doctorAppointmentList),[&appointment,&doctor](std::shared_ptr<DoctorAppointment> doctorAppointment)
-    {return doctorAppointment->getAppointment() == appointment && doctorAppointment->getDoctor() == doctor;});
-    
-    if(it != std::end(_doctorAppointmentList))
+    auto it = std::find_if(std::begin(_doctorAppointmentList), std::end(_doctorAppointmentList), [&appointment, &doctor](std::shared_ptr<DoctorAppointment> doctorAppointment)
+                           { return doctorAppointment->getAppointment() == appointment && doctorAppointment->getDoctor() == doctor; });
+
+    if (it != std::end(_doctorAppointmentList))
     {
         (*it)->DisplayDoctorAppointment();
     }
@@ -376,94 +518,95 @@ void Hospital::FindDoctorAppointment(std::shared_ptr<Appointment> appointment, s
     }
 }
 
-void Hospital::FindPatientByName(std::string& name)
+void Hospital::FindPatientByName(std::string &name)
 {
-    if(name.empty())
+    if (name.empty())
     {
         throw std::length_error("Nom vide");
     }
     else
     {
-        name[0] =std::toupper(name[0]);
+        name[0] = std::toupper(name[0]);
 
-        for(std::size_t i = 1; i < name.size(); ++i)
+        for (std::size_t i = 1; i < name.size(); ++i)
         {
             name[i] = std::tolower(name[i]);
         }
     }
     std::vector<std::shared_ptr<Patient>> patientList;
 
-    auto it = std::copy_if(std::begin(_patientList), std::end(_patientList),std::back_inserter(patientList),
-    [&name](std::shared_ptr<Patient> patient){return patient->getName() == name;});
+    auto it = std::copy_if(std::begin(_patientList), std::end(_patientList), std::back_inserter(patientList),
+                           [&name](std::shared_ptr<Patient> patient)
+                           { return patient->getName() == name; });
 
     std::cout << "Resultat de la recherche: " << std::endl;
 
-    if(patientList.empty())
+    if (patientList.empty())
     {
         throw std::runtime_error("Patient non trouve");
         return;
     }
 
-    for(const auto patient : patientList)
+    for (const auto patient : patientList)
     {
         patient->DisplayPatient();
     }
 }
 
-void Hospital::FindDoctorByName(std::string& name)
+void Hospital::FindDoctorByName(std::string &name)
 {
-     if(name.empty())
+    if (name.empty())
     {
         throw std::length_error("Nom vide");
     }
     else
     {
-        name[0] =std::toupper(name[0]);
+        name[0] = std::toupper(name[0]);
 
-        for(std::size_t i = 1; i < name.size(); ++i)
+        for (std::size_t i = 1; i < name.size(); ++i)
         {
             name[i] = std::tolower(name[i]);
         }
     }
 
     std::vector<std::shared_ptr<Doctor>> doctorList;
-    auto it = std::copy_if(std::begin(_doctorList), std::end(_doctorList),std::back_inserter(_doctorList),
-    [&name](std::shared_ptr<Doctor> doctor){return doctor->getName() == name;});
+    auto it = std::copy_if(std::begin(_doctorList), std::end(_doctorList), std::back_inserter(_doctorList),
+                           [&name](std::shared_ptr<Doctor> doctor)
+                           { return doctor->getName() == name; });
 
-   if(doctorList.empty())
-   {
-       throw std::runtime_error("Docteur non trouve");
-       return;
-   }
+    if (doctorList.empty())
+    {
+        throw std::runtime_error("Docteur non trouve");
+        return;
+    }
 
-   for(const auto doctor : doctorList)
-   {
-       doctor->DisplayDoctor();
-   }
+    for (const auto doctor : doctorList)
+    {
+        doctor->DisplayDoctor();
+    }
 }
 
-//methods link to the medicalRecord
-void Hospital::AddAppointmentToPatientRecord(std::string& patientId, std::shared_ptr<Appointment> appointment)
+// methods link to the medicalRecord
+void Hospital::AddAppointmentToPatientRecord(std::string &patientId, std::shared_ptr<Appointment> appointment)
 {
     auto patient = FindPatientById(patientId);
-    for(const auto record : _patientRecordList)
+    for (const auto record : _patientRecordList)
     {
-      if(patient == record->getPatient())
-      {
-        record->AddAppointment(appointment);
-        return;
-      }
+        if (patient == record->getPatient())
+        {
+            record->AddAppointment(appointment);
+            return;
+        }
     }
     throw std::runtime_error("Patient non trouve");
-
 }
 
-void Hospital::AddConsultationToPatientRecord(std::string& patientId, std::shared_ptr<Consultation> consultation)
+void Hospital::AddConsultationToPatientRecord(std::string &patientId, std::shared_ptr<Consultation> consultation)
 {
     auto patient = FindPatientById(patientId);
-    for(const auto& record : _patientRecordList)
+    for (const auto &record : _patientRecordList)
     {
-        if(patient == record->getPatient())
+        if (patient == record->getPatient())
         {
             record->AddConsultation(consultation);
             return;
@@ -472,10 +615,10 @@ void Hospital::AddConsultationToPatientRecord(std::string& patientId, std::share
     throw std::runtime_error("Patient non trouve");
 }
 
-void Hospital::AddPrescriptionToPatientRecord(std::string& patientId, std::shared_ptr<Prescription> prescription)
+void Hospital::AddPrescriptionToPatientRecord(std::string &patientId, std::shared_ptr<Prescription> prescription)
 {
     auto patient = FindPatientById(patientId);
-    for (const auto& record : _patientRecordList)
+    for (const auto &record : _patientRecordList)
     {
         if (patient == record->getPatient())
         {
@@ -486,10 +629,10 @@ void Hospital::AddPrescriptionToPatientRecord(std::string& patientId, std::share
     throw std::runtime_error("Patient non trouve");
 }
 
-void Hospital::AddChronicDiseaseToPatientRecord(std::string& patientId, std::string& chronicDisease)
+void Hospital::AddChronicDiseaseToPatientRecord(std::string &patientId, std::string &chronicDisease)
 {
     auto patient = FindPatientById(patientId);
-    for (const auto& record : _patientRecordList)
+    for (const auto &record : _patientRecordList)
     {
         if (patient == record->getPatient())
         {
@@ -500,10 +643,10 @@ void Hospital::AddChronicDiseaseToPatientRecord(std::string& patientId, std::str
     throw std::runtime_error("Patient non trouve");
 }
 
-void Hospital::AddChronicMedicationToPatientRecord(std::string& patientId, std::string& chronicMedication)
+void Hospital::AddChronicMedicationToPatientRecord(std::string &patientId, std::string &chronicMedication)
 {
     auto patient = FindPatientById(patientId);
-    for (const auto& record : _patientRecordList)
+    for (const auto &record : _patientRecordList)
     {
         if (patient == record->getPatient())
         {
@@ -514,10 +657,10 @@ void Hospital::AddChronicMedicationToPatientRecord(std::string& patientId, std::
     throw std::runtime_error("Patient non trouve");
 }
 
-void Hospital::AddAllergyToPatientRecord(std::string& patientId, std::string& allergy)
+void Hospital::AddAllergyToPatientRecord(std::string &patientId, std::string &allergy)
 {
     auto patient = FindPatientById(patientId);
-    for (const auto& record : _patientRecordList)
+    for (const auto &record : _patientRecordList)
     {
         if (patient == record->getPatient())
         {
@@ -528,10 +671,10 @@ void Hospital::AddAllergyToPatientRecord(std::string& patientId, std::string& al
     throw std::runtime_error("Patient non trouve");
 }
 
-void Hospital::AddDoctorAppointmentToPatientRecord(std::string& patientId, std::shared_ptr<DoctorAppointment> DoctorAppointment)
+void Hospital::AddDoctorAppointmentToPatientRecord(std::string &patientId, std::shared_ptr<DoctorAppointment> DoctorAppointment)
 {
     auto patient = FindPatientById(patientId);
-    for (const auto& record : _patientRecordList)
+    for (const auto &record : _patientRecordList)
     {
         if (patient == record->getPatient())
         {
@@ -542,10 +685,10 @@ void Hospital::AddDoctorAppointmentToPatientRecord(std::string& patientId, std::
     throw std::runtime_error("Patient non trouve");
 }
 
-void Hospital::DeleteAppointmentToPatientRecord(std::string& patientId, std::shared_ptr<Appointment> appointment)
+void Hospital::DeleteAppointmentToPatientRecord(std::string &patientId, std::shared_ptr<Appointment> appointment)
 {
     auto patient = FindPatientById(patientId);
-    for (const auto& record : _patientRecordList)
+    for (const auto &record : _patientRecordList)
     {
         if (patient == record->getPatient())
         {
@@ -556,10 +699,10 @@ void Hospital::DeleteAppointmentToPatientRecord(std::string& patientId, std::sha
     throw std::runtime_error("Patient non trouve");
 }
 
-void Hospital::DeleteConsultationToPatientRecord(std::string& patientId, std::shared_ptr<Consultation> consultation)
+void Hospital::DeleteConsultationToPatientRecord(std::string &patientId, std::shared_ptr<Consultation> consultation)
 {
     auto patient = FindPatientById(patientId);
-    for (const auto& record : _patientRecordList)
+    for (const auto &record : _patientRecordList)
     {
         if (patient == record->getPatient())
         {
@@ -570,10 +713,10 @@ void Hospital::DeleteConsultationToPatientRecord(std::string& patientId, std::sh
     throw std::runtime_error("Patient non trouve");
 }
 
-void Hospital::DeletePrescriptionToPatientRecord(std::string& patientId, std::shared_ptr<Prescription> prescription)
+void Hospital::DeletePrescriptionToPatientRecord(std::string &patientId, std::shared_ptr<Prescription> prescription)
 {
     auto patient = FindPatientById(patientId);
-    for (const auto& record : _patientRecordList)
+    for (const auto &record : _patientRecordList)
     {
         if (patient == record->getPatient())
         {
@@ -584,10 +727,10 @@ void Hospital::DeletePrescriptionToPatientRecord(std::string& patientId, std::sh
     throw std::runtime_error("Patient non trouve");
 }
 
-void Hospital::DeleteDoctorAppointmentToPatientRecord(std::string& patientId, std::shared_ptr<Appointment> Appointment, std::shared_ptr<Doctor> doctor)
+void Hospital::DeleteDoctorAppointmentToPatientRecord(std::string &patientId, std::shared_ptr<Appointment> Appointment, std::shared_ptr<Doctor> doctor)
 {
     auto patient = FindPatientById(patientId);
-    for (const auto& record : _patientRecordList)
+    for (const auto &record : _patientRecordList)
     {
         if (patient == record->getPatient())
         {
@@ -597,11 +740,11 @@ void Hospital::DeleteDoctorAppointmentToPatientRecord(std::string& patientId, st
     }
     throw std::runtime_error("Patient non trouve");
 }
-void Hospital::DisplayPatientRecord(std::string& patientId) 
+void Hospital::DisplayPatientRecord(std::string &patientId)
 {
     auto patient = FindPatientById(patientId);
 
-   for (const auto& record : _patientRecordList)
+    for (const auto &record : _patientRecordList)
     {
         if (patient == record->getPatient())
         {

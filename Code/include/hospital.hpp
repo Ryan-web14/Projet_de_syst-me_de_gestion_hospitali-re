@@ -40,8 +40,14 @@ void DeleteAppointment(const std::string appointmentId); //delete an appointment
 void AddDoctorAppointment(std::shared_ptr<DoctorAppointment> doctorApppointment); //add a doctorAppointment in the vector of doctorAppointment
 void DeleteDoctorAppointment(std::shared_ptr<Appointment> appointment, std::shared_ptr<Doctor> doctor); //delete a doctorAppointment in the vector of doctorAppointment
 void AddPatientRecord(std::shared_ptr<PatientRecord> patientRecord); //add a patientRecord in the vector of patientRecord
-//void AddToDoctorSchedule(std::shared_ptr<Doctor> doctor, std::shared_ptr<Appointment> appointment); //add an appointment in the vector of appointment of the doctor
+void AddToDoctorSchedule(std::shared_ptr<Doctor> doctor, std::shared_ptr<Appointment> appointment); //add an appointment in the vector of appointment of the doctor
 //void DeleteFromDoctorSchedule(std::shared_ptr<Doctor> doctor, std::shared_ptr<Appointment> appointment); //delete an appointment in the vector of appointment of the doctor
+void AddTreatment(std::shared_ptr<Treatment> treatment,std::shared_ptr<Patient> patient); //add a treatment in the vector of treatment
+void DeleteTreatment(std::string treatmentId); //delete a treatment in the vector of treatment
+void AddXrayExam(std::shared_ptr<XrayExam> xray, std::shared_ptr<Patient> patient); //add a xray exam in the vector of xray exam
+void DeleteXrayExam(std::string xrayId); //delete a xray exam in the vector of xray exam
+void AddBiologicalExam(std::shared_ptr<BiologicalExam> biologicalExam, std::shared_ptr<Patient> patient); //add a biological exam in the vector of biological exam
+void DeleteBiologicalExam(std::string bioExamId); //delete a biological exam in the vector of biological exam
 //more specifics methods
 void FindPatient(const std::string& patientId); //find a patient in the vector of patient by id
 std::shared_ptr<Patient> FindPatientById(const std::string& patientId); //complementary method to be use in another function
@@ -63,6 +69,7 @@ void DisplayDoctorAppointmentList(std::shared_ptr<Doctor> doctor) const; //displ
 void DisplayDoctorSchedule(std::shared_ptr<Doctor> doctor) const; //Display the schedule of a specific doctor 
 void DisplayAppointmentListForPatient(std::shared_ptr<Patient> patient) const; //display the list of appointment
 void DisplayConsultationForDoctor(std::shared_ptr<Doctor> doctor) const;
+void DisplayConsultationForPatient(std::string surname, std::string name);
 //method link to the medicalRecord and patientRecord
 void AddAppointmentToPatientRecord(std::string& patientId, std::shared_ptr<Appointment> appointment); //add an appointment in the vector of appointment of the patient in PatientRecord
 void AddConsultationToPatientRecord(std::string& patientId, std::shared_ptr<Consultation> consultation); //add a consultation in the vector of consultation of the patient in PatientRecord
@@ -116,7 +123,10 @@ std::vector<std::shared_ptr<Appointment>> _appointmentList;
 std::vector<std::shared_ptr<DoctorAppointment>> _doctorAppointmentList;
 std::vector<std::shared_ptr<Consultation>> _consultationList;
 std::vector<std::shared_ptr<Prescription>> _prescriptionList;
-std::vector<DoctorSchedule> _doctorSchedule;
+std::vector<DoctorSchedule> _doctorScheduleList;
+std::vector<std::shared_ptr<Treatment>> _treatmentList;
+std::vector<std::shared_ptr<BiologicalExam>> _biologicalExamList;
+std::vector<std::shared_ptr<XrayExam>> _xrayExamList;
 
 };
 
