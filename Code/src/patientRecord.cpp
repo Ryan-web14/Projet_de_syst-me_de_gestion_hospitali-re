@@ -92,7 +92,7 @@ void PatientRecord::RemoveTreatment(std::string treatmentId)
 
 void PatientRecord::AddXrayExam(std::shared_ptr<XrayExam> xray)
 {
-    _medicalRecord->
+    _medicalRecord->AddXrayExam();
 }
 
 void PatientRecord::RemoveXrayExam(std::string xrayId)
