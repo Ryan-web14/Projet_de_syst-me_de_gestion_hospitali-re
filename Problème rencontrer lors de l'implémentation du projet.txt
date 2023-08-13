@@ -1,1 +1,29 @@
 Un des problèmes rencontrer lors de l'implémentation du projet était les inclusions circulaires
+
+//  void Hospital::DeleteFromDoctorSchedule(std::shared_ptr<Doctor> doctor, std::shared_ptr<Appointment> appointment)
+//  {
+//         auto doctorFound = std::find_if(std::begin(_doctorList), std::end(_doctorList),[&doctor](std::shared_ptr<Doctor> doc)
+//         {return doc->getDoctorNumber() == doctor->getDoctorNumber();});
+
+//         auto appointmentFound = std::find_if(std::begin(_appointmentList), std::end(_appointmentList),[&appointment](std::shared_ptr<Appointment> app)
+//         {return app->getAppointmentId() == appointment->getAppointmentId();});
+
+//         if(doctorFound != std::end(_doctorList) && appointmentFound != std::end(_appointmentList))
+//         {
+//             auto it = std::remove_if(std::begin(_doctorScheduleList), std::end(_doctorScheduleList),[&doctor](std::shared_ptr<DoctorSchedule> doctorSchedule)
+//             {return doctorSchedule->getDoctor()->getDoctorNumber() == doctor->getDoctorNumber() ;});
+
+//             if(it != std::end(_doctorScheduleList))
+//             {
+//                 _doctorScheduleList.erase(it);
+//             }
+//             else
+//             {
+//                 throw std::runtime_error("Rendez-vous docteur non trouve");
+//             }
+//         }
+//         else
+//         {
+//             throw std::runtime_error("Docteur ou rendez-vous non trouve");
+//         }
+//  }

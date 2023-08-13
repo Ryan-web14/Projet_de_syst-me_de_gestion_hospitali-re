@@ -13,6 +13,7 @@
 #include "prescription.hpp"
 #include "consultation.hpp"
 #include "patientRecord.hpp"
+#include "hospitalisation.hpp"
 
 
 
@@ -41,6 +42,8 @@ void AddDoctorAppointment(std::shared_ptr<DoctorAppointment> doctorApppointment)
 void DeleteDoctorAppointment(std::shared_ptr<Appointment> appointment, std::shared_ptr<Doctor> doctor); //delete a doctorAppointment in the vector of doctorAppointment
 void AddPatientRecord(std::shared_ptr<PatientRecord> patientRecord); //add a patientRecord in the vector of patientRecord
 void AddToDoctorSchedule(std::shared_ptr<Doctor> doctor, std::shared_ptr<Appointment> appointment); //add an appointment in the vector of appointment of the doctor
+void AddHospitalisation(std::shared_ptr<Hospitalisation> hospitalisation); //add an hospitalisation
+void DeleteHospitalisation(std::string& hospitalisationId);
 //void DeleteFromDoctorSchedule(std::shared_ptr<Doctor> doctor, std::shared_ptr<Appointment> appointment); //delete an appointment in the vector of appointment of the doctor
 void AddTreatment(std::shared_ptr<Treatment> treatment,std::shared_ptr<Patient> patient); //add a treatment in the vector of treatment
 void DeleteTreatment(std::string treatmentId); //delete a treatment in the vector of treatment
@@ -127,6 +130,7 @@ std::vector<DoctorSchedule> _doctorScheduleList;
 std::vector<std::shared_ptr<Treatment>> _treatmentList;
 std::vector<std::shared_ptr<BiologicalExam>> _biologicalExamList;
 std::vector<std::shared_ptr<XrayExam>> _xrayExamList;
+std::vector <std::shared_ptr<Hospitalisation>> _hospitalisationList;
 
 };
 

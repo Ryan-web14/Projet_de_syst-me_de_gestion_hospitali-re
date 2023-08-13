@@ -238,6 +238,7 @@ void Hospital::AddBiologicalExam(std::shared_ptr<BiologicalExam> biologicalExam,
     }
 }
 
+
 void Hospital::DeleteBiologicalExam(std::string biologicalExamId)
 {
     auto it = std::remove_if(std::begin(_biologicalExamList), std::end(_biologicalExamList), [&biologicalExamId](std::shared_ptr<BiologicalExam> bio)
@@ -253,33 +254,25 @@ void Hospital::DeleteBiologicalExam(std::string biologicalExamId)
     }
 }
 
-//  void Hospital::DeleteFromDoctorSchedule(std::shared_ptr<Doctor> doctor, std::shared_ptr<Appointment> appointment)
-//  {
-//         auto doctorFound = std::find_if(std::begin(_doctorList), std::end(_doctorList),[&doctor](std::shared_ptr<Doctor> doc)
-//         {return doc->getDoctorNumber() == doctor->getDoctorNumber();});
+void Hospital::AddHospitalisation(std::shared_ptr<Hospitalisation> hospitalisation)
+{
+ _hospitalisationList.push_back(hospitalisation);
+}
 
-//         auto appointmentFound = std::find_if(std::begin(_appointmentList), std::end(_appointmentList),[&appointment](std::shared_ptr<Appointment> app)
-//         {return app->getAppointmentId() == appointment->getAppointmentId();});
+void Hospital::DeleteHospitalisation(std::string& hospitalisationId)
+{
+    auto it = std::remove_if(std::begin(_hospitalisationList), std::end(_hospitalisationList), [&hospitalisationId](std::shared_ptr<Hospitalisation> hosp)
+                             { return hosp->getHospitalisationId() == hospitalisationId; });
 
-//         if(doctorFound != std::end(_doctorList) && appointmentFound != std::end(_appointmentList))
-//         {
-//             auto it = std::remove_if(std::begin(_doctorScheduleList), std::end(_doctorScheduleList),[&doctor](std::shared_ptr<DoctorSchedule> doctorSchedule)
-//             {return doctorSchedule->getDoctor()->getDoctorNumber() == doctor->getDoctorNumber() ;});
-
-//             if(it != std::end(_doctorScheduleList))
-//             {
-//                 _doctorScheduleList.erase(it);
-//             }
-//             else
-//             {
-//                 throw std::runtime_error("Rendez-vous docteur non trouve");
-//             }
-//         }
-//         else
-//         {
-//             throw std::runtime_error("Docteur ou rendez-vous non trouve");
-//         }
-//  }
+    if (it != std::end(_hospitalisationList))
+    {
+        _hospitalisationList.erase(it);
+    }
+    else
+    {
+        throw std::runtime_error("Examen biologique non trouve");
+   }
+}
 
 // methods for displaying
 void Hospital::DisplayPatientList() const
