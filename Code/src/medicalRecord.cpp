@@ -88,6 +88,70 @@ void MedicalRecord::RemoveDoctorAppointment(std::shared_ptr<Appointment> appoint
     }
 }
 
+void MedicalRecord::AddTreatement(std::shared_ptr<Treatment> treatment)
+{
+  _treatmentList.push_back(treatment);
+}
+
+void MedicalRecord::RemoveTreatment(std::string treatmentId)
+{
+  auto it = std::remove_if(std::begin(_treatmentList), std::end(_treatmentList), [&treatmentId](const std::shared_ptr<Treatment>treatment)
+  {return treatment->getTreatmentId() == treatmentId;});
+
+  if(it != std::end(_treatmentList))
+  {
+    _treatmentList.erase(it, std::end(_treatmentList));
+    std::cout << "Suppression effectue" << std::endl;
+  }
+  else 
+  {
+    throw std::runtime_error("Traitement non trouve"); 
+  }
+}
+
+void MedicalRecord::AddXrayExam(std::shared_ptr<XrayExam> xray)
+{
+  _xrayExamList.push_back(xray);
+}
+
+void MedicalRecord::RemoveXrayExam(std::string xrayId)
+{
+  auto it = std::remove_if(std::begin(_xrayExamList), std::end(_xrayExamList), [&xrayId](const std::shared_ptr<XrayExam>xrayexam)
+  {return xrayexam->getExamId() == xrayId;});
+
+  if(it != std::end(_xrayExamList))
+  {
+    _xrayExamList.erase(it, std::end(_xrayExamList));
+    std::cout << "Suppression effectue" << std::endl;
+  }
+  else 
+  {
+    throw std::runtime_error("Examen non trouve"); 
+  }
+}
+
+void MedicalRecord::AddBiologicalExam(std::shared_ptr<BiologicalExam> biologicalExam)
+{
+  _biologicalExamList.push_back(biologicalExam);
+}
+
+void MedicalRecord::RemoveBiologicalExam(std::string bioExamId)
+{
+  auto it = std::remove_if(std::begin(_biologicalExamList), std::end(_biologicalExamList), [&bioExamId](const std::shared_ptr<BiologicalExam>bioexam)
+  {return bioexam->getExamId() == bioExamId;});
+
+  if(it != std::end(_biologicalExamList))
+  {
+    _biologicalExamList.erase(it, std::end(_biologicalExamList));
+    std::cout << "Suppression effectue" << std::endl;
+  }
+  else 
+  {
+    throw std::runtime_error("Examen biologique non trouve"); 
+  }
+}
+
+
 void MedicalRecord::DisplayAppointmentList() const
 {
   std::cout << "\n\033[1;35m========================================\033[0m\n";
@@ -168,6 +232,65 @@ void MedicalRecord::DisplayDoctorAppointmentList() const
   std::cout << "\033[1;35m========================================\033[0m\n";
 }
 
+void MedicalRecord::DisplayTreatmentList() const
+{
+  std::cout << "\n\033[1;35m========================================\033[0m\n";
+  std::cout << "\033[1;36m            LISTE DES TRAITEMENTS\033[0m\n";
+  std::cout << "\033[1;35m========================================\033[0m\n";
+
+  if (_treatmentList.empty())
+  {
+    std::cout << "Pas de traitement." << std::endl;
+  }
+  else
+  {
+    for (const auto &treatment : _treatmentList)
+    {
+      treatment->DisplayTreatment();
+    }
+  }
+  std::cout << "\033[1;35m========================================\033[0m\n";
+}
+
+void MedicalRecord::DisplayXrayExamList() const
+{
+  std::cout << "\n\033[1;35m========================================\033[0m\n";
+  std::cout << "\033[1;36m            LISTE DES EXAMENS RADIOLOGIQUES\033[0m\n";
+  std::cout << "\033[1;35m========================================\033[0m\n";
+
+  if (_xrayExamList.empty())
+  {
+    std::cout << "Pas d'examen radiologique." << std::endl;
+  }
+  else
+  {
+    for (const auto &xrayExam : _xrayExamList)
+    {
+      xrayExam->DisplayExam();
+    }
+  }
+  std::cout << "\033[1;35m========================================\033[0m\n";
+}
+
+void MedicalRecord::DisplayBiologicalExamList() const
+{
+  std::cout << "\n\033[1;35m========================================\033[0m\n";
+  std::cout << "\033[1;36m            LISTE DES EXAMENS BIOLOGIQUES\033[0m\n";
+  std::cout << "\033[1;35m========================================\033[0m\n";
+
+  if (_biologicalExamList.empty())
+  {
+    std::cout << "Pas d'examen biologique." << std::endl;
+  }
+  else
+  {
+    for (const auto &bioExam : _biologicalExamList)
+    {
+      bioExam->DisplayExam();
+    }
+  }
+  std::cout << "\033[1;35m========================================\033[0m\n";
+}
 
 void MedicalRecord::DisplayMedicalRecord() const
 {

@@ -34,6 +34,12 @@ public:
     void RemoveChronicMedication(std::string chronicMedication);
     void AddAllergy(std::string allergy);
     void RemoveAllergy(std::string allergy);
+    void AddTreatement(std::shared_ptr<Treatment> treatment);
+    void RemoveTreatment(std::string treatmentId);
+    void AddXrayExam(std::shared_ptr<XrayExam> xray);
+    void RemoveXrayExam(std::string xrayId);
+    void AddBiologicalExam(std::shared_ptr<BiologicalExam> biologicalExam);
+    void RemoveBiologicalExam(std::string bioExamId);
     void DisplayMedicalRecord() const;
 
 private:

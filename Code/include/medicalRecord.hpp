@@ -9,6 +9,7 @@
 #include "prescription.hpp"
 #include "doctorAppointment.hpp"
 #include "numberGenerator.hpp"
+#include "treatment.hpp"
 
 
 class MedicalRecord
@@ -35,6 +36,18 @@ void AddChronicDisease(std::string ChronicDisease);
 void AddChronicMedication(std::string ChronicMedication);
 //add allergy
 void AddAllergy(std::string Allergy);
+//add treatment
+void AddTreatement(std::shared_ptr<Treatment> treatment);
+//remove treatment
+void RemoveTreatment(std::string treatmentId);
+//add xray exam
+void AddXrayExam(std::shared_ptr<XrayExam> xray);
+//remove xray exam
+void RemoveXrayExam(std::string xrayId);
+//add biological exam
+void AddBiologicalExam(std::shared_ptr<BiologicalExam> biologicalExam);
+//remove bio exam
+void RemoveBiologicalExam(std::string bioExamId);
 //remove allergy
 void RemoveAllergy(std::string Allergy);
 //remove chronic medication
@@ -59,7 +72,13 @@ void DisplayConsultationList() const;
 void DisplayPrescriptionList() const;
 //display all the doctor appointment of the patient
 void DisplayDoctorAppointmentList() const;
-
+//display treatment
+void DisplayTreatmentList() const;
+//display xray exam
+void DisplayXrayExamList() const;
+//display bio exam
+void DisplayBiologicalExamList() const;
+ 
 //getters and setters
 //getter
 std::string getMedicalRecordId() const;
@@ -70,6 +89,7 @@ std::vector<std::shared_ptr<Appointment>> getAppointmentList() const;
 std::vector<std::shared_ptr<Consultation>> getConsultationList() const;
 std::vector<std::shared_ptr<Prescription>> getPrescriptionList() const;
 std::vector<std::shared_ptr<DoctorAppointment>> getDoctorAppointmentList() const;
+std::vector<std::shared_ptr<Treatment>> getTreatmentList() const;
 //implémentation à réaliser 
 //setter
 // void setAllergies(std::vector<std::string> allergies);
@@ -90,4 +110,8 @@ std::vector<std::shared_ptr<Appointment>> _appointmentList; //all the appointmen
 std::vector<std::shared_ptr<Consultation>> _consultationList; //all the consultation of the patient
 std::vector<std::shared_ptr<Prescription>> _prescriptionList; //all the prescription of the patient
 std::vector<std::shared_ptr<DoctorAppointment>> _doctorAppointmentList; //all the doctor appointment of the patient
+std::vector<std::shared_ptr<Treatment>>_treatmentList;
+std::vector<std::shared_ptr<XrayExam>> _xrayExamList;
+std::vector<std::shared_ptr<BiologicalExam>> _biologicalExamList;
+
 };

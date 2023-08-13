@@ -80,6 +80,37 @@ void PatientRecord::RemoveChronicMedication(std::string chronicMedication)
     _medicalRecord->RemoveChronicMedication(chronicMedication);
 }
 
+void PatientRecord::AddTreatement(std::shared_ptr<Treatment> treatment)
+{
+    _medicalRecord->AddTreatement(treatment);
+}
+
+void PatientRecord::RemoveTreatment(std::string treatmentId)
+{
+    _medicalRecord->RemoveTreatment(treatmentId);
+}
+
+void PatientRecord::AddXrayExam(std::shared_ptr<XrayExam> xray)
+{
+    _medicalRecord->
+}
+
+void PatientRecord::RemoveXrayExam(std::string xrayId)
+{
+    _medicalRecord->RemoveXrayExam(xrayId);
+}
+
+void PatientRecord::AddBiologicalExam(std::shared_ptr<BiologicalExam> biologicalExam)
+{
+    _medicalRecord->AddBiologicalExam(biologicalExam);
+}
+
+void PatientRecord::RemoveBiologicalExam(std::string bioExamId)
+{
+    _medicalRecord->RemoveBiologicalExam(bioExamId);
+}
+
+
 //getter
 std::shared_ptr<Patient> PatientRecord::getPatient()
 {
