@@ -6,19 +6,20 @@
 #include <limits>
 #include <memory>
 #include <algorithm>
-using namespace menu;
 
-
-
-void menu::DisplayMainMenu()
+namespace menu
+{
+     Hospital hospital ;
+    void DisplayMainMenu()
 {
     int choice;
-    // do
-    // {
+
+    do
+     {
         
        
         std::cout << std::string(40, '=') << "\n";
-std::cout << "Welcome to " << hospital.getName() << "\n";
+std::cout <<"Bienvenue a ngoyo" << "\n";
 std::cout << std::string(40, '-') << "\n";
 std::cout << std::left << std::setw(5) << "1." << "Patient\n";
 std::cout << std::left << std::setw(5) << "2." << "Doctor\n";
@@ -33,43 +34,42 @@ std::cout << std::string(40, '=') << "\n";
 std::cout << "Enter your choice: ";
 std::cin >> choice;
 
-    //     switch (choice)
-    //     {
-    //         case 1:
-    //             PatientMenu();
-    //             break;
-    //         case 2:
-    //             DoctorMenu();
-    //             break;
-    //         case 3:
-    //             ConsultationMenu();
-    //             break;
-    //         case 4:
-    //             AppointmentMenu();
-    //             break;
-    //         case 5:
-    //             TreatmentMenu();
-    //             break;
-    //         case 6:
-    //             PrescriptionMenu();
-    //             break;
-    //         case 7:
-    //             ExamMenu();
-    //             break;
-    //         case 8:
-    //             HospitalisationMenu();
-    //             break;
-    //         case 9:
-    //             std::cout << "Thank you for using our application" << std::endl;
-    //             break;
-    //         default:
-    //             std::cout << "Invalid choice" << std::endl;
-    //             break;
-    //     }
-    // } while (choice != 9);
+        switch (choice)
+        {
+            case 1:
+                PatientMenu();
+          
+            // case 2:
+            //     DoctorMenu();
+            //     break;
+            // case 3:
+            //     ConsultationMenu();
+            //     break;
+            // case 4:
+            //     AppointmentMenu();
+            //     break;
+            // case 5:
+            //     TreatmentMenu();
+            //     break;
+            // case 6:
+            //     PrescriptionMenu();
+            //     break;
+            // case 7:
+            //     ExamMenu();
+            //     break;
+            // case 8:
+            //     HospitalisationMenu();
+            //     break;
+            // case 9:
+            //     std::cout << "Thank you for using our application" << std::endl;
+            //     break;
+            default:
+                std::cout << "Invalid choice" << std::endl;
+                break;
+        }
+    } while (choice != 9);
 }
-
-void menu::PatientMenu()
+void PatientMenu()
 {
 std::string choice;
 do
@@ -374,7 +374,8 @@ if (ss >> choice_int && ss.eof())
         break;
     case 3:
         // DeletePatient
-        bool success = false;
+       {
+         bool success = false;
         while (!success)
         {
             std::cout << std::setw(40) << std::setfill('=') << "" << '\n';
@@ -400,11 +401,12 @@ if (ss >> choice_int && ss.eof())
             std::cout << std::setw(40) << std::setfill('=') << "" << '\n';
             std::cin.clear();
         }
+       }
 
         break;
     case 4:
         // DisplayPatient
-        
+
         break;
     case 5:
         // DisplayAllPatients();
@@ -439,4 +441,8 @@ else
 
 }
 
+
+
+
+}
 

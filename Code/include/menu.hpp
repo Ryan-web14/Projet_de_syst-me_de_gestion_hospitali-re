@@ -4,7 +4,7 @@
 
 namespace menu
 {
-  Hospital hospital("Hopital General de Ngoyo");
+ extern Hospital hospital;
     void DisplayMainMenu();
     void PatientMenu();
     void DoctorMenu();
