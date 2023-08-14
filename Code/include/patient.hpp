@@ -40,7 +40,7 @@ std::string getAdress() const;
 std::string getPhoneNumber() const;
 
 //setter
-void setName(const std::string& name) ;
+void setName(std::string& name) ;
 void setSurname(const std::string& surname) ;
 void setBirthday(Birth birthday) ;
 void setAdress(const std::string& adress) ;

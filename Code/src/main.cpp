@@ -46,37 +46,46 @@
 //     return 0;
 // }
 
-#include "xrayExam.hpp"
-#include <memory>
+// #include "xrayExam.hpp"
+// #include <memory>
 
-int main()
-{
+// int main()
+// {
 
 
-  Birth birth;
-  birth.day = 1;
-  birth.month = 1;
-  birth.year = 2000;
-  std::shared_ptr<Patient> patient = std::make_shared<Patient>("Jean", "Dupont", birth, "Rue de la gare 1", "064568525");
+//   Birth birth;
+//   birth.day = 1;
+//   birth.month = 1;
+//   birth.year = 2000;
+//   std::shared_ptr<Patient> patient = std::make_shared<Patient>("Jean", "Dupont", birth, "Rue de la gare 1", "064568525");
 
-  patient->DisplayPatient();
-try
-{
- Birth birth2;
-  birth2.day = 2;
-  birth2.month = 2;
-  birth2.year = 1990;
-  Specialty specialty("ORL", "Oto-rhino-laryngologie");
-  std::shared_ptr<Doctor> doctor = std::make_shared<Doctor>("Alain", "bikindou",birth2,"12 rue mpandou auguste", specialty,"066643440");
-  Date dateExam(2021,1,1);
-  Times timeExam(17,30);
-  dateExam.setTime(timeExam);
-  XrayExam xray(patient,doctor,"Xray",dateExam,100000,"head","Xray","IRM");
-  xray.DisplayExam();
-}
-catch(const std::exception& e)
-{
-  std::cout << e.what();
-}
+//   patient->DisplayPatient();
+// try
+// {
+//  Birth birth2;
+//   birth2.day = 2;
+//   birth2.month = 2;
+//   birth2.year = 1990;
+//   Specialty specialty("ORL", "Oto-rhino-laryngologie");
+//   std::shared_ptr<Doctor> doctor = std::make_shared<Doctor>("Alain", "bikindou",birth2,"12 rue mpandou auguste", specialty,"066643440");
+//   Date dateExam(2021,1,1);
+//   Times timeExam(17,30);
+//   dateExam.setTime(timeExam);
+//   XrayExam xray(patient,doctor,"Xray",dateExam,100000,"head","Xray","IRM");
+//   xray.DisplayExam();
+// }
+// catch(const std::exception& e)
+// {
+//   std::cout << e.what();
+// }
   
+// }
+
+#include <iostream>
+#include "menu.hpp"
+using namespace menu;
+
+int main() {
+   DisplayMainMenu();
+
 }

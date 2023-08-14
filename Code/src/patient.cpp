@@ -30,7 +30,7 @@ Patient::Patient(std::string name, std::string surname,Birth birthday, std::stri
     {
         throw std::runtime_error("Invalid surname");
     } 
-    else if (!name.empty()) 
+     if (!name.empty()) 
     {
         name [0] = std::toupper(name[0]); //capitalize the first letter of the name
         
@@ -38,7 +38,7 @@ Patient::Patient(std::string name, std::string surname,Birth birthday, std::stri
         {
             name[i] = std::tolower(name[i]);
         }
-        std::cout <<"hello" <<"\n";
+        
     }
 
 
@@ -117,8 +117,18 @@ bool Patient::IsValidBirthDate(const Birth& birthday)
 
 //getter and setter
 //setters
-void Patient::setName(const std::string &name)
+void Patient::setName(std::string &name)
 {
+     if (!name.empty()) 
+    {
+        name [0] = std::toupper(name[0]); //capitalize the first letter of the name
+        
+        for (std::size_t i = 1; i < name.size(); i++)
+        {
+            name[i] = std::tolower(name[i]);
+        }
+        
+    }
     _name = name;
 }
 
