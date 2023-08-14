@@ -194,4 +194,8 @@ bool Doctor::operator ==(std::shared_ptr<Doctor> other) const
     return _doctorNumber == other->getDoctorNumber();
 }
 
+void Doctor::setBirthday(Birth birthday)
+{
+    _birthday = birthday
+}
 

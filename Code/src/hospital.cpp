@@ -616,42 +616,48 @@ void Hospital::FindDoctorAppointment(std::shared_ptr<Appointment> appointment, s
     }
 }
 
-void Hospital::FindPatientByName(std::string &name)
+void Hospital::FindPatientByName(std::string &name, std::string& surname)
+{if (name.empty())
 {
-    if (name.empty())
+    throw std::length_error("Nom vide");
+}
+else
+{
+    name[0] = std::toupper(name[0]);
+
+    for (std::size_t i = 1; i < name.size(); ++i)
     {
-        throw std::length_error("Nom vide");
+        name[i] = std::tolower(name[i]);
     }
-    else
+}
+std::transform(std::begin(surname), std::end(surname), std::begin(surname), [](char c) { return std::toupper(c); });
+
+std::vector<std::shared_ptr<Patient>> patientList;
+auto it = std::copy_if(std::begin(_patientList), std::end(_patientList), std::back_inserter(patientList),
+                       [&name,&surname](std::shared_ptr<Patient> patient)
+                       { return patient->getName() == name && patient->getSurname() == surname; });
+
+std::cout << std::setw(40) << std::setfill('=') << "" << '\n';
+std::cout << std::setw(25) << std::setfill(' ') << "Resultat de la recherche" << std::endl;
+std::cout << std::setw(40) << std::setfill('-') << "" << '\n';
+
+if (patientList.empty())
+{
+    std::cout << std::setw(25) << std::setfill(' ') << "Patient non trouve" << std::endl;
+}
+else
+{
+    for (const auto& patient : patientList)
     {
-        name[0] = std::toupper(name[0]);
-
-        for (std::size_t i = 1; i < name.size(); ++i)
-        {
-            name[i] = std::tolower(name[i]);
-        }
-    }
-    std::vector<std::shared_ptr<Patient>> patientList;
-
-    auto it = std::copy_if(std::begin(_patientList), std::end(_patientList), std::back_inserter(patientList),
-                           [&name](std::shared_ptr<Patient> patient)
-                           { return patient->getName() == name; });
-
-    std::cout << "Resultat de la recherche: " << std::endl;
-
-    if (patientList.empty())
-    {
-        throw std::runtime_error("Patient non trouve");
-        return;
-    }
-
-    for (const auto patient : patientList)
-    {
-        patient->DisplayPatient();
+        patient->DisplayPatient(); // Assuming DisplayPatient prints the patient details
     }
 }
 
-void Hospital::FindDoctorByName(std::string &name)
+std::cout << std::setw(40) << std::setfill('=') << "" << '\n';
+
+}
+
+void Hospital::FindDoctorByName(std::string &name, std::string& surname)
 {
     if (name.empty())
     {
@@ -669,8 +675,8 @@ void Hospital::FindDoctorByName(std::string &name)
 
     std::vector<std::shared_ptr<Doctor>> doctorList;
     auto it = std::copy_if(std::begin(_doctorList), std::end(_doctorList), std::back_inserter(_doctorList),
-                           [&name](std::shared_ptr<Doctor> doctor)
-                           { return doctor->getName() == name; });
+                           [&name, &surname](std::shared_ptr<Doctor> doctor)
+                           { return doctor->getName() == name && doctor->getSurname() == surname; });
 
     if (doctorList.empty())
     {
@@ -871,4 +877,18 @@ void Hospital::DisplayPatientRecord(std::string &patientId)
         }
     }
     throw std::runtime_error("Patient non trouve");
+}
+
+std::shared_ptr<Doctor> Hospital::FindDoctorById(const std::string &doctorId)
+{
+    auto it = std::find_if(std::begin(_doctorList), std::end(_doctorList),
+                           [&doctorId](std::shared_ptr<Doctor> doctor)
+                           { return doctor->getDoctorNumber() == doctorId; });
+
+    if (it != std::end(_doctorList))
+    {
+        return *it;
+    }
+
+    return nullptr;
 }

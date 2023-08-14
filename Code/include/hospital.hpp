@@ -57,13 +57,14 @@ void DeleteBiologicalExam(std::string bioExamId); //delete a biological exam in 
 //more specifics methods
 void FindPatient(const std::string& patientId); //find a patient in the vector of patient by id
 std::shared_ptr<Patient> FindPatientById(const std::string& patientId); //complementary method to be use in another function
+std::shared_ptr<Doctor> FindDoctorById(const std::string& doctorId); //complementary method to be use in another function   
 void FindDoctor(const std::string doctorId); //find a doctor in the vector of doctor by id
 void FindPrescription(const std::string& prescriptionId); //find a prescription in the vector of prescription by id
 void FindConsultation(const std::string& consultationId); //find a consultation in the vector of consultation by id
 void FindDoctorAppointment(std::shared_ptr<Appointment> appointment, std::shared_ptr<Doctor> doctor); //find a doctorAppointment in the vector of doctorAppointment by appointment and doctor
 void FindAppointment(const std::string& appointmentId);
-void FindPatientByName( std::string& name); //find a patient in the vector of patient by name
-void FindDoctorByName( std::string& name); //find a doctor in the vector of doctor by name
+void FindPatientByName( std::string& name, std::string& surname); //find a patient in the vector of patient by name
+void FindDoctorByName( std::string& name, std::string& surname); //find a doctor in the vector of doctor by name
 void FindAppointmentByDate(Date &date);
 void SortAppointmentByDate(std::vector<std::shared_ptr<Appointment>>& appointmentList); //sort the appointment by date
 //methods to display information
