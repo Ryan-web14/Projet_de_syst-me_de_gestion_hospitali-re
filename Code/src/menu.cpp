@@ -145,7 +145,7 @@ if (ss >> choice_int && ss.eof())
                 catch (const std::exception &e)
                 {
                     std::cerr << "Erreur : " << e.what() << '\n';
-                    std::cout << "Veuillez réessayer.\n";
+                    std::cout << "Veuillez réessayer a nouveau .\n";
                     std::cin.clear();
                     std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n'); // Ignore rest of the line
                 }
